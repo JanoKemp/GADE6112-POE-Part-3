@@ -11,8 +11,6 @@ namespace GADE6112_POE_part_1
         private void mainForm_Load(object sender, EventArgs e)
         {
             this.Text = "test2";
-            
-
         }
     }
 }
