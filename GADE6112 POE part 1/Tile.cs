@@ -16,5 +16,12 @@ namespace GADE6112_POE_part_1
             Gold = 3, 
             Weapon =4
         }
+
+        public Tile(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+
+        }
     }
 }
