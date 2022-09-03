@@ -11,10 +11,10 @@ namespace GADE6112_POE_part_1
         protected int x, y;
         public enum TileType
         {
-            Hero,
-            Enemy,
-            Gold, 
-            Weapon
+            Hero = 1,
+            Enemy = 2,
+            Gold = 3, 
+            Weapon = 4
         }
 
         public Tile(int x, int y)
