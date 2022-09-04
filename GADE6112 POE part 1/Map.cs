@@ -8,7 +8,11 @@ namespace GADE6112_POE_part_1
 {
     internal class Map
     {
-        private int [,] map = new int [8,15];
+        static private int width = 8;
+        static private int height = 15;
+        private int [,] map = new int [width,height];
+        private string[] enemy = new string[5]; //Come back and check if correct later
+        Random randomGen = new Random();
 
         Map Hero = new Map();
 
