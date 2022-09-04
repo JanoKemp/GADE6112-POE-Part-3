@@ -8,9 +8,9 @@ namespace GADE6112_POE_part_1
 {
     internal class EmptyTile : Tile
     {
-        public EmptyTile(int x , int y)
+        public EmptyTile(int x , int y,TileType type)
         {
-            Tile empty = new Tile(x, y, TileType.Clear);
+            EmptyTile empty = new EmptyTile(x, y, TileType.Clear);
         }
     }
 }
