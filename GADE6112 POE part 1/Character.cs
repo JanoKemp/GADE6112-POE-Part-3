@@ -20,5 +20,26 @@ namespace GADE6112_POE_part_1
             right,
 
         }
+        public Character(int x, int y, Tile.TileType type)
+        {
+
+        }
+        public bool isDead(int hp)
+        {
+            bool dead = false;
+            if (hp <= 0)
+            {
+                dead = true;
+            }
+            else
+            {
+                dead = false;
+            }
+            return dead;
+            
+        }
     }
 }
+
+
+
