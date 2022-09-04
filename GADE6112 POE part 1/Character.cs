@@ -24,6 +24,11 @@ namespace GADE6112_POE_part_1
         {
 
         }
+
+        public virtual void Attack()
+        {
+
+        }
         public bool isDead(int hp)
         {
             bool dead = false;
