@@ -9,19 +9,37 @@ namespace GADE6112_POE_part_1
     internal class Tile
     {
         protected int x, y;
+
+        public TileType type;
+
         public enum TileType
         {
             Hero,
             Enemy,
-            Gold, 
-            Weapon
+            Gold,
+            Weapon,
+           
         }
-
-        public Tile(int x, int y)
+       
+        public Tile()
         {
-            this.x = x;
-            this.y = y;
-
+            this.x = 0;
+            this.y = 0;
+            
         }
+
+        public Tile(int x, int y, TileType type)
+        {
+            this.y = y;
+            this.x = x;
+            this.type = type;   
+        }
+
+        public int X { get { return x; } set { this.x = value; } }
+        public int Y { get { return y; } set { this.y = value; } }
+        public TileType Type { get { return type; } set { this.type = value; } }
+        
+        
+
     }
 }
