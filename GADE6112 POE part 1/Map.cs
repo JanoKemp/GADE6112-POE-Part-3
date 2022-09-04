@@ -15,7 +15,7 @@ namespace GADE6112_POE_part_1
         Random randomGen = new Random();
 
         Map Hero = new Map();
-        public Map()
+        public Map(/*Create()*/) // Calling Create() to be coded later to loop through and create hero and enemies on the map
         {
             int horizontal,vertical,enemyNum;
 
@@ -29,7 +29,12 @@ namespace GADE6112_POE_part_1
             vertical = randomGen.Next(minHeight, maxHeight);
             Tile[,] map = new Tile[horizontal - 1, vertical - 1]; //one less than the map border for playable map. For borders to be done.
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
-            
+            Character [] enemy = new Character [enemyNum];
+            for (int i = 0; i < enemy.Length; i++)
+            {
+               // enemy[i] = Create(); Method to be coded later and hopefully work.
+            }
+
         } 
 
 
