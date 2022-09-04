@@ -9,7 +9,7 @@ namespace GADE6112_POE_part_1
     internal class Tile
     {
         protected int x, y;
-
+        public TileType type;
         public enum TileType
         {
             Hero = 1,
@@ -20,15 +20,23 @@ namespace GADE6112_POE_part_1
             Barrier = 6
 
         }
+        
         public Tile()
         {
             this.x = 0;
             this.y = 0;
-            TileType type = TileType.Hero;
+
         }
-        public Tile(int x, int y, int TileType)
+
+        public Tile(int x, int y, TileType type)
         {
-          
+            this.y = y;
+            this.x = x;
+            this.type = type;
         }
+
+        public int X { get { return x; } set { this.x = value; } }
+        public int Y { get { return y; } set { this.y = value; } }
+        public TileType Type { get { return type; } set { this.type = value; } }
     }
 }

@@ -10,7 +10,7 @@ namespace GADE6112_POE_part_1
     {
         public Obstacle (int x , int y)
             {
-            Tile type = new Tile(x, y, 6);
+            Tile type = new Tile(x, y, TileType.Barrier);
             }
     }
 }
