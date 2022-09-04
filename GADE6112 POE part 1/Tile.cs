@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GADE6112_POE_part_1
 {
-    internal class Tile
+    internal abstract class Tile
     {
         protected int x, y;
         public TileType type;
