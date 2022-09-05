@@ -9,7 +9,7 @@ namespace GADE6112_POE_part_1
     internal abstract class Character
     {
         protected int hP, maxHP, damage;
-        Tile[] vision = new Tile[4];
+        Tile[] vision = new Tile[4]; // Vision Array  - to be updated in Map class
 
         public enum Movement
         {
@@ -38,7 +38,7 @@ namespace GADE6112_POE_part_1
         {
             return DistanceTo();//Calculate distance to a certain grid
         }
-        public void Move(Movement move, int x , int y)
+        public void Move(Movement move, int x, int y)
         {
             x++;
             y++;//Modify to be able to move left right up or down for both the x and the y later use when buttons are added
@@ -46,6 +46,8 @@ namespace GADE6112_POE_part_1
         public abstract Movement ReturnMove(Movement move = 0);
 
         public abstract override string ToString();
+        
+       
 
         public bool isDead(int hp)
         {
@@ -61,6 +63,7 @@ namespace GADE6112_POE_part_1
             return dead;
             
         }
+        
     }
 }
 

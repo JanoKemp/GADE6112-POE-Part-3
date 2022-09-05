@@ -29,13 +29,29 @@ namespace GADE6112_POE_part_1
             vertical = randomGen.Next(minHeight, maxHeight);
             Tile[,] map = new Tile[horizontal - 1, vertical - 1]; //one less than the map border for playable map. For borders to be done.
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
+            //Create();
             Character [] enemy = new Character [enemyNum];
             for (int i = 0; i < enemy.Length; i++)
             {
                // enemy[i] = Create(); Method to be coded later and hopefully work.
             }
+            //UpdateVision();
+            for (int i = 0; i < enemy.Length; i++)
+            {
+                //UpdateVision();
+            }
+        }
+        public void UpdateVision() 
+        {
+            // Vision [index]  - x -1 x + 1 y - 1 y + 1 - This will update the vision on all four sides of the character or enemy. Possibly make Vision a 2d array to store x and y
+        }
+        private Tile Create(Tile.TileType type)// Meant to create obstacles on the map using an array
+        {
 
-        } 
+            Obstacle bush = new Obstacle(1, 1, type); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
+            return bush;
+        }
+            
 
 
 
