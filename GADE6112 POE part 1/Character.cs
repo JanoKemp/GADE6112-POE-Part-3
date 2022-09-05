@@ -20,6 +20,11 @@ namespace GADE6112_POE_part_1
             right,
 
         }
+        public Character()
+        {
+
+        }
+
         public Character(int x, int y, Tile.TileType type)
         {
 
