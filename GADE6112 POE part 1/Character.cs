@@ -21,6 +21,7 @@ namespace GADE6112_POE_part_1
             right,
 
         }
+        public Movement direction;
         public Character()
         {
 
@@ -33,6 +34,13 @@ namespace GADE6112_POE_part_1
             this.type = type;
 
         }
+
+        public int HP { get { return hP; } set { this.hP = value; } }
+        public int MaxHP { get { return maxHP; } set { this.maxHP = value; } }
+        public int Damage { get { return damage; } set { this.damage = value; } }
+        public Tile[] Vision { get { return vision; } set { this.vision = value; } }
+        public Movement Direction { get { return direction; } set { this.direction = value; } }
+
 
         public virtual void Attack(Character target)
         {
