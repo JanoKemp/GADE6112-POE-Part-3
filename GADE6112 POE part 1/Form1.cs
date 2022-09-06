@@ -15,6 +15,9 @@ namespace GADE6112_POE_part_1
         }
         public void MapAssignment()
         {
+            
+            //how to inherit in windows
+
             // Possibly add text boxes into array
         }
 

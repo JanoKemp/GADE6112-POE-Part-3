@@ -10,7 +10,7 @@ namespace GADE6112_POE_part_1
     {
         private int width;
         private int height;
-        private TextBox[,] map = new TextBox[7, 9];  
+        private TextBox[,] land = new TextBox[7, 9];  
         private string[] enemy = new string[5]; //Come back and check if correct later
         Random randomGen = new Random();
         Hero Hero = new Hero(0,0,20,30,Tile.TileType.Hero,2); // Hero object 
@@ -42,8 +42,14 @@ namespace GADE6112_POE_part_1
                 //UpdateVision();
             }
         }
-        
-        
+
+        public int Width { get { return width; } set { this.width = value; } }
+        public int Height { get { return height; } set { this.height = value; } }
+        public TextBox[,] Land { get { return land; } set { this.land = value; } }
+        public string [] Enemy { get { return enemy; } set { this.enemy = value; } }
+
+
+
         public void UpdateVision() 
         {
             // Vision [index]  - x -1 x + 1 y - 1 y + 1 - This will update the vision on all four sides of the character or enemy. Possibly make Vision a 2d array to store x and y
