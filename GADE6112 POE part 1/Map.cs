@@ -8,13 +8,14 @@ namespace GADE6112_POE_part_1
 {
     internal class Map
     {
-        static private int width;
-        static private int height;
-        private TextBox[,] map = new TextBox[width, height];  
+        private int width;
+        private int height;
+        private TextBox[,] map = new TextBox[7, 9];  
         private string[] enemy = new string[5]; //Come back and check if correct later
         Random randomGen = new Random();
+        Hero Hero = new Hero(0,0,20,30,Tile.TileType.Hero,2); // Hero object 
 
-        Map Hero = new Map();
+        
         public Map(/*Create()*/) // Calling Create() to be coded later to loop through and create hero and enemies on the map
         {
             int horizontal,vertical,enemyNum;
@@ -41,10 +42,7 @@ namespace GADE6112_POE_part_1
                 //UpdateVision();
             }
         }
-        public void MapAssignment()
-        {
-
-        }
+        
         
         public void UpdateVision() 
         {
