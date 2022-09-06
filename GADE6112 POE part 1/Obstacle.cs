@@ -8,9 +8,9 @@ namespace GADE6112_POE_part_1
 {
     internal class Obstacle : Tile
     {
-        public Obstacle (int x , int y, TileType type)
+        public Obstacle (int x , int y, TileType type): base (x , y , type)
             {
-            Obstacle barrier = new Obstacle(x , y , TileType.Barrier);
+                
             }
     }
    
