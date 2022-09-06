@@ -9,10 +9,11 @@ namespace GADE6112_POE_part_1
     
     internal class GameEngine 
     {
-       public GameEngine()
+        private Map map = new Map();
+        public GameEngine()
         {
-            Map map = new Map();
-            
+         
+         
         }
         public bool MovePlayer(Character.Movement direction)
         {
