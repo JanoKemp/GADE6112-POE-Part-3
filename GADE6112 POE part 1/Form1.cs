@@ -13,7 +13,10 @@ namespace GADE6112_POE_part_1
             this.Text = "test2";
             this.Text = "test branch 1";
         }
-        
+        public void MapAssignment()
+        {
+            // Possibly add text boxes into array
+        }
 
         private void textBox00_TextChanged(object sender, EventArgs e)
         {
