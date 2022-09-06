@@ -57,6 +57,7 @@ namespace GADE6112_POE_part_1
         }
         public void Move(Movement move, int x, int y)
         {
+            
             x++;
             y++;//Modify to be able to move left right up or down for both the x and the y later use when buttons are added
         }
