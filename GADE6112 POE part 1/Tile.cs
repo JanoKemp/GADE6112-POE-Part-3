@@ -11,7 +11,7 @@ namespace GADE6112_POE_part_1
         protected int x, y;
         public enum TileType
         {
-            Hero,
+            Hero ,
             Enemy,
             Gold, 
             Weapon,

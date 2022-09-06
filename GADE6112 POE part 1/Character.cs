@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace GADE6112_POE_part_1
 {
-    internal abstract class Character
+    internal abstract class Character : Tile
     {
         protected int hP, maxHP, damage;
+        
         Tile[] vision = new Tile[4]; // Vision Array  - to be updated in Map class
 
         public enum Movement
@@ -27,12 +28,15 @@ namespace GADE6112_POE_part_1
 
         public Character(int x, int y, Tile.TileType type)
         {
+            this.y = y;
+            this.x = x;
+            this.type = type;
 
         }
 
-        public virtual void Attack()
+        public virtual void Attack(Character target)
         {
-
+            
         }
         public virtual bool CheckRange()//add target
         {
