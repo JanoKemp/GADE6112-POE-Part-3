@@ -8,7 +8,12 @@ namespace GADE6112_POE_part_1
 {
     internal abstract class Enemy: Character
     {
-        protected Random rnd = new Random();  
+        protected Random rnd = new Random(); 
+        
+        public Enemy()
+        {
+
+        }
 
         public Enemy(int x , int y, int hP, int maxHP, int damage) // Needs to call its symbol
         {
