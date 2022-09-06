@@ -13,5 +13,31 @@ namespace GADE6112_POE_part_1
             this.Text = "test2";
             this.Text = "test branch 1";
         }
+        
+
+        private void textBox00_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonUp_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonLeft_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonRight_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonDown_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
