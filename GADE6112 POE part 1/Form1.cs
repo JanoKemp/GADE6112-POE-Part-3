@@ -15,6 +15,8 @@ namespace GADE6112_POE_part_1
         }
         public void MapAssignment()
         {
+            Map map = new Map();
+            map.Land[1000, 5] = textBox00;
             
             //how to inherit in windows
 
