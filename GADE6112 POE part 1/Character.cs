@@ -55,13 +55,13 @@ namespace GADE6112_POE_part_1
         {
             return DistanceTo();//Calculate distance to a certain grid
         }
-        public void Move(Movement move, int x, int y)
+        public void Move(Movement direction, int x, int y)
         {
             
             x++;
             y++;//Modify to be able to move left right up or down for both the x and the y later use when buttons are added
         }
-        public abstract Movement ReturnMove(Movement move = 0);
+        public abstract Movement ReturnMove(Movement direction = 0);
 
         public abstract override string ToString();
         

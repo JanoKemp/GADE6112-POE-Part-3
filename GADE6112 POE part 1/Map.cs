@@ -10,7 +10,7 @@ namespace GADE6112_POE_part_1
     {
         private int width;
         private int height;
-        private TextBox[,] land = new TextBox[7, 9];  
+        private TextBox[,] land = new TextBox[9, 7];  
         private string[] enemy = new string[5]; //Come back and check if correct later
         Random randomGen = new Random();
         Hero Hero = new Hero(0,0,20,30,Tile.TileType.Hero,2); // Hero object 
