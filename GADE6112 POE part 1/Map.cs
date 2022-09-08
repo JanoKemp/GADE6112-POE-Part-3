@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +15,7 @@ namespace GADE6112_POE_part_1
         private string[] enemy = new string[5]; //Come back and check if correct later
         Random randomGen = new Random();
         Hero Hero = new Hero(0,0,20,Tile.TileType.Hero); // Hero object 
-        private int horizontal, vertical, enemyNum;
+        private int horizontal, vertical, enemyNum, enemyX , enemyY;
 
         public Map() // Calling Create() to be coded later to loop through and create hero and enemies on the map
         {
@@ -28,15 +29,17 @@ namespace GADE6112_POE_part_1
             int maxEnemy = 6;
             horizontal = randomGen.Next(minWidth, maxWidth);//TOADD IF ISSUES: +1 because random gens stop 1 number before max. Eg if range is 0-9 then it will only calc between 0-8
             vertical = randomGen.Next(minHeight, maxHeight);
-            Tile[,] updateMap = new Tile[horizontal - 1, vertical - 1]; //one less than the map border for playable map. For borders to be done.
+            Tile[,] playableMap = new Tile[horizontal - 1, vertical - 1]; //one less than the map border for playable map. For borders to be done.
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             Create(Tile.TileType.Hero);
             Enemy [] enemy = new Enemy [enemyNum];
             for (int i = 0; i < enemy.Length; i++)
             {
-                enemy[i] =  (Enemy)Create(Tile.TileType.Enemy); 
+                enemy[i] =  (SwampCreature)Create(Tile.TileType.Enemy);
+                playableMap[enemyX,enemyY] = (SwampCreature)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
+
             }
-            //UpdateVision();
+            UpdateVision();
             for (int i = 0; i < enemy.Length; i++)
             {
                 UpdateVision();
@@ -52,25 +55,33 @@ namespace GADE6112_POE_part_1
 
 
 
-        public void UpdateVision() 
+        public void UpdateVision(/*Character vision*/) 
         {
+            //int north = vision.X;
+
+            //vision.Vision[0] =;
             // Vision [index]  - x -1 x + 1 y - 1 y + 1 - This will update the vision on all four sides of the character or enemy. Possibly make Vision a 2d array to store x and y
         }
         private Tile Create(Tile.TileType type)// Creates Objects for the map
         {
-            
-            if(type == Tile.TileType.Enemy) //Creates an enemy when called
+            if (land[horizontal, vertical] != null)
             {
-                horizontal = randomGen.Next(1, horizontal);
-                vertical = randomGen.Next(1, vertical);
-                SwampCreature swampEn = new SwampCreature(horizontal , vertical);
-               
+                enemyX = randomGen.Next(1, horizontal);
+                enemyY = randomGen.Next(1, vertical);
+            }
+
+            if (type == Tile.TileType.Enemy) //Creates an enemy when called
+            {
+                
+                SwampCreature swampEn = new SwampCreature(enemyX, enemyY); // generates random location on map to spawn
+                
                 return swampEn;
             }
             if (type == Tile.TileType.Barrier)
             {
-                Obstacle bush = new Obstacle(1, 1, Tile.TileType.Barrier); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
-                land[0, 1].Text = "x";
+                
+                Obstacle bush = new Obstacle(0, 0, Tile.TileType.Barrier); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
+                
                 return bush;
                 
             }

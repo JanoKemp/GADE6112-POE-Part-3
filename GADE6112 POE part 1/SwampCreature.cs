@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace GADE6112_POE_part_1
     {
         // Random creatureMove = new Random();
 
-        public SwampCreature(int x , int y )
+        public SwampCreature(int x , int y ) 
         {
             this.x = x;
             this.y = y;
