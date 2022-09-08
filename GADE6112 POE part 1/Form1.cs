@@ -20,6 +20,7 @@ namespace GADE6112_POE_part_1
         {
             Map map = new Map();
             
+            
 
             //Map array [ Row , Column ] = TextBox[ X , Y]
             //First Column
