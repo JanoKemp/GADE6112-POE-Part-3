@@ -10,7 +10,7 @@ namespace GADE6112_POE_part_1
     {
         public EmptyTile(int x , int y,TileType type): base(x,y,type)
         {
-            
+            type = TileType.Clear;
         }
     }
 }
