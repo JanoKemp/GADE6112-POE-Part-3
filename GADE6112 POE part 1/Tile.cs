@@ -9,6 +9,8 @@ namespace GADE6112_POE_part_1
     internal abstract class Tile
     {
         protected int x, y;
+        protected char[] symbols = new char[6] { 'H', 'E', 'G', 'W', 'C', 'X' }; // Symbols to tell which character to put on the map
+        
         public enum TileType
         {
             Hero ,
