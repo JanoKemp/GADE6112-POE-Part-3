@@ -8,7 +8,7 @@ namespace GADE6112_POE_part_1
 {
     internal class SwampCreature : Enemy
     {
-        Random creatureMove = new Random();
+        // Random creatureMove = new Random();
 
         public SwampCreature(int x , int y , int hP , int damage )
         {
