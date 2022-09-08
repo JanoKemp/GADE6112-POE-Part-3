@@ -10,7 +10,7 @@ namespace GADE6112_POE_part_1
     {
         // Random creatureMove = new Random();
 
-        public SwampCreature(int x , int y , int hP , int damage )
+        public SwampCreature(int x , int y )
         {
             this.x = x;
             this.y = y;
