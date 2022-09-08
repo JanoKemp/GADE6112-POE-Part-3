@@ -13,7 +13,7 @@ namespace GADE6112_POE_part_1
         private TextBox[,] land = new TextBox[9, 7];  
         private string[] enemy = new string[5]; //Come back and check if correct later
         Random randomGen = new Random();
-        Hero Hero = new Hero(0,0,20,30,Tile.TileType.Hero); // Hero object 
+        Hero Hero = new Hero(0,0,20,Tile.TileType.Hero); // Hero object 
         private int horizontal, vertical, enemyNum;
 
         public Map() // Calling Create() to be coded later to loop through and create hero and enemies on the map
@@ -31,10 +31,10 @@ namespace GADE6112_POE_part_1
             Tile[,] tile = new Tile[horizontal - 1, vertical - 1]; //one less than the map border for playable map. For borders to be done.
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             //Create();
-            Character [] enemy = new Character [enemyNum];
+            Enemy [] enemy = new Enemy [enemyNum];
             for (int i = 0; i < enemy.Length; i++)
             {
-                enemy[i] =  (Character)Create(Tile.TileType.Enemy); 
+                enemy[i] =  (Enemy)Create(Tile.TileType.Enemy); 
             }
             //UpdateVision();
             for (int i = 0; i < enemy.Length; i++)
@@ -56,20 +56,25 @@ namespace GADE6112_POE_part_1
         }
         private Tile Create(Tile.TileType type)// Meant to create obstacles on the map using an array
         {
-
+            type = Tile.TileType.Enemy;
             if(type == Tile.TileType.Enemy)
             {
                 horizontal = randomGen.Next(1, horizontal);
                 vertical = randomGen.Next(1, vertical);
                 SwampCreature swampEn = new SwampCreature(horizontal , vertical);
+                return swampEn;
             }
             if (type == Tile.TileType.Barrier)
             {
                 Obstacle bush = new Obstacle(1, 1, Tile.TileType.Barrier); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
                 land[0, 1].Text = "x";
+                return bush;
                 
             }
-            return Create(type);
+            else 
+                return Create(type);
+            
+            
         }
             
 
