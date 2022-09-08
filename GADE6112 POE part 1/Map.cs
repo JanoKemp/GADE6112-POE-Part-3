@@ -13,7 +13,7 @@ namespace GADE6112_POE_part_1
         private TextBox[,] land = new TextBox[9, 7];  
         private string[] enemy = new string[5]; //Come back and check if correct later
         Random randomGen = new Random();
-        Hero Hero = new Hero(0,0,20,30,Tile.TileType.Hero,2); // Hero object 
+        Hero Hero = new Hero(0,0,20,30,Tile.TileType.Hero); // Hero object 
         private int horizontal, vertical, enemyNum;
 
         public Map() // Calling Create() to be coded later to loop through and create hero and enemies on the map
@@ -61,7 +61,7 @@ namespace GADE6112_POE_part_1
             {
                 horizontal = randomGen.Next(1, horizontal);
                 vertical = randomGen.Next(1, vertical);
-                SwampCreature swampEn = new SwampCreature(horizontal , vertical , 10 , 1);
+                SwampCreature swampEn = new SwampCreature(horizontal , vertical);
             }
             if (type == Tile.TileType.Barrier)
             {

@@ -8,7 +8,7 @@ namespace GADE6112_POE_part_1
 {
     internal abstract class Enemy: Character
     {
-        // protected Random rnd = new Random(); 
+        protected Random enemyRand = new Random(); 
         
         public Enemy()
         {
@@ -23,6 +23,8 @@ namespace GADE6112_POE_part_1
             this.maxHP = maxHP;
             this.damage = damage;
         }
+        
+        
         public override string ToString()
         {
             String enemyInfo = "Enemy at [" + x + "," + y + "] (" + damage + ")";

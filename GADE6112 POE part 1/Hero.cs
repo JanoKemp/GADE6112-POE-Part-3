@@ -9,12 +9,12 @@ namespace GADE6112_POE_part_1
     internal class Hero:Character 
     {
 
-        public Hero(int x, int y, int hP, int maxHP, TileType type, int damage): base(x, y, type)
+        public Hero(int x, int y, int hP, int maxHP, TileType type): base(x, y, type)
         {
             this.x = x;
             this.y = y;
             this.hP = hP;
-            this.maxHP = 20;
+            this.maxHP = maxHP;
             this.damage = 2;
         }
 
