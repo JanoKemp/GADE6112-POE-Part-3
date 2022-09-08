@@ -10,15 +10,18 @@ namespace GADE6112_POE_part_1
 
         private void mainForm_Load(object sender, EventArgs e)
         {
+            MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
+            
             this.Text = "test2";
             this.Text = "test branch 1";
+            
         }
         public void MapAssignment()
         {
             Map map = new Map();
             
 
-            //Map array [ Row , Column ] = TextBox[column, Row]
+            //Map array [ Row , Column ] = TextBox[ X , Y]
             //First Column
             //First Row 
             map.Land[0, 0] = textBox00;
@@ -95,6 +98,7 @@ namespace GADE6112_POE_part_1
             map.Land[8, 4] = textBox84;
             map.Land[8, 5] = textBox85;
             map.Land[8, 6] = textBox86;
+            
 
             //how to inherit in windows
 

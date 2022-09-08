@@ -16,7 +16,7 @@ namespace GADE6112_POE_part_1
         Hero Hero = new Hero(0,0,20,30,Tile.TileType.Hero,2); // Hero object 
 
         
-        public Map(/*Create()*/) // Calling Create() to be coded later to loop through and create hero and enemies on the map
+        public Map() // Calling Create() to be coded later to loop through and create hero and enemies on the map
         {
             int horizontal,vertical,enemyNum;
 
@@ -34,12 +34,12 @@ namespace GADE6112_POE_part_1
             Character [] enemy = new Character [enemyNum];
             for (int i = 0; i < enemy.Length; i++)
             {
-               // enemy[i] = Create(); Method to be coded later and hopefully work.
+                enemy[i] =  (Character)Create(Tile.TileType.Enemy); 
             }
             //UpdateVision();
             for (int i = 0; i < enemy.Length; i++)
             {
-                //UpdateVision();
+                UpdateVision();
             }
         }
 
@@ -57,7 +57,8 @@ namespace GADE6112_POE_part_1
         private Tile Create(Tile.TileType type)// Meant to create obstacles on the map using an array
         {
 
-            Obstacle bush = new Obstacle(1, 1, type); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
+            Obstacle bush = new Obstacle(1, 1, Tile.TileType.Barrier); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
+            land[0, 1].Text = "x"; 
             return bush;
         }
             
