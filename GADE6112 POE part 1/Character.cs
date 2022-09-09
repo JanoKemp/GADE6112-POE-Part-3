@@ -65,18 +65,49 @@ namespace GADE6112_POE_part_1
 
 
 
-        public virtual void Attack(Character target)
+        public virtual void Attack(Character target) //Used to attack enemies
         {
-            
+            Hero hero = new Hero();
+            int targetHp, heroDamage;
+            targetHp = target.getHP(); // gets target Hp 
+            heroDamage = hero.getDamage();
+            CheckRange(target);//Checks if target is in range for an attack
+            if(CheckRange(target) == true)//when target is in range
+            {
+                targetHp = targetHp - heroDamage; // Enemy health - damage
+            }
         }
-        public virtual bool CheckRange()//add target
+        public virtual bool CheckRange(Character target)//add target
         {
-            //DistanceTo()
-            return CheckRange();//Checks range to target ( COME BACK AND ADD)
+            if (DistanceTo(target) <= 2)// if distance to target is less than 2(max range) then returns true(is within range)
+            {
+                return true;
+            }
+            else
+                return false;//any other range is unnacceptable and therefore not in range
         }
-        private int DistanceTo()//add target
+        private int DistanceTo(Character target)//Wants the number of tiles in between hero and target
         {
-            return DistanceTo();//Calculate distance to a certain grid
+            Hero hero = new Hero();
+
+            int targetX , targetY,distance;
+            targetX = target.getX();
+            targetY = target.getY();
+            if (targetX > hero.getX() && targetY > hero.getY())
+            {
+                distance = (targetX + targetY) - (hero.getX() + hero.getX());
+                return distance;
+            }
+            if (targetX < hero.getX() && targetY < hero.getY())
+            {
+                distance = (hero.getX() + hero.getY() - (targetX + targetY));
+                return distance;
+            }
+            else
+                distance = 0;
+                    return distance;
+
+                //Calculate distance to a certain grid
         }
         public void Move(Movement direction) //Implementation of movement by changing X and Y values for each character
         {
@@ -100,6 +131,7 @@ namespace GADE6112_POE_part_1
             {
                 currentX = currentX + 1;
             }
+           
             //Modify to be able to move left right up or down for both the x and the y later use when buttons are added
         }
         public abstract Movement ReturnMove(Movement direction = 0);
@@ -108,10 +140,14 @@ namespace GADE6112_POE_part_1
         
        
 
-        public bool isDead(int hp)
+        public bool isDead()
         {
+            Hero hero = new Hero();
+            SwampCreature creature = new SwampCreature();
+            int heroHp = hero.getHP();
+            int enemyHp = creature.getHP();
             bool dead = false;
-            if (hp <= 0)
+            if (heroHp <= 0 || enemyHp <= 0)
             {
                 dead = true;
             }
