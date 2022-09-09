@@ -8,14 +8,18 @@ namespace GADE6112_POE_part_1
 {
     internal class Hero:Character 
     {
-
-        public Hero(int x, int y, int hP, TileType type): base(x, y, type)
+        public Hero()
         {
-            this.x = x;
-            this.y = y;
-            this.hP = hP;
-            this.maxHP = hP;
+            this.x = getX();
+            this.y = getY();
+            this.hP = getHP();
+            this.maxHP = getHP();
             this.damage = 2;
+        }
+
+        public Hero(int x, int y, int hP, TileType type)
+        {
+            
         }
 
         override public Movement ReturnMove(Movement move = 0)

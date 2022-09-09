@@ -11,13 +11,17 @@ namespace GADE6112_POE_part_1
     {
         // Random creatureMove = new Random();
 
-        public SwampCreature(int x , int y ) 
+        public SwampCreature() 
         {
-            this.x = x;
-            this.y = y;
+            this.x = getX();
+            this.y = getY();
             this.hP = 10;
             this.damage = 1;
-
+        }
+        public SwampCreature(int x , int y)
+        {
+            
+            
         }
         override public Movement ReturnMove(Movement move = 0)
         {
