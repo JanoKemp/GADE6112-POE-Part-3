@@ -18,10 +18,10 @@ namespace GADE6112_POE_part_1
         Hero Hero = new Hero(); // Hero object 
         private int horizontal, vertical, enemyNum, enemyX , enemyY;
 
-        public Map() // Calling Create() to be coded later to loop through and create hero and enemies on the map
+        public Map(Character vision) // Calling Create() to be coded later to loop through and create hero and enemies on the map
         {
             
-
+            
             int minWidth = 6; // playable tiles must be 4 + 2 for the borders
             int maxWidth = 7; // Max is 5 + 2 for the borders
             int minHeight = 7;//playable tiles must be 7
@@ -40,7 +40,7 @@ namespace GADE6112_POE_part_1
                 playableMap[enemyX,enemyY] = (SwampCreature)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
 
             }
-            //UpdateVision();
+            UpdateVision(vision);
             for (int i = 0; i < enemy.Length; i++)
             {
                 //UpdateVision();
