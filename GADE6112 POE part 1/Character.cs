@@ -100,7 +100,7 @@ namespace GADE6112_POE_part_1
             {
                 currentX = currentX + 1;
             }
-            y++;//Modify to be able to move left right up or down for both the x and the y later use when buttons are added
+            //Modify to be able to move left right up or down for both the x and the y later use when buttons are added
         }
         public abstract Movement ReturnMove(Movement direction = 0);
 
