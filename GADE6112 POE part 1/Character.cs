@@ -78,10 +78,28 @@ namespace GADE6112_POE_part_1
         {
             return DistanceTo();//Calculate distance to a certain grid
         }
-        public void Move(Movement direction, int x, int y)
+        public void Move(Movement direction) //Implementation of movement by changing X and Y values for each character
         {
-            
-            x++;
+            int currentX;
+            int currentY;
+            currentX = getX();
+            currentY = getY();
+            if ( direction == Movement.up)
+            {
+                currentY = currentY + 1;
+            }
+            if (direction == Movement.down)
+            {
+                currentY = currentY -1;
+            }
+            if(direction == Movement.left)
+            {
+                currentX = currentX - 1;
+            }
+            if (direction==Movement.right)
+            {
+                currentX = currentX + 1;
+            }
             y++;//Modify to be able to move left right up or down for both the x and the y later use when buttons are added
         }
         public abstract Movement ReturnMove(Movement direction = 0);
