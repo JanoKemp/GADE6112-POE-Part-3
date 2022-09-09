@@ -75,6 +75,7 @@ namespace GADE6112_POE_part_1
             if(CheckRange(target) == true)//when target is in range
             {
                 targetHp = targetHp - heroDamage; // Enemy health - damage
+                target.setHP(targetHp);
             }
         }
         public virtual bool CheckRange(Character target)//add target
