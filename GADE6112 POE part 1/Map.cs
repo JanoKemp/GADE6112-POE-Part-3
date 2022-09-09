@@ -18,7 +18,7 @@ namespace GADE6112_POE_part_1
         Hero Hero = new Hero(); // Hero object 
         private int horizontal, vertical, enemyNum, enemyX , enemyY;
 
-        public Map(Character vision) // Calling Create() to be coded later to loop through and create hero and enemies on the map
+        public Map() // Calling Create() to be coded later to loop through and create hero and enemies on the map
         {
             
             
@@ -40,7 +40,7 @@ namespace GADE6112_POE_part_1
                 playableMap[enemyX,enemyY] = (SwampCreature)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
 
             }
-            UpdateVision(vision);
+            UpdateVision();
             for (int i = 0; i < enemy.Length; i++)
             {
                 //UpdateVision();
@@ -75,7 +75,7 @@ namespace GADE6112_POE_part_1
         {
             this.enemyY = enemyY;
         }
-        /*public void setLand(TextBox [,] land)
+        public void setLand(TextBox [,] land)
        {
            this.land = land;
        }
@@ -83,7 +83,7 @@ namespace GADE6112_POE_part_1
        {
            this.enemy = enemy;
        }
-       */
+       
 
 
         public int getWidth() { return width; }
@@ -98,7 +98,7 @@ namespace GADE6112_POE_part_1
 
 
 
-        public void UpdateVision(Character vision) 
+        public void UpdateVision(/*Character vision*/) 
         {
             int heroUp, heroDown, heroLeft, heroRight, currentHeroX, currentHeroY; // variables for storing X and Y locations for Hero
             int enemyUp, enemyDown, enemyLeft, enemyRight, currentEnemyX, currentEnemyY;

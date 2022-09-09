@@ -18,7 +18,9 @@ namespace GADE6112_POE_part_1
         }
         public void MapAssignment()
         {
-            TextBox[,] land = new TextBox[7, 9]; 
+            TextBox[,] land = new TextBox[7, 9];
+            Map map = new Map();
+            map.setLand(land);
             
             //Map array [ Row , Column ] = TextBox[ X , Y]
             //First Column
