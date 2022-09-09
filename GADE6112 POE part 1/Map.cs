@@ -46,12 +46,54 @@ namespace GADE6112_POE_part_1
             }
         }
 
-        public int Width { get { return width; } set { this.width = value; } }
-        public int Height { get { return height; } set { this.height = value; } }
-        public TextBox[,] Land { get { return land; } set { this.land = value; } }
-        public string [] Enemy { get { return enemy; } set { this.enemy = value; } }
-        
+        public void setWidth(int width)
+        {
+            this.width = width;
+        }
+        public void setHeight(int height)
+        {
+            this.height = height;
+        }
+        public void setHorizontal(int horizontal)
+        {
+            this.horizontal = horizontal;
+        }
+        public void setVertical(int vertical)
+        {
+            this.vertical = vertical;
+        }
+        public void setEnemyNum(int enemyNum)
+        {
+            this.enemyNum = enemyNum;
+        }
+        public void setEnemyX(int enemyX)
+        {
+            this.enemyX = enemyX;
+        }
+        public void setEnemyY(int enemyY)
+        {
+            this.enemyY = enemyY;
+        }
+        /*public void setLand(TextBox [,] land)
+       {
+           this.land = land;
+       }
+       public void setEnemy(string [] enemy)
+       {
+           this.enemy = enemy;
+       }
+       */
 
+
+        public int getWidth() { return width; }
+        public int getHeight() { return height; }
+        public int getHorizontal() { return horizontal; }
+        public int getVertical() { return vertical; }
+        public int getEnemyNum() { return enemyNum; }
+        public int getEnemyX() { return enemyX; }
+        public int getEnemyY() { return enemyY; }
+
+       
 
 
 
@@ -64,7 +106,8 @@ namespace GADE6112_POE_part_1
         }
         private Tile Create(Tile.TileType type)// Creates Objects for the map
         {
-            if (land[horizontal, vertical] != null)
+            if (land[horizontal, vertical] != null) //'Index was outside the bounds of the array.'
+
             {
                 enemyX = randomGen.Next(1, horizontal);
                 enemyY = randomGen.Next(1, vertical);

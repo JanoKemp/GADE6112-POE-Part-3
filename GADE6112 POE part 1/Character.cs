@@ -35,11 +35,34 @@ namespace GADE6112_POE_part_1
 
         }
 
-        public int HP { get { return hP; } set { this.hP = value; } }
-        public int MaxHP { get { return maxHP; } set { this.maxHP = value; } }
-        public int Damage { get { return damage; } set { this.damage = value; } }
-        public Tile[] Vision { get { return vision; } set { this.vision = value; } }
-        public Movement Direction { get { return direction; } set { this.direction = value; } }
+        public void setHP(int hP)
+        {
+            this.hP = hP;
+        }
+        public void setMaxHP(int maxHP)
+        {
+            this.maxHP = maxHP;
+        }
+        public void setDamage(int damage)
+        {
+            this.damage = damage;
+        }
+        public void setMovement(Movement direction)
+        {
+            this.direction = direction;
+        }
+       /* public void setVision(Tile[] vision)
+        {
+            this.vision = vision;
+        }
+       */
+        public int getHP() { return hP; }
+        public int getMaxHP() { return maxHP; }
+        public int getDamage() { return damage; }
+       // public Tile[] getVision() { return vision; }
+        public Movement getMovement() { return direction; }
+
+
 
 
         public virtual void Attack(Character target)

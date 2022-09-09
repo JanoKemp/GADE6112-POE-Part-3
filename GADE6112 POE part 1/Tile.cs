@@ -39,8 +39,24 @@ namespace GADE6112_POE_part_1
             
         }
 
-        public int X { get { return x; } set { this.x = value; } }
-        public int Y { get { return y; } set { this.y = value; } }
-        public TileType Type { get { return type; } set { this.type = value; } }
+        public void setX(int x)
+        {
+            this.x = x;
+        }
+        public void setY(int y)
+        {
+            this.y = y;
+        }
+
+        public void setTileType(TileType type)
+        {
+            this.type = type;
+        }
+
+        public int getX() { return x; }
+        public int getY() { return y; }
+        public TileType getTileType() { return type; }
+
+      
     }
 }
