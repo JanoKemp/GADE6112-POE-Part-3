@@ -27,16 +27,14 @@ namespace GADE6112_POE_part_1
         {
             this.x = 0;
             this.y = 0;
+            this.type = TileType.Clear;
             
 
         }
 
         public Tile(int x, int y, TileType type)
         {
-            this.y = y;
-            this.x = x;
-            this.type = type;
-            
+         
         }
 
         public int X { get { return x; } set { this.x = value; } }
