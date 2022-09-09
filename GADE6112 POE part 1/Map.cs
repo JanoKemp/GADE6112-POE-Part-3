@@ -4,17 +4,18 @@ using System.Linq;
 using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace GADE6112_POE_part_1
 {
-    internal class Map
+    internal class Map : Tile
     {
         private int width;
         private int height;
         private TextBox[,] land = new TextBox[9, 7];  
         private string[] enemy = new string[5]; //Come back and check if correct later
         Random randomGen = new Random();
-        Hero Hero = new Hero(0,0,20,Tile.TileType.Hero); // Hero object 
+        Hero Hero = new Hero(); // Hero object 
         private int horizontal, vertical, enemyNum, enemyX , enemyY;
 
         public Map() // Calling Create() to be coded later to loop through and create hero and enemies on the map
@@ -39,10 +40,10 @@ namespace GADE6112_POE_part_1
                 playableMap[enemyX,enemyY] = (SwampCreature)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
 
             }
-            UpdateVision();
+            //UpdateVision();
             for (int i = 0; i < enemy.Length; i++)
             {
-                UpdateVision();
+                //UpdateVision();
             }
         }
 
@@ -97,9 +98,29 @@ namespace GADE6112_POE_part_1
 
 
 
-        public void UpdateVision(/*Character vision*/) 
+        public void UpdateVision(Character vision) 
         {
-            //int north = vision.X;
+            int heroUp, heroDown, heroLeft, heroRight, currentHeroX, currentHeroY; // variables for storing X and Y locations for Hero
+            int enemyUp, enemyDown, enemyLeft, enemyRight, currentEnemyX, currentEnemyY;
+            currentHeroX = Hero.getX(); // Gets current X and Y locations for Hero
+            currentHeroY = Hero.getY();
+            heroUp = currentHeroY -1; // Adds TextBox above to the array. So it can be called to check for its Tile array.
+            heroDown = currentHeroY + 1;
+            heroLeft = currentHeroX - 1;
+            heroRight = currentHeroX + 1;
+
+            //Updates visions surrounding the swampcreatures 
+            SwampCreature creature = new SwampCreature();
+            currentEnemyX = creature.getX();
+            currentEnemyY = creature.getY();
+            enemyUp = currentEnemyY - 1;
+            enemyDown = currentEnemyY + 1;
+            enemyLeft = currentEnemyX -1;
+            enemyRight = currentEnemyX + 1;
+
+
+
+
 
             //vision.Vision[0] =;
             // Vision [index]  - x -1 x + 1 y - 1 y + 1 - This will update the vision on all four sides of the character or enemy. Possibly make Vision a 2d array to store x and y
@@ -116,7 +137,7 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Enemy) //Creates an enemy when called
             {
                 
-                SwampCreature swampEn = new SwampCreature(enemyX, enemyY); // generates random location on map to spawn
+                SwampCreature swampEn = new SwampCreature(enemyX,enemyY); // generates random location on map to spawn
                 
                 return swampEn;
             }
@@ -130,11 +151,11 @@ namespace GADE6112_POE_part_1
             }
             if (type == Tile.TileType.Hero)
             {
-                Hero hero = new Hero(0 ,0 , 20,Tile.TileType.Hero);
+                Hero hero = new Hero();
                 return hero; // Filler , fill with code to create hero 
             }
-            else 
-                return Create(type);
+            else
+                return null;
             
             
         }
