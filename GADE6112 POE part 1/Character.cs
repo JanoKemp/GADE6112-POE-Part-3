@@ -24,14 +24,14 @@ namespace GADE6112_POE_part_1
         public Movement direction;
         public Character()
         {
-
+            this.y = getY();
+            this.x = getX();
+            this.type = getTileType();
         }
 
         public Character(int x, int y, Tile.TileType type) // Must get symbol from Tile Class
         {
-            this.y = y;
-            this.x = x;
-            this.type = type;
+           
 
         }
 
