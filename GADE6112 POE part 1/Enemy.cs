@@ -12,16 +12,16 @@ namespace GADE6112_POE_part_1
         
         public Enemy()
         {
-
+            this.x = getX();
+            this.y = getY();
+            this.hP = getHP();
+            this.maxHP = getMaxHP();
+            this.damage = getDamage();
         }
 
         public Enemy(int x , int y, int hP, int maxHP, int damage) // Needs to call its symbol
         {
-            this.x = x;
-            this.y = y;
-            this.hP = hP;
-            this.maxHP = maxHP;
-            this.damage = damage;
+           
         }
         
         
