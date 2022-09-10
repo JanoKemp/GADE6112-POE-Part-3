@@ -9,8 +9,8 @@ namespace GADE6112_POE_part_1
     internal abstract class Character : Tile
     {
         protected int hP, maxHP, damage;
-        
-        Tile[] vision = new Tile[4]; // Vision Array - stores N S E W for vision meant to be used to validate the movement
+
+        public Character[,] currentVision;  // Vision Array - stores N S E W for vision meant to be used to validate the movement
 
         public enum Movement
         {

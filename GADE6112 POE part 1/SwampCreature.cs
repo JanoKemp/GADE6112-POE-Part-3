@@ -9,7 +9,7 @@ namespace GADE6112_POE_part_1
 {
     internal class SwampCreature : Enemy
     {
-        // Random creatureMove = new Random();
+         Random creatureMove = new Random();
 
         public SwampCreature() 
         {
@@ -26,12 +26,28 @@ namespace GADE6112_POE_part_1
             
             
         }
-        override public Movement ReturnMove(Movement move = 0)
+        override public Movement ReturnMove(Movement move = 0) // If movement is invalid then the movement is returned to its original
         {
-           //creatureMove.Next(x,y); Random number generator that randomly moves the creature in a direction on its move
-           // Add if statements to check if there is an obstacle and if there is regenerate the number to move in a valid position
-
-            return move;
+            int moveDirection;
+            moveDirection = creatureMove.Next(4);
+            if (moveDirection == 0 && currentVision[x,y - 1].getTileType() == TileType.Clear )
+            {
+                return Movement.up;
+            }
+            if(moveDirection == 1 && currentVision[x,y + 1].getTileType() == TileType.Clear )
+            {
+                return Movement.down;
+            }
+            if(moveDirection == 2 && currentVision[x - 1,y].getTileType() == TileType.Clear )
+            {
+                return Movement.left;
+            }
+            if(moveDirection == 3 && currentVision[x + 1,y].getTileType() == TileType.Clear )
+            {
+                return Movement.right;
+            }
+           
+                return Movement.noMovement;
         }
 
     }
