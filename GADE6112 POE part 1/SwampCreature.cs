@@ -21,6 +21,8 @@ namespace GADE6112_POE_part_1
         }
         public SwampCreature(int x , int y)
         {
+            this.hP = 10;
+            this.damage = 1;
             
             
         }
