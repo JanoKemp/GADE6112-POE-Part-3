@@ -10,7 +10,7 @@ namespace GADE6112_POE_part_1
     {
         protected int hP, maxHP, damage;
         
-        Tile[] vision = new Tile[4]; // Vision Array  - to be updated in Map class
+        Tile[] vision = new Tile[4]; // Vision Array - stores N S E W for vision meant to be used to validate the movement
 
         public enum Movement
         {

@@ -12,16 +12,15 @@ namespace GADE6112_POE_part_1
     {
         private int width;
         private int height;
-        private TextBox[,] land = new TextBox[9, 7];  
-        private string[] enemy = new string[5]; //Come back and check if correct later
+        private Tile[,] land = new Tile[9, 7];  // Come back and maybe make it TextBoxes
         Random randomGen = new Random();
         Hero Hero = new Hero(); // Hero object 
-        private int horizontal, vertical, enemyNum, enemyX , enemyY;
+        private int horizontal, vertical, enemyNum, enemyX, enemyY;
 
         public Map() // Calling Create() to be coded later to loop through and create hero and enemies on the map
         {
-            
-            
+
+
             int minWidth = 6; // playable tiles must be 4 + 2 for the borders
             int maxWidth = 7; // Max is 5 + 2 for the borders
             int minHeight = 7;//playable tiles must be 7
@@ -33,17 +32,19 @@ namespace GADE6112_POE_part_1
             Tile[,] playableMap = new Tile[horizontal - 1, vertical - 1]; //one less than the map border for playable map. For borders to be done.
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             Create(Tile.TileType.Hero);
-            Enemy [] enemy = new Enemy [enemyNum];
-            for (int i = 0; i < enemy.Length; i++)
+            Enemy[] enemy = new Enemy[enemyNum];
+            for (int i = 0; i < enemyNum; i++) //Loops through enemy to create() new enemies in the array
             {
-                enemy[i] =  (SwampCreature)Create(Tile.TileType.Enemy);
-                playableMap[enemyX,enemyY] = (SwampCreature)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
+
+                enemy[i] = (SwampCreature)Create(Tile.TileType.Enemy);
+                playableMap[enemyX, enemyY] = (Tile)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
+
 
             }
             UpdateVision();
             for (int i = 0; i < enemy.Length; i++)
             {
-                //UpdateVision();
+                UpdateVision();
             }
         }
 
@@ -75,15 +76,12 @@ namespace GADE6112_POE_part_1
         {
             this.enemyY = enemyY;
         }
-        public void setLand(TextBox [,] land)
-       {
-           this.land = land;
-       }
-       public void setEnemy(string [] enemy)
-       {
-           this.enemy = enemy;
-       }
-       
+        public void setLand(Tile[,] land) // Come back and make textbox if issues
+        {
+            this.land = land;
+        }
+        
+
 
 
         public int getWidth() { return width; }
@@ -92,6 +90,7 @@ namespace GADE6112_POE_part_1
         public int getVertical() { return vertical; }
         public int getEnemyNum() { return enemyNum; }
         public int getEnemyX() { return enemyX; }
+        public Tile[,] getLand() { return land; } // Public get accessor for Land tile array 
         public int getEnemyY() { return enemyY; }
 
        
@@ -127,12 +126,14 @@ namespace GADE6112_POE_part_1
         }
         private Tile Create(Tile.TileType type)// Creates Objects for the map
         {
-            if (land[horizontal, vertical] != null) //'Index was outside the bounds of the array.'
+             //'Index was outside the bounds of the array.'
 
-            {
+                
                 enemyX = randomGen.Next(1, horizontal);
                 enemyY = randomGen.Next(1, vertical);
-            }
+
+            //Add code to randomly generate a new location if the current generated block is not clear
+            
 
             if (type == Tile.TileType.Enemy) //Creates an enemy when called
             {
