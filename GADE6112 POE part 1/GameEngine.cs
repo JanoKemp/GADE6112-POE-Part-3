@@ -18,7 +18,9 @@ namespace GADE6112_POE_part_1
         public Map getMap() { return map; } // public get accessor for the private map variable
         public bool MovePlayer(Character.Movement direction, Hero hero)
         {
-            // map.setLand(map.getLand(map.getTileType(Tile.TileType.Clear))); -------> Empties heros last tile position to clear
+            Tile [,] currentTile = new Tile[hero.getX(), hero.getY()];
+            currentTile[hero.getX(), hero.getY()].setTileType(Tile.TileType.Clear);
+            map.setLand(currentTile);
             bool movement = true; // Possibly add this somewhere else for it to be called (unknown)
             if (hero.ReturnMove(hero.getMovement()) == direction)
             {
@@ -47,6 +49,10 @@ namespace GADE6112_POE_part_1
                     movement = false;
                 }
             }
+            Tile[,] newTile = new Tile[hero.getX(), hero.getY()];
+            newTile[hero.getX(), hero.getY()].setTileType(Tile.TileType.Hero);
+            map.setLand(newTile); //Sets new hero location as Hero tile type. -------> i hope
+            
            // map.setLand(map.getLand(map.getTileType(Tile.TileType.Hero))); -------> sets new hero location to tile type hero
             //This updates the move is the movement is valid via button presses
             return movement;
