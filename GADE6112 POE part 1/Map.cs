@@ -41,10 +41,10 @@ namespace GADE6112_POE_part_1
                 
 
             }
-            UpdateVision();
+            //UpdateVision();
             for (int i = 0; i < enemy.Length; i++)
             {
-                UpdateVision();
+               // UpdateVision();
             }
         }
 
@@ -97,41 +97,28 @@ namespace GADE6112_POE_part_1
 
 
 
-        public void UpdateVision(/*Character vision*/) 
+        public void UpdateVision(Tile up , Tile down, Tile left , Tile right , Character character) 
         {
-            int heroUp, heroDown, heroLeft, heroRight, currentHeroX, currentHeroY; // variables for storing X and Y locations for Hero
-            int enemyUp, enemyDown, enemyLeft, enemyRight, currentEnemyX, currentEnemyY;
-            currentHeroX = Hero.getX(); // Gets current X and Y locations for Hero
-            currentHeroY = Hero.getY();
-            heroUp = currentHeroY -1; // Adds TextBox above to the array. So it can be called to check for its Tile array.
-            heroDown = currentHeroY + 1;
-            heroLeft = currentHeroX - 1;
-            heroRight = currentHeroX + 1;
 
-            //Updates visions surrounding the swampcreatures 
-            SwampCreature creature = new SwampCreature();
-            currentEnemyX = creature.getX();
-            currentEnemyY = creature.getY();
-            enemyUp = currentEnemyY - 1;
-            enemyDown = currentEnemyY + 1;
-            enemyLeft = currentEnemyX -1;
-            enemyRight = currentEnemyX + 1;
-
-
-
-
-
+            up.setX(character.getX());//For north tile X stays the same - Any characters X and Y position and updates their array ( generic implementation )
+            up.setY(character.getY() - 1); // Y changes as its 1 above
+            down.setX(character.getX());
+            down.setY(character.getY() + 1);
+            right.setX(character.getX() + 1);
+            right.setY(character.getY());
+            left.setX(character.getX() -1 );
+            left.setY(character.getY());
             //vision.Vision[0] =;
             // Vision [index]  - x -1 x + 1 y - 1 y + 1 - This will update the vision on all four sides of the character or enemy. Possibly make Vision a 2d array to store x and y
         }
         private Tile Create(Tile.TileType type)// Creates Objects for the map
         {
-             
 
-                
-                enemyX = randomGen.Next(1, horizontal);
-                enemyY = randomGen.Next(1, vertical);
-            while (land[enemyX,enemyY].getTileType() != TileType.Clear)
+
+
+            enemyX = randomGen.Next(horizontal) ;
+                enemyY = randomGen.Next(vertical);
+            if (land[enemyX,enemyY].getTileType() != TileType.Clear)
             {
                 enemyX = randomGen.Next(1,horizontal);
                 enemyY = randomGen.Next(1, vertical);
