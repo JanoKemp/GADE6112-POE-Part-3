@@ -24,8 +24,23 @@ namespace GADE6112_POE_part_1
 
         override public Movement ReturnMove(Movement move = 0)
         {
-           
-            return move;
+            if (move == Movement.up && currentVision[x,y+1].getTileType() == Tile.TileType.Clear)
+            {
+                return Movement.up;
+            }
+            if (move == Movement.down && currentVision[x,y-1].getTileType() == Tile.TileType.Clear)
+            {
+                return Movement.down;
+            }
+            if (move == Movement.left && currentVision[ x -1 , y].getTileType() == Tile.TileType.Clear)
+            {
+                return Movement.left;
+            }
+            if(move == Movement.right && currentVision[x + 1 , y].getTileType() ==  Tile.TileType.Clear)
+            {
+                return Movement.right;
+            }
+            return Movement.noMovement;
         }
 
         override public string ToString()
