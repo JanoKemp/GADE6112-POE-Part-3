@@ -29,16 +29,16 @@ namespace GADE6112_POE_part_1
             int maxEnemy = 6;
             horizontal = randomGen.Next(minWidth, maxWidth);//TOADD IF ISSUES: +1 because random gens stop 1 number before max. Eg if range is 0-9 then it will only calc between 0-8
             vertical = randomGen.Next(minHeight, maxHeight);
-            Tile[,] playableMap = new Tile[horizontal - 1, vertical - 1]; //one less than the map border for playable map. For borders to be done.
+            land = new Tile[horizontal - 1, vertical - 1]; //one less than the map border for playable map. For borders to be done.
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             Create(Tile.TileType.Hero);
             Enemy[] enemy = new Enemy[enemyNum];
-            for (int i = 0; i < enemyNum; i++) //Loops through enemy to create() new enemies in the array
+            for (int i = 0; i < enemy.Length; i++) //Loops through enemy to create() new enemies in the array
             {
 
                 enemy[i] = (SwampCreature)Create(Tile.TileType.Enemy);
-                playableMap[enemyX, enemyY] = (Tile)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
-
+                land[enemyX, enemyY] = (SwampCreature)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
+                
 
             }
             UpdateVision();
@@ -126,11 +126,16 @@ namespace GADE6112_POE_part_1
         }
         private Tile Create(Tile.TileType type)// Creates Objects for the map
         {
-             //'Index was outside the bounds of the array.'
+             
 
                 
                 enemyX = randomGen.Next(1, horizontal);
                 enemyY = randomGen.Next(1, vertical);
+            while (land[enemyX,enemyY].getTileType() != TileType.Clear)
+            {
+                enemyX = randomGen.Next(1,horizontal);
+                enemyY = randomGen.Next(1, vertical);
+            }
 
             //Add code to randomly generate a new location if the current generated block is not clear
             
@@ -138,8 +143,9 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Enemy) //Creates an enemy when called
             {
                 
-                SwampCreature swampEn = new SwampCreature(enemyX,enemyY); // generates random location on map to spawn
-                
+                SwampCreature swampEn = new SwampCreature(); // generates random location on map to spawn
+                swampEn.setX(enemyX);
+                swampEn.setY(enemyY);
                 return swampEn;
             }
             if (type == Tile.TileType.Barrier)
@@ -153,6 +159,8 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Hero)
             {
                 Hero hero = new Hero();
+                hero.setX(enemyX);
+                hero.setY(enemyY);
                 return hero; // Filler , fill with code to create hero 
             }
             else
