@@ -18,14 +18,14 @@ namespace GADE6112_POE_part_1
         }
         public void MapAssignment()
         {
-            TextBox[,] land = new TextBox[7, 9];
+            TextBox[,] land = new TextBox[9, 7];
             Map map = new Map();
-            map.setLand(land);
-            
+
+
             //Map array [ Row , Column ] = TextBox[ X , Y]
             //First Column
             //First Row 
-            
+            land[0, 0] = textBox00;
             land[0, 1] = textBox01;
             land[0, 2] = textBox02;
             land[0, 3] = textBox03;
@@ -97,6 +97,7 @@ namespace GADE6112_POE_part_1
             land[8, 4] = textBox84;
             land[8, 5] = textBox85;
             land[8, 6] = textBox86;
+            //map.setLand(land); // Assigns textboxes to fill Map array, Change setLand to textbox to make work again
             
 
             //how to inherit in windows
@@ -106,7 +107,7 @@ namespace GADE6112_POE_part_1
             //how to inherit in windows
 
             // Possibly add text boxes into array
-            
+
         }
 
         private void textBox00_TextChanged(object sender, EventArgs e)
