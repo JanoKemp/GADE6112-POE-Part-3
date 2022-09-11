@@ -27,7 +27,7 @@ namespace GADE6112_POE_part_1
 
             horizontal = randomGen.Next(minWidth, maxWidth);//TOADD IF ISSUES: +1 because random gens stop 1 number before max. Eg if range is 0-9 then it will only calc between 0-8
             vertical = randomGen.Next(minHeight, maxHeight);
-            land = new Tile[horizontal - 1, vertical - 1]; //one less than the map border for playable map. For borders to be done.
+            land = new Tile[vertical -1,horizontal -1]; //one less than the map border for playable map. For borders to be done.
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             Create(Tile.TileType.Hero);
             Enemy[] enemy = new Enemy[enemyNum];
@@ -148,10 +148,11 @@ namespace GADE6112_POE_part_1
         }
         private Tile Create(Tile.TileType type)// Creates Objects for the map
         {
+            
+            enemyY = randomGen.Next(horizontal);
+            enemyX = randomGen.Next(vertical);
 
-            enemyX = randomGen.Next(horizontal);
-            enemyY = randomGen.Next(vertical);
-            if (land[enemyX, enemyY].getTileType() != TileType.Clear)
+            while (land[enemyX, enemyY].getTileType() != TileType.Clear) // Object reference not set to an instance of an object
             {
                 enemyX = randomGen.Next(1, horizontal);
                 enemyY = randomGen.Next(1, vertical);
@@ -159,7 +160,7 @@ namespace GADE6112_POE_part_1
 
             //Add code to randomly generate a new location if the current generated block is not clear
 
-            if (type == Tile.TileType.Enemy) //Creates an enemy when called
+            if (type == TileType.Enemy) //Creates an enemy when called
             {
 
                 SwampCreature swampEn = new SwampCreature(); // generates random location on map to spawn
@@ -167,7 +168,7 @@ namespace GADE6112_POE_part_1
                 swampEn.setY(enemyY);
                 return swampEn;
             }
-            if (type == Tile.TileType.Barrier)
+            if (type == TileType.Barrier)
             {
 
                 Obstacle bush = new Obstacle(0, 0, Tile.TileType.Barrier); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
@@ -175,7 +176,7 @@ namespace GADE6112_POE_part_1
                 return bush;
 
             }
-            if (type == Tile.TileType.Hero)
+            if (type == TileType.Hero)
             {
                 Hero hero = new Hero();
                 hero.setX(enemyX);

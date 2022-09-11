@@ -7,13 +7,13 @@ namespace GADE6112_POE_part_1
         {
             InitializeComponent();
         }
-
+        
         private void mainForm_Load(object sender, EventArgs e)
         {
+            
             MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
             
-            this.Text = "test2";
-            this.Text = "test branch 1";
+            
             
         }
         public void MapAssignment()
@@ -117,7 +117,9 @@ namespace GADE6112_POE_part_1
 
         private void buttonUp_Click(object sender, EventArgs e)
         {
-
+            Hero hero = new Hero();
+            GameEngine gameEngine = new GameEngine();
+            gameEngine.MovePlayer(Character.Movement.up, hero);
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
@@ -131,6 +133,19 @@ namespace GADE6112_POE_part_1
         }
 
         private void buttonDown_Click(object sender, EventArgs e)
+        {
+            Hero hero = new Hero();
+            GameEngine gameEngine = new GameEngine();
+            gameEngine.MovePlayer(Character.Movement.down, hero);
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonAttack_Click(object sender, EventArgs e)
         {
 
         }
