@@ -12,12 +12,12 @@ namespace GADE6112_POE_part_1
     {
         private int width;
         private int height;
-        private Tile[,] land = new Tile[9, 7];  // Come back and maybe make it TextBoxes
+        private Tile[,] land = new Tile[,] { };  // Come back and maybe make it TextBoxes
         Random randomGen = new Random();
         Hero Hero = new Hero(); // Hero object 
         private int horizontal, vertical, enemyNum, enemyX, enemyY;
 
-        public Map() // Calling Create() to be coded later to loop through and create hero and enemies on the map
+        public Map() 
         {
 
 
@@ -41,11 +41,8 @@ namespace GADE6112_POE_part_1
                 
 
             }
-            //UpdateVision();
-            for (int i = 0; i < enemy.Length; i++)
-            {
-               // UpdateVision();
-            }
+            UpdateVision();
+            
         }
 
         public void setWidth(int width)
@@ -97,10 +94,15 @@ namespace GADE6112_POE_part_1
 
 
 
-        public void UpdateVision(Tile up , Tile down, Tile left , Tile right , Character character) 
+        public void UpdateVision() 
         {
+            Hero character = new Hero(); ; // Has the attributes of the Characters class
+            Map up = new Map(); // Has the attributes of the Tile class , therefore it stores the X and Y at those locations.
+            Map down = new Map();
+            Map left = new Map();
+            Map right = new Map();
 
-            up.setX(character.getX());//For north tile X stays the same - Any characters X and Y position and updates their array ( generic implementation )
+            up.setX(character.getX());//Updates vision for Hero tiles
             up.setY(character.getY() - 1); // Y changes as its 1 above
             down.setX(character.getX());
             down.setY(character.getY() + 1);
@@ -108,8 +110,18 @@ namespace GADE6112_POE_part_1
             right.setY(character.getY());
             left.setX(character.getX() -1 );
             left.setY(character.getY());
-            //vision.Vision[0] =;
-            // Vision [index]  - x -1 x + 1 y - 1 y + 1 - This will update the vision on all four sides of the character or enemy. Possibly make Vision a 2d array to store x and y
+
+            SwampCreature creature = new SwampCreature();
+
+            up.setX(creature.getX());//Updates vision for enemy tiles
+            up.setY(creature.getY() - 1); // Y changes as its 1 above
+            down.setX(creature.getX());
+            down.setY(creature.getY() + 1);
+            right.setX(creature.getX() + 1);
+            right.setY(creature.getY());
+            left.setX(creature.getX() - 1);
+            left.setY(creature.getY());
+
         }
         private Tile Create(Tile.TileType type)// Creates Objects for the map
         {
