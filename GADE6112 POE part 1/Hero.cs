@@ -12,8 +12,8 @@ namespace GADE6112_POE_part_1
         {
             this.x = getX();
             this.y = getY();
-            this.hP = getHP();
-            this.maxHP = getHP();
+            this.hp = getHP();
+            this.maxHp = getHP();
             this.damage = 2;
         }
 
@@ -45,7 +45,7 @@ namespace GADE6112_POE_part_1
 
         override public string ToString()
         {
-            String heroMessage = "Player stats:\n Hp: " + hP + "/ Max: " + maxHP + "\n Damage: " + damage + "\n [X:Y] --> [" + x + ":" + y + "]";
+            String heroMessage = "Player stats:\n Hp: " + hp + "/ Max: " + maxHp + "\n Damage: " + damage + "\n [X:Y] --> [" + x + ":" + y + "]";
             return ToString();
         }
 
