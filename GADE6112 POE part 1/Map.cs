@@ -146,11 +146,11 @@ namespace GADE6112_POE_part_1
 
 
         }
-        private Tile Create(Tile.TileType type)// Creates Objects for the map
+        private Tile Create(Tile.TileType type  )// Creates Objects for the map
         {
             
-            enemyY = randomGen.Next(horizontal);
-            enemyX = randomGen.Next(vertical);
+            enemyY = randomGen.Next(horizontal -1);
+            enemyX = randomGen.Next(vertical -1);
 
             while (land[enemyX, enemyY].getTileType() != TileType.Clear) // Object reference not set to an instance of an object
             {

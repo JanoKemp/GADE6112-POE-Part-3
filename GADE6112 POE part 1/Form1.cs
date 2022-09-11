@@ -7,19 +7,23 @@ namespace GADE6112_POE_part_1
         {
             InitializeComponent();
         }
+        Hero hero = new Hero();
+        SwampCreature creature = new SwampCreature();
+        GameEngine gameEngine = new GameEngine();
+        Map map = new Map();
         
         private void mainForm_Load(object sender, EventArgs e)
         {
             
             MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
-            
+            gameEngine.getMap();
             
             
         }
         public void MapAssignment()
         {
             TextBox[,] land = new TextBox[9, 7];
-            Map map = new Map();
+            
 
 
             //Map array [ Row , Column ] = TextBox[ X , Y]
@@ -117,37 +121,42 @@ namespace GADE6112_POE_part_1
 
         private void buttonUp_Click(object sender, EventArgs e)
         {
-            Hero hero = new Hero();
-            GameEngine gameEngine = new GameEngine();
+           
             gameEngine.MovePlayer(Character.Movement.up, hero);
+            map.UpdateVision(hero, Character.Movement.up);
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
-
+            gameEngine.MovePlayer(Character.Movement.left, hero);
+            map.UpdateVision(hero, Character.Movement.left);
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
         {
+            gameEngine.MovePlayer(Character.Movement.right, hero);
+            map.UpdateVision(hero, Character.Movement.right);
+            
 
         }
 
         private void buttonDown_Click(object sender, EventArgs e)
         {
-            Hero hero = new Hero();
-            GameEngine gameEngine = new GameEngine();
+           
             gameEngine.MovePlayer(Character.Movement.down, hero);
+            map.UpdateVision(hero, Character.Movement.down);
 
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-
+            hero.ToString();
+            creature.ToString();
         }
 
         private void buttonAttack_Click(object sender, EventArgs e)
         {
-
+            hero.Attack(creature);
         }
     }
 }
