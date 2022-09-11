@@ -8,7 +8,7 @@ namespace GADE6112_POE_part_1
 {
     internal abstract class Character : Tile
     {
-        protected int hP, maxHP, damage;
+        protected int hp, maxHp, damage;
 
         public Character[,] currentVision;  // Vision Array - stores N S E W for vision meant to be used to validate the movement
 
@@ -35,13 +35,13 @@ namespace GADE6112_POE_part_1
 
         }
 
-        public void setHP(int hP)
+        public void setHP(int hp)
         {
-            this.hP = hP;
+            this.hp = hp;
         }
-        public void setMaxHP(int maxHP)
+        public void setMaxHP(int maxHp)
         {
-            this.maxHP = maxHP;
+            this.maxHp = maxHp;
         }
         public void setDamage(int damage)
         {
@@ -56,8 +56,8 @@ namespace GADE6112_POE_part_1
             this.vision = vision;
         }
        */
-        public int getHP() { return hP; }
-        public int getMaxHP() { return maxHP; }
+        public int getHP() { return hp; }
+        public int getMaxHP() { return maxHp; }
         public int getDamage() { return damage; }
        // public Tile[] getVision() { return vision; }
         public Movement getMovement() { return direction; }

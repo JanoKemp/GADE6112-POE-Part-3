@@ -14,8 +14,8 @@ namespace GADE6112_POE_part_1
         {
             this.x = getX();
             this.y = getY();
-            this.hP = getHP();
-            this.maxHP = getMaxHP();
+            this.hp = getHP();
+            this.maxHp = getMaxHP();
             this.damage = getDamage();
         }
 
