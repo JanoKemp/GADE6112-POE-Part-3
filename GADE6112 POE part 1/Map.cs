@@ -42,6 +42,7 @@ namespace GADE6112_POE_part_1
             UpdateVision(hero, Character.Movement.noMovement);
 
         }
+        #region Gets and setters
         internal Tile getLocation(int x, int y)
         {
             return land[x, y];
@@ -79,6 +80,7 @@ namespace GADE6112_POE_part_1
         {
             this.land = land;
         }
+        
 
 
 
@@ -91,6 +93,7 @@ namespace GADE6112_POE_part_1
         public int getEnemyX() { return enemyX; }
         public Tile[,] getLand() { return land; } // Public get accessor for Land tile array 
         public int getEnemyY() { return enemyY; }
+        #endregion
 
 
 
@@ -106,7 +109,7 @@ namespace GADE6112_POE_part_1
                     up.setY(vision.getY() - 1);
                     up.setX(vision.getX());
                     return up;
-                    break;
+                    
 
                 case Character.Movement.down:
 
@@ -114,28 +117,28 @@ namespace GADE6112_POE_part_1
                     down.setY(vision.getY() + 1);
                     down.setX(vision.getX());
                     return down;
-                    break;
+                    
                 case Character.Movement.left:
 
                     Tile left = land[vision.getX() - 1, vision.getY()];
                     left.setY(vision.getY());
                     left.setX(vision.getX() - 1);
                     return left;
-                    break;
+
                 case Character.Movement.right:
 
                     Tile right = land[vision.getX() + 1, vision.getY()];
                     right.setY(vision.getY());
                     right.setX(vision.getX() - 1);
                     return right;
-                    break;
+                    
                 case Character.Movement.noMovement:
 
                     return vision;
-                    break;
+                    
                     default:
                     return vision;
-                    break;
+                   
 
 
 
