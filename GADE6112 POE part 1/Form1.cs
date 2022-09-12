@@ -10,8 +10,8 @@ namespace GADE6112_POE_part_1
         Hero hero = new Hero();
         SwampCreature creature = new SwampCreature();
         GameEngine gameEngine = new GameEngine();
-        Map map = new Map();
-        
+         
+
         private void mainForm_Load(object sender, EventArgs e)
         {
             
@@ -23,20 +23,22 @@ namespace GADE6112_POE_part_1
         public void MapAssignment()
         {
             TextBox[,] land = new TextBox[9, 7];
-            
 
+            
 
             //Map array [ Row , Column ] = TextBox[ X , Y]
             //First Column
             //First Row 
             land[0, 0] = textBox00;
+            
             land[0, 1] = textBox01;
             land[0, 2] = textBox02;
             land[0, 3] = textBox03;
             land[0, 4] = textBox04;
             land[0, 5] = textBox05;
             land[0, 6] = textBox06;
-        
+
+            land[hero.getX(), hero.getY()].Text = hero.getHeroSymbol().ToString();
             //Second Row
             land[1, 0] = textBox10;
             land[1, 1] = textBox11;
@@ -123,19 +125,19 @@ namespace GADE6112_POE_part_1
         {
            
             gameEngine.MovePlayer(Character.Movement.up, hero);
-            map.UpdateVision(hero, Character.Movement.up);
+            gameEngine.getMap().UpdateVision(hero, Character.Movement.up);
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
             gameEngine.MovePlayer(Character.Movement.left, hero);
-            map.UpdateVision(hero, Character.Movement.left);
+            gameEngine.getMap().UpdateVision(hero, Character.Movement.left);
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
         {
             gameEngine.MovePlayer(Character.Movement.right, hero);
-            map.UpdateVision(hero, Character.Movement.right);
+            gameEngine.getMap().UpdateVision(hero, Character.Movement.right);
             
 
         }
@@ -144,7 +146,7 @@ namespace GADE6112_POE_part_1
         {
            
             gameEngine.MovePlayer(Character.Movement.down, hero);
-            map.UpdateVision(hero, Character.Movement.down);
+            gameEngine.getMap().UpdateVision(hero, Character.Movement.down);
 
         }
 

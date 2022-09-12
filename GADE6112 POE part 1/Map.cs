@@ -112,11 +112,14 @@ namespace GADE6112_POE_part_1
             switch (move)
             {
                 case Character.Movement.up:
-
-                    Tile up = land[vision.getX(), vision.getY() - 1];
-                    up.setY(vision.getY() - 1);
-                    up.setX(vision.getX());
-                    return up;
+                    if (vision.getX() != 0)
+                    {
+                        Tile up = land[vision.getX(), vision.getY() - 1];
+                        up.setY(vision.getY() - 1);
+                        up.setX(vision.getX());
+                        return up;
+                    }
+                    return vision;
                     
 
                 case Character.Movement.down:
@@ -127,11 +130,14 @@ namespace GADE6112_POE_part_1
                     return down;
                     
                 case Character.Movement.left:
-
-                    Tile left = land[vision.getX() - 1, vision.getY()];
-                    left.setY(vision.getY());
-                    left.setX(vision.getX() - 1);
-                    return left;
+                    if (vision.getX() != 0)
+                    {
+                        Tile left = land[vision.getX() - 1, vision.getY()];
+                        left.setY(vision.getY());
+                        left.setX(vision.getX() - 1);
+                        return left;
+                    }
+                    return vision;
 
                 case Character.Movement.right:
 
