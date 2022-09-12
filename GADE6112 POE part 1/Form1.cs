@@ -156,7 +156,11 @@ namespace GADE6112_POE_part_1
 
         private void buttonAttack_Click(object sender, EventArgs e)
         {
-            hero.Attack(creature);
+            if(hero.CheckRange(creature) == true)
+            {
+                hero.Attack(creature);
+            }
+            
         }
     }
 }
