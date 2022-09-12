@@ -33,10 +33,7 @@ namespace GADE6112_POE_part_1
 
         }
 
-        public Tile(int x, int y, TileType type)
-        {
-         
-        }
+        
 
         public void setX(int x)
         {
@@ -55,7 +52,7 @@ namespace GADE6112_POE_part_1
         public int getX() { return x; }
         public int getY() { return y; }
         public TileType getTileType() { return type; }
-         
+        public char getSymbols(int s) {  return symbols[s]; } 
 
       
     }

@@ -8,6 +8,7 @@ namespace GADE6112_POE_part_1
 {
     internal class Hero:Character 
     {
+        char heroSym;
         public Hero()
         {
             this.x = getX();
@@ -15,6 +16,7 @@ namespace GADE6112_POE_part_1
             this.hp = getHP();
             this.maxHp = getHP();
             this.damage = 2;
+            heroSym = getSymbols(0);
         }
 
         public Hero(int x, int y, int hP, TileType type)
@@ -42,6 +44,7 @@ namespace GADE6112_POE_part_1
             }
             return Movement.noMovement;
         }
+        public char getHeroSymbol() { return heroSym; }
 
         override public string ToString()
         {

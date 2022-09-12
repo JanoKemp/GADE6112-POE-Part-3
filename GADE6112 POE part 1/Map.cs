@@ -8,7 +8,7 @@ using System.Transactions;
 
 namespace GADE6112_POE_part_1
 {
-    internal class Map : Tile
+    internal class Map 
     {
         private int width;
         private int height;
@@ -28,6 +28,13 @@ namespace GADE6112_POE_part_1
             horizontal = randomGen.Next(minWidth, maxWidth);//TOADD IF ISSUES: +1 because random gens stop 1 number before max. Eg if range is 0-9 then it will only calc between 0-8
             vertical = randomGen.Next(minHeight, maxHeight);
             land = new Tile[vertical -1,horizontal -1]; //one less than the map border for playable map. For borders to be done.
+            for(int x = 0; x < land.GetLength(0); x++)
+            {
+                for(int y = 0; y < land.GetLength(1); y++)
+                {
+                    land[x, y] = new SwampCreature();
+                }
+            }    
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             Create(Tile.TileType.Hero);
             Enemy[] enemy = new Enemy[enemyNum];
@@ -104,11 +111,15 @@ namespace GADE6112_POE_part_1
             switch (move)
             {
                 case Character.Movement.up:
-
-                    Tile up = land[vision.getX(), vision.getY() - 1];
-                    up.setY(vision.getY() - 1);
-                    up.setX(vision.getX());
-                    return up;
+                    if (vision.getX() != 0)
+                    {
+                        Tile up = land[vision.getX(), vision.getY() - 1];
+                        up.setY(vision.getY() - 1);
+                        up.setX(vision.getX());
+                        return up;
+                    }
+                    else
+                    return vision;
                     
 
                 case Character.Movement.down:
@@ -119,11 +130,15 @@ namespace GADE6112_POE_part_1
                     return down;
                     
                 case Character.Movement.left:
-
-                    Tile left = land[vision.getX() - 1, vision.getY()];
-                    left.setY(vision.getY());
-                    left.setX(vision.getX() - 1);
-                    return left;
+                    if (vision.getY() != 0)
+                    {
+                        Tile left = land[vision.getX() - 1, vision.getY()];
+                        left.setY(vision.getY());
+                        left.setX(vision.getX() - 1);
+                        return left;
+                    }
+                    else
+                    return vision;
 
                 case Character.Movement.right:
 
@@ -152,7 +167,7 @@ namespace GADE6112_POE_part_1
             enemyY = randomGen.Next(horizontal -1);
             enemyX = randomGen.Next(vertical -1);
 
-            while (land[enemyX, enemyY].getTileType() != TileType.Clear) // Object reference not set to an instance of an object
+            while (land[enemyX, enemyY].getTileType() != Tile.TileType.Clear) // Object reference not set to an instance of an object
             {
                 enemyX = randomGen.Next(1, horizontal);
                 enemyY = randomGen.Next(1, vertical);
@@ -160,7 +175,7 @@ namespace GADE6112_POE_part_1
 
             //Add code to randomly generate a new location if the current generated block is not clear
 
-            if (type == TileType.Enemy) //Creates an enemy when called
+            if (type == Tile.TileType.Enemy) //Creates an enemy when called
             {
 
                 SwampCreature swampEn = new SwampCreature(); // generates random location on map to spawn
@@ -168,7 +183,7 @@ namespace GADE6112_POE_part_1
                 swampEn.setY(enemyY);
                 return swampEn;
             }
-            if (type == TileType.Barrier)
+            if (type == Tile.TileType.Barrier)
             {
 
                 Obstacle bush = new Obstacle(0, 0, Tile.TileType.Barrier); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
@@ -176,7 +191,7 @@ namespace GADE6112_POE_part_1
                 return bush;
 
             }
-            if (type == TileType.Hero)
+            if (type == Tile.TileType.Hero)
             {
                 Hero hero = new Hero();
                 hero.setX(enemyX);

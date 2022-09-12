@@ -11,7 +11,7 @@ namespace GADE6112_POE_part_1
     
     internal class GameEngine 
     {
-        private Map map = new Map();
+        private Map map;
         public GameEngine()
         {
             
