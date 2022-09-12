@@ -10,7 +10,7 @@ namespace GADE6112_POE_part_1
         Hero hero = new Hero();
         SwampCreature creature = new SwampCreature();
         GameEngine gameEngine = new GameEngine();
-        Map map = new Map();
+        Map map;
         
         private void mainForm_Load(object sender, EventArgs e)
         {
@@ -123,19 +123,19 @@ namespace GADE6112_POE_part_1
         {
            
             gameEngine.MovePlayer(Character.Movement.up, hero);
-            map.UpdateVision(hero, Character.Movement.up);
+            gameEngine.getMap().UpdateVision(hero, Character.Movement.up);
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
             gameEngine.MovePlayer(Character.Movement.left, hero);
-            map.UpdateVision(hero, Character.Movement.left);
+            gameEngine.getMap().UpdateVision(hero, Character.Movement.left);
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
         {
             gameEngine.MovePlayer(Character.Movement.right, hero);
-            map.UpdateVision(hero, Character.Movement.right);
+            gameEngine.getMap().UpdateVision(hero, Character.Movement.right);
             
 
         }
@@ -144,7 +144,7 @@ namespace GADE6112_POE_part_1
         {
            
             gameEngine.MovePlayer(Character.Movement.down, hero);
-            map.UpdateVision(hero, Character.Movement.down);
+            gameEngine.getMap().UpdateVision(hero, Character.Movement.down);
 
         }
 

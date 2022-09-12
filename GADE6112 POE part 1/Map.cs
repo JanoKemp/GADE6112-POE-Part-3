@@ -8,8 +8,9 @@ using System.Transactions;
 
 namespace GADE6112_POE_part_1
 {
-    internal class Map : Tile
+    internal class Map// : Tile
     {
+        
         private int width;
         private int height;
         private Tile[,] land = new Tile[,] { };  // Come back and maybe make it TextBoxes
@@ -17,10 +18,7 @@ namespace GADE6112_POE_part_1
         Hero hero = new Hero(); // Hero object 
         private int horizontal, vertical, enemyNum, enemyX, enemyY;
 
-        public Map()
-        {
-
-        }
+   
         public Map(int minWidth , int maxWidth , int minHeight , int maxHeight , int minEnemy , int maxEnemy)
         {
 
@@ -31,16 +29,18 @@ namespace GADE6112_POE_part_1
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             Create(Tile.TileType.Hero);
             Enemy[] enemy = new Enemy[enemyNum];
+            Console.WriteLine("dog");
             for (int i = 0; i < enemy.Length; i++) //Loops through enemy to create() new enemies in the array
             {
-
+                Console.WriteLine("dog");
                 enemy[i] = (SwampCreature)Create(Tile.TileType.Enemy);
-                land[enemyX, enemyY] = (SwampCreature)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
+
+
+             //   land[enemyX, enemyY] = (SwampCreature)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
 
 
             }
             UpdateVision(hero, Character.Movement.noMovement);
-
         }
         #region Gets and setters
         internal Tile getLocation(int x, int y)
@@ -148,11 +148,13 @@ namespace GADE6112_POE_part_1
         }
         private Tile Create(Tile.TileType type  )// Creates Objects for the map
         {
-            
+            //Console.WriteLine(land);
+            //Console.WriteLine("dog");
             enemyY = randomGen.Next(horizontal -1);
             enemyX = randomGen.Next(vertical -1);
-
-            while (land[enemyX, enemyY].getTileType() != TileType.Clear) // Object reference not set to an instance of an object
+            //Console.WriteLine(land);
+            land[0,0] = new SwampCreature();
+            while (land[0, 0].getTileType() != Tile.TileType.Clear) // Object reference not set to an instance of an object
             {
                 enemyX = randomGen.Next(1, horizontal);
                 enemyY = randomGen.Next(1, vertical);
@@ -160,7 +162,7 @@ namespace GADE6112_POE_part_1
 
             //Add code to randomly generate a new location if the current generated block is not clear
 
-            if (type == TileType.Enemy) //Creates an enemy when called
+            if (type == Tile.TileType.Enemy) //Creates an enemy when called
             {
 
                 SwampCreature swampEn = new SwampCreature(); // generates random location on map to spawn
@@ -168,7 +170,7 @@ namespace GADE6112_POE_part_1
                 swampEn.setY(enemyY);
                 return swampEn;
             }
-            if (type == TileType.Barrier)
+            if (type == Tile.TileType.Barrier)
             {
 
                 Obstacle bush = new Obstacle(0, 0, Tile.TileType.Barrier); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
@@ -176,7 +178,7 @@ namespace GADE6112_POE_part_1
                 return bush;
 
             }
-            if (type == TileType.Hero)
+            if (type == Tile.TileType.Hero)
             {
                 Hero hero = new Hero();
                 hero.setX(enemyX);

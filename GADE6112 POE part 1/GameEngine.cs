@@ -11,14 +11,12 @@ namespace GADE6112_POE_part_1
     
     internal class GameEngine 
     {
-        private Map map = new Map();
+        private Map map;
         public GameEngine()
         {
             
            map = new Map(6,7,7,9,3,6); // Creates a map with overloaded constructor
-            
-            
-         
+  
         }
         public Map getMap() { return map; } // public get accessor for the private map variable
         public bool MovePlayer(Character.Movement direction, Hero hero)
