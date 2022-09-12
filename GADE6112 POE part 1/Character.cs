@@ -91,12 +91,12 @@ namespace GADE6112_POE_part_1
         {
             Hero hero = new Hero();
 
-            int targetX , targetY,distance;
+            int targetX , targetY,distance; // Local variables created for assigning Target X and Y values to be checked against distance
             targetX = target.getX();
             targetY = target.getY();
-            if (targetX > hero.getX() && targetY > hero.getY())
+            if (targetX > hero.getX() && targetY > hero.getY()) // Ensures distance cannot be negative
             {
-                distance = (targetX + targetY) - (hero.getX() + hero.getX());
+                distance = (targetX + targetY) - (hero.getX() + hero.getX()); // Adds X and Y of each object and then subtracts from the bigger X and Y. Gives a distance to be used , later for checking
                 return distance;
             }
             if (targetX < hero.getX() && targetY < hero.getY())
@@ -118,20 +118,22 @@ namespace GADE6112_POE_part_1
             currentY = getY();
             if ( direction == Movement.up)
             {
-                currentY = currentY + 1;
+                currentX = currentX - 1; 
             }
             if (direction == Movement.down)
             {
-                currentY = currentY -1;
+                currentX = currentX  + 1;
             }
             if(direction == Movement.left)
             {
-                currentX = currentX - 1;
+                currentY = currentY - 1;
             }
-            if (direction==Movement.right)
+            if (direction == Movement.right)
             {
-                currentX = currentX + 1;
+                currentY = currentY + 1;
             }
+            else
+                direction = Movement.noMovement;
            
             //Modify to be able to move left right up or down for both the x and the y later use when buttons are added
         }
@@ -141,7 +143,7 @@ namespace GADE6112_POE_part_1
         
        
 
-        public bool isDead()
+        public bool isDead() // Checks the Heros Hp and Enemies Hp and returns a Bool value based on if statement.
         {
             Hero hero = new Hero();
             SwampCreature creature = new SwampCreature();

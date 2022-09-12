@@ -12,7 +12,7 @@ namespace GADE6112_POE_part_1
         protected int x, y; // X is column , Y is row
         protected char[] symbols = new char[6] { 'H', 'E', 'G', 'W', 'C', 'X' }; // Symbols to tell which character to put on the map
         
-        public enum TileType
+        public enum TileType // Different Types of Tiles
         {
             Hero ,
             Enemy,
@@ -34,7 +34,7 @@ namespace GADE6112_POE_part_1
         }
 
         
-
+        // Gets and Sets 
         public void setX(int x)
         {
             this.x = x;

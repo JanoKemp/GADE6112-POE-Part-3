@@ -10,12 +10,8 @@ namespace GADE6112_POE_part_1
         Hero hero = new Hero();
         SwampCreature creature = new SwampCreature();
         GameEngine gameEngine = new GameEngine();
-<<<<<<< HEAD
-       
-=======
-        Map map;
->>>>>>> origin/master
         
+
         private void mainForm_Load(object sender, EventArgs e)
         {
             
@@ -128,8 +124,8 @@ namespace GADE6112_POE_part_1
         private void buttonUp_Click(object sender, EventArgs e)
         {
            
-            gameEngine.MovePlayer(Character.Movement.up, hero);
-            gameEngine.getMap().UpdateVision(hero, Character.Movement.up);
+            gameEngine.MovePlayer(Character.Movement.up, hero); // Calls Move player method which changes the X and Y accordingly 
+            gameEngine.getMap().UpdateVision(hero, Character.Movement.up); // Updates vision based on new movement
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
@@ -156,15 +152,15 @@ namespace GADE6112_POE_part_1
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            hero.ToString();
-            creature.ToString();
+            hero.ToString(); // Outputs Hero information
+            creature.ToString(); // Outputs Enemy information
         }
 
         private void buttonAttack_Click(object sender, EventArgs e)
         {
-            if(hero.CheckRange(creature) == true)
+            if(hero.CheckRange(creature) == true) // Checks if creature is within range
             {
-                hero.Attack(creature);
+                hero.Attack(creature); // Creature hp - hero damage. Then sets new Creature hp
             }
             
         }

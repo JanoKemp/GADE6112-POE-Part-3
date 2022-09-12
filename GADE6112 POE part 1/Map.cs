@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Security.Cryptography.Xml;
 using System.Text;
@@ -8,18 +9,18 @@ using System.Transactions;
 
 namespace GADE6112_POE_part_1
 {
-<<<<<<< HEAD
+
+
+
     internal class Map 
-=======
-    internal class Map// : Tile
->>>>>>> origin/master
+
     {
         
         private int width;
         private int height;
         private Tile[,] land = new Tile[,] { };  // Come back and maybe make it TextBoxes
         Random randomGen = new Random();
-        Hero hero = new Hero(); // Hero object 
+        Hero hero = new Hero(); // Hero object
         private int horizontal, vertical, enemyNum, enemyX, enemyY;
 
    
@@ -110,16 +111,16 @@ namespace GADE6112_POE_part_1
 
 
 
-        public Tile UpdateVision(Character vision, Character.Movement move)
+        public Tile UpdateVision(Character vision, Character.Movement move) // Hero or Swampcreature is added into the params to gift Visions values and Character.Move.Example is written in to recieve moves 
         {
-            switch (move)
+            switch (move) // Depending on the entered enum the following is carried out
             {
                 case Character.Movement.up:
-                    if (vision.getX() != 0)
+                    if (vision.getX() != 0) // Stops user from crashing Array from out of bounds
                     {
-                        Tile up = land[vision.getX(), vision.getY() - 1];
-                        up.setY(vision.getY() - 1);
-                        up.setX(vision.getX());
+                        Tile up = land[vision.getX() - 1, vision.getY() ]; // A new tile is created above the Character 
+                        up.setY(vision.getY()); // sets new Y location 
+                        up.setX(vision.getX()-1); // sets new X position as one above
                         return up;
                     }
                     else
@@ -128,17 +129,17 @@ namespace GADE6112_POE_part_1
 
                 case Character.Movement.down:
 
-                    Tile down = land[vision.getX(), vision.getY() + 1];
-                    down.setY(vision.getY() + 1);
-                    down.setX(vision.getX());
+                    Tile down = land[vision.getX() + 1, vision.getY()];
+                    down.setY(vision.getY());
+                    down.setX(vision.getX() + 1);
                     return down;
                     
                 case Character.Movement.left:
                     if (vision.getY() != 0)
                     {
-                        Tile left = land[vision.getX() - 1, vision.getY()];
-                        left.setY(vision.getY());
-                        left.setX(vision.getX() - 1);
+                        Tile left = land[vision.getX(), vision.getY() - 1];
+                        left.setY(vision.getY() - 1);
+                        left.setX(vision.getX());
                         return left;
                     }
                     else
@@ -146,9 +147,9 @@ namespace GADE6112_POE_part_1
 
                 case Character.Movement.right:
 
-                    Tile right = land[vision.getX() + 1, vision.getY()];
+                    Tile right = land[vision.getX(), vision.getY() + 1];
                     right.setY(vision.getY());
-                    right.setX(vision.getX() - 1);
+                    right.setX(vision.getX() +1);
                     return right;
                     
                 case Character.Movement.noMovement:
@@ -167,34 +168,26 @@ namespace GADE6112_POE_part_1
         }
         private Tile Create(Tile.TileType type  )// Creates Objects for the map
         {
-            //Console.WriteLine(land);
-            //Console.WriteLine("dog");
-            enemyY = randomGen.Next(horizontal -1);
-            enemyX = randomGen.Next(vertical -1);
-<<<<<<< HEAD
 
-            while (land[enemyX, enemyY].getTileType() != Tile.TileType.Clear) // Object reference not set to an instance of an object
-=======
-            //Console.WriteLine(land);
-            land[0,0] = new SwampCreature();
-            while (land[0, 0].getTileType() != Tile.TileType.Clear) // Object reference not set to an instance of an object
->>>>>>> origin/master
+            enemyY = randomGen.Next(horizontal -1); // random X and Y generated
+            enemyX = randomGen.Next(vertical -1);
+
+            while (land[enemyX, enemyY].getTileType() != Tile.TileType.Clear) // If X and Y already contain an Character or Border then generate a new X and Y until there is a new clean space
             {
-                enemyX = randomGen.Next(1, horizontal);
-                enemyY = randomGen.Next(1, vertical);
+                enemyX = randomGen.Next(horizontal - 1);
+                enemyY = randomGen.Next(vertical - 1);
             }
 
-            //Add code to randomly generate a new location if the current generated block is not clear
-
+         
             if (type == Tile.TileType.Enemy) //Creates an enemy when called
             {
 
-                SwampCreature swampEn = new SwampCreature(); // generates random location on map to spawn
-                swampEn.setX(enemyX);
+                SwampCreature swampEn = new SwampCreature(); // Creates a new Enemy at the X and Y
+                swampEn.setX(enemyX); // Sets new X and Y for Creature 
                 swampEn.setY(enemyY);
                 return swampEn;
             }
-            if (type == Tile.TileType.Barrier)
+            if (type == Tile.TileType.Barrier)// Creates a new border at that X and Y
             {
 
                 Obstacle bush = new Obstacle(0, 0, Tile.TileType.Barrier); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
@@ -202,7 +195,7 @@ namespace GADE6112_POE_part_1
                 return bush;
 
             }
-            if (type == Tile.TileType.Hero)
+            if (type == Tile.TileType.Hero) // Creates the Hero at the X and Y 
             {
                 Hero hero = new Hero();
                 hero.setX(enemyX);

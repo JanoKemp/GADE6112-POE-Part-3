@@ -10,27 +10,31 @@ namespace GADE6112_POE_part_1
     internal class SwampCreature : Enemy
     {
          Random creatureMove = new Random();
-
-        public SwampCreature() 
+        char enemySym; // Global variable to allow for the symbol to be gotten and returned to the main form
+        public SwampCreature() // Basic constructor that sets up every enemy with and X, Y , hp of 10 , damage of 1 , symbol of "E" Stated in TIle class
         {
             this.x = getX();
             this.y = getY();
             this.hp = 10;
             this.damage = 1;
+            enemySym = getSymbols(1);
             
         }
-        public SwampCreature(int x , int y)
+        public SwampCreature(int x , int y) // Allows for X and Y locations to set by programmer
         {
+            this.x = getX();
+            this.y=getY();
             this.hp = 10;
             this.damage = 1;
             
             
         }
+        public char getEnemySym() { return enemySym; } // Fetches enemy symbol to be used when outputting to the form
         override public Movement ReturnMove(Movement move = 0) // If movement is invalid then the movement is returned to its original
         {
-            int moveDirection;
-            moveDirection = creatureMove.Next(4);
-            if (moveDirection == 0 && currentVision[x,y - 1].getTileType() == TileType.Clear )
+            int moveDirection; // Local variable used for assigning random direction
+            moveDirection = creatureMove.Next(4); // randomly generates a number which is then correlated with a direction.
+            if (moveDirection == 0 && currentVision[x,y - 1].getTileType() == TileType.Clear ) // if random num is 0 then get tiles around Character and their respective Tiletypes. And if they are empty then move in the returned direction.
             {
                 return Movement.up;
             }
