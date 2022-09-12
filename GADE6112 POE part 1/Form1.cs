@@ -10,7 +10,11 @@ namespace GADE6112_POE_part_1
         Hero hero = new Hero();
         SwampCreature creature = new SwampCreature();
         GameEngine gameEngine = new GameEngine();
+<<<<<<< HEAD
        
+=======
+        Map map;
+>>>>>>> origin/master
         
         private void mainForm_Load(object sender, EventArgs e)
         {
