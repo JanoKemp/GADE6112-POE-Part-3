@@ -44,7 +44,7 @@ namespace GADE6112_POE_part_1
             Console.WriteLine("dog");
             for (int i = 0; i < enemy.Length; i++) //Loops through enemy to create() new enemies in the array
             {
-                Console.WriteLine("dog");
+                
                 enemy[i] = (SwampCreature)Create(Tile.TileType.Enemy);
 
 
