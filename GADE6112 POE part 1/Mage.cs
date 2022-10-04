@@ -17,9 +17,15 @@ namespace GADE6112_POE_part_1
             this.damage = 5;
         }
 
-        public override Movement ReturnMove(Movement direction = Movement.noMovement)
+        public override Movement ReturnMove(Movement direction = 0)
         {
-            return direction;
+
+            return Movement.noMovement;
+        }
+        public override bool CheckRange(Character target)
+        {
+            
+            return CheckRange(target);
         }
     }
 }
