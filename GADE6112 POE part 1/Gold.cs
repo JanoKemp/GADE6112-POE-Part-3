@@ -12,11 +12,20 @@ namespace GADE6112_POE_part_1
         private int goldDrop; // Private member variable Q2.2 ?
         private Random goldAm = new Random();
 
-        public Gold()
+        public Gold(int x , int y)
         {
-            x = getX();
-            y = getY();
-            Gold gold = new Gold(x, y); // Delegates to Item class // dont think thats possible ( higher class) 
+            this.x = getX();
+            this.y = getY();
+            Gold gold = new Gold(x, y);
+            goldDrop = goldAm.Next(1,6); // Generates a number between 0-6 not including 0 or 6
+        }
+
+        public int getGoldDrop() { return goldDrop; } // public get method for goldDrop amount
+
+        override public string ToString()
+        {
+            string goldItem =  "Gold drop:"+goldDrop.ToString();
+            return goldItem;
         }
     }
 }
