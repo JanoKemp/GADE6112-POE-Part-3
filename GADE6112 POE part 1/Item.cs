@@ -6,11 +6,19 @@ using System.Threading.Tasks;
 
 namespace GADE6112_POE_part_1
 {
-    abstract internal class Item
+    abstract internal class Item : Tile
     {
-        public Item(int x, int y)
+        public Item()
         {
 
-        } 
+        }
+        public Item(int x, int y)
+        {
+            this.x = getX();// gets X and Y
+            this.y = getY();
+        }
+
+        public abstract string ToString(); //Overidden ToString to output the type of Item 
+
     }
 }
