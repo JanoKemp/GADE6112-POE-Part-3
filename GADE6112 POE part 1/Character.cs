@@ -133,7 +133,8 @@ namespace GADE6112_POE_part_1
                 currentY = currentY + 1;
             }
             else
-                direction = Movement.noMovement;
+                direction = Movement.noMovement; // No movement , used for mage class as it never moves.
+            
            
             //Modify to be able to move left right up or down for both the x and the y later use when buttons are added
         }
