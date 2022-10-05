@@ -8,6 +8,10 @@ namespace GADE6112_POE_part_1
 {
     internal class Mage: Enemy
     {
+        public Mage()
+        {
+
+        }
         public Mage(int x, int y)
         {
             this.x = getX();// gets X and Y
@@ -24,8 +28,22 @@ namespace GADE6112_POE_part_1
         }
         public override bool CheckRange(Character target)
         {
+            int targetX, targetY;
+            targetX = target.getX();
+            targetY = target.getY();
+            Mage mage = new Mage(x, y);
+            if (targetX == mage.x + 1 || targetX == mage.x - 1 || targetY == mage.y - 1 || targetY == mage.y + 1) // Checks if enemy is within the 1 block up, down,left,right
+            {
+                return true;
+            }
+            //Checks the four diagonal blocks , top right , left , bottom left, right
+            if (targetX == mage.x +1 && targetY == mage.y +1 || targetX == mage.x + 1 && targetY == mage.y -1 || targetX == mage.x -1 && targetY == mage.y -1 || targetX == mage.x-1 && targetY == mage.y+1)
+            {
+                return true;
+            }
+
+            else return false;
             
-            return CheckRange(target);
         }
     }
 }
