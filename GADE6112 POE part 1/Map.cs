@@ -21,13 +21,14 @@ namespace GADE6112_POE_part_1
         private Tile[,] land = new Tile[,] { };  // Come back and maybe make it TextBoxes
         Random randomGen = new Random();
         Hero hero = new Hero(); // Hero object
+        
         private int horizontal, vertical, enemyNum, enemyX, enemyY , enemyGen;
 
    
-        public Map(int minWidth , int maxWidth , int minHeight , int maxHeight , int minEnemy , int maxEnemy)
+        public Map(int minWidth , int maxWidth , int minHeight , int maxHeight , int minEnemy , int maxEnemy, int numGoldDrops)
         {
-
-
+            
+            
             horizontal = randomGen.Next(minWidth, maxWidth);//TOADD IF ISSUES: +1 because random gens stop 1 number before max. Eg if range is 0-9 then it will only calc between 0-8
             vertical = randomGen.Next(minHeight, maxHeight);
             land = new Tile[vertical -1,horizontal -1]; //one less than the map border for playable map. For borders to be done.
@@ -41,6 +42,7 @@ namespace GADE6112_POE_part_1
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             Create(Tile.TileType.Hero);
             Enemy[] enemy = new Enemy[enemyNum];
+               
             for (int i = 0; i < enemy.Length; i++) //Loops through enemy to create() new enemies in the array
             {
                 
@@ -59,6 +61,11 @@ namespace GADE6112_POE_part_1
                 //   land[enemyX, enemyY] = (SwampCreature)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
 
 
+            }
+            Gold[] items = new Gold[numGoldDrops];
+            for(int c = 0; c < numGoldDrops; c++)
+            {
+                items[c] = (Gold)Create(Tile.TileType.Gold);
             }
             UpdateVision(hero, Character.Movement.noMovement);
         }
@@ -202,6 +209,11 @@ namespace GADE6112_POE_part_1
                 mageEn.setY(enemyY);
                 return mageEn; // returns to be created
                 
+            }
+            if (type == Tile.TileType.Gold)// Creates gold item
+            {
+                Gold gold = new Gold(enemyX,enemyY); // gives it an X and Y and in the contructor the ammount of gold is randomised 
+                return gold;
             }
             if (type == Tile.TileType.Barrier)// Creates a new border at that X and Y
             {
