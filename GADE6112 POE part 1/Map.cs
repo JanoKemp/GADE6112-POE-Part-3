@@ -21,7 +21,7 @@ namespace GADE6112_POE_part_1
         private Tile[,] land = new Tile[,] { };  // Come back and maybe make it TextBoxes
         Random randomGen = new Random();
         Hero hero = new Hero(); // Hero object
-        private int horizontal, vertical, enemyNum, enemyX, enemyY;
+        private int horizontal, vertical, enemyNum, enemyX, enemyY , enemyGen;
 
    
         public Map(int minWidth , int maxWidth , int minHeight , int maxHeight , int minEnemy , int maxEnemy)
@@ -41,14 +41,22 @@ namespace GADE6112_POE_part_1
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             Create(Tile.TileType.Hero);
             Enemy[] enemy = new Enemy[enemyNum];
-            Console.WriteLine("dog");
             for (int i = 0; i < enemy.Length; i++) //Loops through enemy to create() new enemies in the array
             {
                 
-                enemy[i] = (SwampCreature)Create(Tile.TileType.Enemy);
+                enemyGen = randomGen.Next(1,3); // Randomly picks 1 or 2 and then creates that enemy type based on selection
+                if (enemyGen == 1)
+                {
+                    enemy[i] = (SwampCreature)Create(Tile.TileType.Enemy);
+                }
+                if (enemyGen == 2)
+                {
+                    enemy[i] = (Mage)Create(Tile.TileType.Enemy);
+                }
+               
 
 
-             //   land[enemyX, enemyY] = (SwampCreature)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
+                //   land[enemyX, enemyY] = (SwampCreature)Create(Tile.TileType.Enemy); // Creates an identical enemy at that tile location on the map 
 
 
             }
@@ -179,13 +187,21 @@ namespace GADE6112_POE_part_1
             }
 
          
-            if (type == Tile.TileType.Enemy) //Creates an enemy when called
+            if (type == Tile.TileType.Enemy && enemyGen == 1) //Creates an enemy when called
             {
 
                 SwampCreature swampEn = new SwampCreature(); // Creates a new Enemy at the X and Y
                 swampEn.setX(enemyX); // Sets new X and Y for Creature 
                 swampEn.setY(enemyY);
                 return swampEn;
+            }
+            if (type == Tile.TileType.Enemy && enemyGen == 2) // Creates Mage on the board
+            {
+                Mage mageEn = new Mage(enemyX, enemyY); // Generates a new mage enemy at the generated X and Y locations
+                mageEn.setX(enemyX); // sets those locations to ensure it is set
+                mageEn.setY(enemyY);
+                return mageEn; // returns to be created
+                
             }
             if (type == Tile.TileType.Barrier)// Creates a new border at that X and Y
             {
