@@ -166,9 +166,14 @@ namespace GADE6112_POE_part_1
             return dead;
             
         }
-        public void PickUp()
+        public void PickUp(Item item) // Check if is correct ( Question 3.2)
         {
-
+            if (item == new Gold(x, y))
+            {
+                Gold item2 = new Gold(x, y);
+                int goldPickUp = item2.getGoldDrop();
+                goldPurse = goldPurse + goldPickUp;
+            }
         }
     }
 }

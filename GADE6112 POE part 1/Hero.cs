@@ -50,7 +50,7 @@ namespace GADE6112_POE_part_1
 
         override public string ToString()
         {
-            String heroMessage = "Player stats:\n Hp: " + hp + "/ Max: " + maxHp + "\n Damage: " + damage + "\n [X:Y] --> [" + x + ":" + y + "]";
+            String heroMessage = "Player stats:\n Hp: " + hp + "/ Max: " + maxHp + "\n Damage: " + damage + "\n [X:Y] --> [" + x + ":" + y + "]\nGold: " + goldPurse;
             return heroMessage; // Outputs the heros information
         }
 

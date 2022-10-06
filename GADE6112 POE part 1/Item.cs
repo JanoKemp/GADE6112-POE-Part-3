@@ -16,6 +16,7 @@ namespace GADE6112_POE_part_1
         {
             this.x = getX();// gets X and Y
             this.y = getY();
+            
         }
 
         public abstract string ToString(); //Overidden ToString to output the type of Item 
