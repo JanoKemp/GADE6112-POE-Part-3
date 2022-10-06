@@ -12,7 +12,7 @@ namespace GADE6112_POE_part_1
         private int goldDrop; // Private member variable Q2.2 ?
         private Random goldAm = new Random();
 
-        public Gold(int x , int y)
+        public Gold(int x , int y) :base(x,y)
         {
             this.x = getX();
             this.y = getY();

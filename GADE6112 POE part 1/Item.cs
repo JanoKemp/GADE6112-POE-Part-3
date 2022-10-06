@@ -12,7 +12,7 @@ namespace GADE6112_POE_part_1
         {
 
         }
-        public Item(int x, int y)
+        public Item(int x, int y) :base()
         {
             this.x = getX();// gets X and Y
             this.y = getY();

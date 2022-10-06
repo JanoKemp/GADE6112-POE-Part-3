@@ -168,7 +168,8 @@ namespace GADE6112_POE_part_1
         }
         public void PickUp(Item item) // Check if is correct ( Question 3.2)
         {
-            if (item == new Gold(x, y))
+            
+            if (item.getTileType() == Tile.TileType.Gold)
             {
                 Gold item2 = new Gold(x, y);
                 int goldPickUp = item2.getGoldDrop();
