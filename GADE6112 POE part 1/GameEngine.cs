@@ -52,6 +52,17 @@ namespace GADE6112_POE_part_1
                     movement = false;
                 }
             }
+            if (map.getLocation(hero.getX(),hero.getY()).getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+            {
+                
+                hero.PickUp(map.GetItemAtPosition(hero.getX(),hero.getY())); // Adds item to player after given movement based on its location
+            }
+            if (map.getLocation(hero.getX(), hero.getY()).getTileType() == Tile.TileType.Weapon)
+            {
+
+                hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY()));
+            }
+            
             map.getLocation(hero.getX(), hero.getY()).setTileType(Tile.TileType.Hero); // Gets the new position of the hero and sets its Tile type to Clear ( empty) 
 
             // map.setLand(map.getLand(map.getTileType(Tile.TileType.Hero))); -------> sets new hero location to tile type hero
