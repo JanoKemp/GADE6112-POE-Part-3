@@ -20,7 +20,7 @@ namespace GADE6112_POE_part_1
             goldDrop = goldAm.Next(1,6); // Generates a number between 0-6 not including 0 or 6
         }
 
-        public int getGoldDrop() { return goldDrop; } // public get method for goldDrop amount
+        public int getGoldDrop(){ return goldDrop; } // public get method for goldDrop amount
 
         override public string ToString()
         {

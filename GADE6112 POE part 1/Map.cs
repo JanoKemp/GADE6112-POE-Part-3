@@ -19,6 +19,7 @@ namespace GADE6112_POE_part_1
         private int width;
         private int height;
         private Tile[,] land = new Tile[,] { };  // Come back and maybe make it TextBoxes
+        Item[] items;  
         Random randomGen = new Random();
         Hero hero = new Hero(); // Hero object
         
@@ -62,7 +63,8 @@ namespace GADE6112_POE_part_1
 
 
             }
-            Gold[] items = new Gold[numGoldDrops];
+
+            items = new Gold[numGoldDrops];
             for(int c = 0; c < numGoldDrops; c++)
             {
                 items[c] = (Gold)Create(Tile.TileType.Gold);
@@ -234,6 +236,26 @@ namespace GADE6112_POE_part_1
                 return null;
 
 
+        }
+
+        public Item GetItemAtPosition(int x, int y)
+        {
+            int checkX, checkY;
+            for(int g = 0; g < items.GetLength(0); g++)
+            {
+              checkX = items[g].getX();
+              checkY =  items[g].getY();
+                if (checkX == x && checkY == y)
+                {
+                    return items[g]; // if Gold does exist then it moves on
+                }
+                else
+                {
+                    items[g] = null; // sets array location to null if X and Y dont add up
+                    return items[g];
+                }
+            }
+           return GetItemAtPosition((int)x, (int)y);
         }
 
 
