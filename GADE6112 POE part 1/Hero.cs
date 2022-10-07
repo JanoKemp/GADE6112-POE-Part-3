@@ -18,6 +18,7 @@ namespace GADE6112_POE_part_1
             this.maxHp = getHP();
             this.damage = 2;
             heroSym = getSymbols(0); // "H" symbol
+            
         }
 
         public Hero(int x, int y, int hP, TileType type)

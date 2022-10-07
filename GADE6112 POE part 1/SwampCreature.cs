@@ -19,6 +19,7 @@ namespace GADE6112_POE_part_1
             this.damage = 1;
             enemySym = getSymbols(1);
             
+            
         }
         public SwampCreature(int x , int y) // Allows for X and Y locations to set by programmer
         {
@@ -50,7 +51,7 @@ namespace GADE6112_POE_part_1
             {
                 return Movement.right;
             }
-           
+           else
                 return Movement.noMovement;
         }
 

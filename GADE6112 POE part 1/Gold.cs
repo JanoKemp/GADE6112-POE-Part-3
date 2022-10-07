@@ -16,7 +16,7 @@ namespace GADE6112_POE_part_1
         {
             this.x = getX();
             this.y = getY();
-            Gold gold = new Gold(x, y);
+            
             goldDrop = goldAm.Next(1,6); // Generates a number between 0-6 not including 0 or 6
         }
 

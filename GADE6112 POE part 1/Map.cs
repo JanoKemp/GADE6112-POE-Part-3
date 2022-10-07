@@ -18,7 +18,9 @@ namespace GADE6112_POE_part_1
         
         private int width;
         private int height;
+        
         private Tile[,] land = new Tile[,] { };  // Come back and maybe make it TextBoxes
+        private Enemy [] enemy;
         Item[] items;  
         Random randomGen = new Random();
         Hero hero = new Hero(); // Hero object
@@ -28,21 +30,21 @@ namespace GADE6112_POE_part_1
    
         public Map(int minWidth , int maxWidth , int minHeight , int maxHeight , int minEnemy , int maxEnemy, int numGoldDrops)
         {
-            
-            
+
+            enemyNum = randomGen.Next(minEnemy, maxEnemy);
             horizontal = randomGen.Next(minWidth, maxWidth);//TOADD IF ISSUES: +1 because random gens stop 1 number before max. Eg if range is 0-9 then it will only calc between 0-8
             vertical = randomGen.Next(minHeight, maxHeight);
             land = new Tile[vertical -1,horizontal -1]; //one less than the map border for playable map. For borders to be done.
-            for(int x = 0; x < land.GetLength(0); x++)
+            for (int x = 0; x < land.GetLength(0); x++)
             {
-                for(int y = 0; y < land.GetLength(1); y++)
+                for (int y = 0; y < land.GetLength(1); y++)
                 {
                     land[x, y] = new SwampCreature();
                 }
-            }    
-            enemyNum = randomGen.Next(minEnemy, maxEnemy);
+            }
+
             Create(Tile.TileType.Hero);
-            Enemy[] enemy = new Enemy[enemyNum];
+             enemy = new Enemy[enemyNum];
                
             for (int i = 0; i < enemy.Length; i++) //Loops through enemy to create() new enemies in the array
             {
@@ -122,6 +124,7 @@ namespace GADE6112_POE_part_1
         public int getEnemyX() { return enemyX; }
         public Tile[,] getLand() { return land; } // Public get accessor for Land tile array 
         public int getEnemyY() { return enemyY; }
+        public Enemy[] getEnemies() { return enemy; } // gets the enemy array from map constructor
         #endregion
 
 
@@ -202,6 +205,7 @@ namespace GADE6112_POE_part_1
                 SwampCreature swampEn = new SwampCreature(); // Creates a new Enemy at the X and Y
                 swampEn.setX(enemyX); // Sets new X and Y for Creature 
                 swampEn.setY(enemyY);
+                
                 return swampEn;
             }
             if (type == Tile.TileType.Enemy && enemyGen == 2) // Creates Mage on the board
@@ -209,19 +213,21 @@ namespace GADE6112_POE_part_1
                 Mage mageEn = new Mage(enemyX, enemyY); // Generates a new mage enemy at the generated X and Y locations
                 mageEn.setX(enemyX); // sets those locations to ensure it is set
                 mageEn.setY(enemyY);
+                
                 return mageEn; // returns to be created
                 
             }
             if (type == Tile.TileType.Gold)// Creates gold item
             {
                 Gold gold = new Gold(enemyX,enemyY); // gives it an X and Y and in the contructor the ammount of gold is randomised 
+               
                 return gold;
             }
             if (type == Tile.TileType.Barrier)// Creates a new border at that X and Y
             {
 
                 Obstacle bush = new Obstacle(0, 0, Tile.TileType.Barrier); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
-
+                // Add Code to Create to create border
                 return bush;
 
             }
@@ -230,6 +236,7 @@ namespace GADE6112_POE_part_1
                 Hero hero = new Hero();
                 hero.setX(enemyX);
                 hero.setY(enemyY);
+                
                 return hero; // Filler , fill with code to create hero 
             }
             else

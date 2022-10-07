@@ -12,6 +12,7 @@ namespace GADE6112_POE_part_1
     internal class GameEngine 
     {
         private Map map;
+        public int movementDet = 0; // increments if the hero moves / used to tell enemies when to move
         public GameEngine()
         {
             
@@ -26,7 +27,11 @@ namespace GADE6112_POE_part_1
             
             map.getLocation(hero.getX(), hero.getY()).setTileType(Tile.TileType.Clear); // Gets the current location of the hero and sets the tile type to Clear
             bool movement = true; // Possibly add this somewhere else for it to be called (unknown)
-            if (hero.ReturnMove(hero.getMovement()) == direction)
+            if (movement = true)
+            {
+                movementDet = 1;
+            }
+            if (hero.ReturnMove(hero.getMovement()) == direction) // Return move checks if movement is valid with Vision array , getMovement gets the players input
             {
                 if (direction == Character.Movement.down)
                 {
@@ -68,6 +73,27 @@ namespace GADE6112_POE_part_1
             // map.setLand(map.getLand(map.getTileType(Tile.TileType.Hero))); -------> sets new hero location to tile type hero
             //This updates the move is the movement is valid via button presses
             return movement;
+        }
+        public bool MoveEnemies(Hero hero , Character.Movement enemyDirection , SwampCreature swamp , Mage mage ,  GameEngine gameEngine)
+        {
+            Enemy[] enemyArr = map.getEnemies(); 
+            
+            if (movementDet == 1)
+            {
+                for (int i = 0; i < map.getEnemies().GetLength(0); i++)
+                {
+                    if (enemyArr[i] != mage) // Mages cannot move therefore they must not use the following code
+                    {
+                        enemyDirection = swamp.ReturnMove(); // Checks if movement is valid against Vision array
+                        enemyArr[i].Move(enemyDirection); //Moves the X and Y location
+                        enemyArr[i] = (Enemy)map.UpdateVision(enemyArr[i],enemyDirection);//Updates the vision array of the enemy at the new location
+                        
+                    }
+                    
+                }
+            }
+            map.getLand();// gets 2d map array
+            return MoveEnemies(hero,enemyDirection,swamp,mage,gameEngine);
         }
     }
 }

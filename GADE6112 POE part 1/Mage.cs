@@ -16,7 +16,7 @@ namespace GADE6112_POE_part_1
         {
             this.x = getX();// gets X and Y
             this.y = getY();
-
+            
             this.hp = 5;
             this.damage = 5;
         }
