@@ -34,7 +34,7 @@ namespace GADE6112_POE_part_1
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             horizontal = randomGen.Next(minWidth, maxWidth);//TOADD IF ISSUES: +1 because random gens stop 1 number before max. Eg if range is 0-9 then it will only calc between 0-8
             vertical = randomGen.Next(minHeight, maxHeight);
-            land = new Tile[vertical,horizontal]; //one less than the map border for playable map. For borders to be done.
+            land = new Tile[vertical+1,horizontal+1]; //one less than the map border for playable map. For borders to be done.
             for (int x = 0; x < land.GetLength(0) ; x++)
             {
                 for(int y = 0; y < land.GetLength(1) ; y++)
@@ -47,7 +47,7 @@ namespace GADE6112_POE_part_1
 
                 
                     land[borderTnB, 0] = (Obstacle)Create(Tile.TileType.Barrier);
-                    land[borderTnB, horizontal -1] = (Obstacle)Create(Tile.TileType.Barrier);
+                    land[borderTnB, horizontal ] = (Obstacle)Create(Tile.TileType.Barrier);
                 
             }
             for (int borderLnR = 0; borderLnR < horizontal ; borderLnR++) // Border Left and Right
@@ -55,7 +55,7 @@ namespace GADE6112_POE_part_1
 
                 
                     land[0, borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
-                   land[vertical -1, borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
+                   land[vertical , borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
                 
             }
             Create(Tile.TileType.Hero);
@@ -262,6 +262,7 @@ namespace GADE6112_POE_part_1
                 Hero hero = new Hero();
                 hero.setX(enemyX);
                 hero.setY(enemyY);
+                land[hero.getX(), hero.getY()] = hero;
                 
                 return hero; // Filler , fill with code to create hero 
             }

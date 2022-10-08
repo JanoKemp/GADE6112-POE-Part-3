@@ -9,102 +9,129 @@ namespace GADE6112_POE_part_1
         }
         Hero hero = new Hero();
         SwampCreature creature = new SwampCreature();
+        Mage mage = new Mage();
         GameEngine gameEngine = new GameEngine();
+        
         
 
         private void mainForm_Load(object sender, EventArgs e)
         {
             
             MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
-            gameEngine.getMap();
+            
             
             
         }
         public void MapAssignment()
         {
-            TextBox[,] land = new TextBox[9, 7];
+            Map mapLand = gameEngine.getMap();
+            TextBox[,] textBoxes = new TextBox[9,7];
+            int landVertical = mapLand.getLand().GetLength(0);
+            int landHorizontal = mapLand.getLand().GetLength(1);
+            
+            
             
 
-
+            
             //Map array [ Row , Column ] = TextBox[ X , Y]
             //First Column
             //First Row 
-            land[0, 0] = textBox00;
-            land[0, 1] = textBox01;
-            land[0, 2] = textBox02;
-            land[0, 3] = textBox03;
-            land[0, 4] = textBox04;
-            land[0, 5] = textBox05;
-            land[0, 6] = textBox06;
-
-            land[hero.getX(), hero.getY()].Text = hero.getHeroSymbol().ToString();
+            textBoxes[0, 0] = textBox00;
+            textBoxes[0, 1] = textBox01;
+            textBoxes[0, 2] = textBox02;
+            textBoxes[0, 3] = textBox03;
+            textBoxes[0, 4] = textBox04;
+            textBoxes[0, 5] = textBox05;
+            textBoxes[0, 6] = textBox06;
+            
+            textBoxes[hero.getX(), hero.getY()].Text = hero.getHeroSymbol().ToString();
         
             //Second Row
-            land[1, 0] = textBox10;
-            land[1, 1] = textBox11;
-            land[1, 2] = textBox12;
-            land[1, 3] = textBox13;
-            land[1, 4] = textBox14;
-            land[1, 5] = textBox15;
-            land[1, 6] = textBox16;
+            textBoxes[1, 0] = textBox10;
+            textBoxes[1, 1] = textBox11;
+            textBoxes[1, 2] = textBox12;
+            textBoxes[1, 3] = textBox13;
+            textBoxes[1, 4] = textBox14;
+            textBoxes[1, 5] = textBox15;
+            textBoxes[1, 6] = textBox16;
             //Third Row
-            land[2, 0] = textBox20;
-            land[2, 1] = textBox21;
-            land[2, 2] = textBox22;
-            land[2, 3] = textBox23;
-            land[2, 4] = textBox24;
-            land[2, 5] = textBox25;
-            land[2, 6] = textBox26;
+            textBoxes[2, 0] = textBox20;
+            textBoxes[2, 1] = textBox21;
+            textBoxes[2, 2] = textBox22;
+            textBoxes[2, 3] = textBox23;
+            textBoxes[2, 4] = textBox24;
+            textBoxes[2, 5] = textBox25;
+            textBoxes[2, 6] = textBox26;
             //Fourth Row
-            land[3, 0] = textBox30;
-            land[3, 1] = textBox31;
-            land[3, 2] = textBox32;
-            land[3, 3] = textBox33;
-            land[3, 4] = textBox34;
-            land[3, 5] = textBox35;
-            land[3, 6] = textBox36;
+            textBoxes[3, 0] = textBox30;
+            textBoxes[3, 1] = textBox31;
+            textBoxes[3, 2] = textBox32;
+            textBoxes[3, 3] = textBox33;
+            textBoxes[3, 4] = textBox34;
+            textBoxes[3, 5] = textBox35;
+            textBoxes[3, 6] = textBox36;
             //Fifth
-            land[4, 0] = textBox40;
-            land[4, 1] = textBox41;
-            land[4, 2] = textBox42;
-            land[4, 3] = textBox43;
-            land[4, 4] = textBox44;
-            land[4, 5] = textBox45;
-            land[4, 6] = textBox46;
+            textBoxes[4, 0] = textBox40;
+            textBoxes[4, 1] = textBox41;
+            textBoxes[4, 2] = textBox42;
+            textBoxes[4, 3] = textBox43;
+            textBoxes[4, 4] = textBox44;
+            textBoxes[4, 5] = textBox45;
+            textBoxes[4, 6] = textBox46;
             //Sixth Row
-            land[5, 0] = textBox50;
-            land[5, 1] = textBox51;
-            land[5, 2] = textBox52;
-            land[5, 3] = textBox53;
-            land[5, 4] = textBox54;
-            land[5, 5] = textBox55;
-            land[5, 6] = textBox56;
+            textBoxes[5, 0] = textBox50;
+            textBoxes[5, 1] = textBox51;
+            textBoxes[5, 2] = textBox52;
+            textBoxes[5, 3] = textBox53;
+            textBoxes[5, 4] = textBox54;
+            textBoxes[5, 5] = textBox55;
+            textBoxes[5, 6] = textBox56;
             //Seventh Row
-            land[6, 0] = textBox60;
-            land[6, 1] = textBox61;
-            land[6, 2] = textBox62;
-            land[6, 3] = textBox63;
-            land[6, 4] = textBox64;
-            land[6, 5] = textBox65;
-            land[6, 6] = textBox66;
+            textBoxes[6, 0] = textBox60;
+            textBoxes[6, 1] = textBox61;
+            textBoxes[6, 2] = textBox62;
+            textBoxes[6, 3] = textBox63;
+            textBoxes[6, 4] = textBox64;
+            textBoxes[6, 5] = textBox65;
+            textBoxes[6, 6] = textBox66;
             //Eigth Row
-            land[7, 0] = textBox70;
-            land[7, 1] = textBox71;
-            land[7, 2] = textBox72;
-            land[7, 3] = textBox73;
-            land[7, 4] = textBox74;
-            land[7, 5] = textBox75;
-            land[7, 6] = textBox76;
+            textBoxes[7, 0] = textBox70;
+            textBoxes[7, 1] = textBox71;
+            textBoxes[7, 2] = textBox72;
+            textBoxes[7, 3] = textBox73;
+            textBoxes[7, 4] = textBox74;
+            textBoxes[7, 5] = textBox75;
+            textBoxes[7, 6] = textBox76;
             //Ninth Row
-            land[8, 0] = textBox80;
-            land[8, 1] = textBox81;
-            land[8, 2] = textBox82;
-            land[8, 3] = textBox83;
-            land[8, 4] = textBox84;
-            land[8, 5] = textBox85;
-            land[8, 6] = textBox86;
+            textBoxes[8, 0] = textBox80;
+            textBoxes[8, 1] = textBox81;
+            textBoxes[8, 2] = textBox82;
+            textBoxes[8, 3] = textBox83;
+            textBoxes[8, 4] = textBox84;
+            textBoxes[8, 5] = textBox85;
+            textBoxes[8, 6] = textBox86;
+            for (  int i = landVertical; i < textBoxes.GetLength(0); i++ )
+            {
+                for (int j = 0; j < textBoxes.GetLength(1); j++)
+                {
+
+
+                    textBoxes[i,j ].Visible = false; // Sets textBoxes visible based on randomly Generated Map and Map class ( Deals in X axis)
+                }
+               
+            }
+            for (int c = landHorizontal; c < textBoxes.GetLength(1); c++)
+            {
+                for (int z = 0; z < textBoxes.GetLength(0); z++)
+                {
+
+
+                    textBoxes[z,c].Visible = false; // Deals in Y Axis
+                }
+
+            }
             //map.setLand(land); // Assigns textboxes to fill Map array, Change setLand to textbox to make work again
-            
+
 
             //how to inherit in windows
 
