@@ -34,15 +34,30 @@ namespace GADE6112_POE_part_1
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             horizontal = randomGen.Next(minWidth, maxWidth);//TOADD IF ISSUES: +1 because random gens stop 1 number before max. Eg if range is 0-9 then it will only calc between 0-8
             vertical = randomGen.Next(minHeight, maxHeight);
-            land = new Tile[vertical -1,horizontal -1]; //one less than the map border for playable map. For borders to be done.
-            for (int x = 0; x < land.GetLength(0); x++)
+            land = new Tile[vertical,horizontal]; //one less than the map border for playable map. For borders to be done.
+            for (int x = 0; x < land.GetLength(0) ; x++)
             {
-                for (int y = 0; y < land.GetLength(1); y++)
+                for(int y = 0; y < land.GetLength(1) ; y++)
                 {
-                    land[x, y] = new SwampCreature();
+                    land[x, y] =  new EmptyTile();
                 }
             }
+            for (int borderTnB = 0; borderTnB < vertical; borderTnB++) //Border top and bottom
+            {
 
+                
+                    land[borderTnB, 0] = (Obstacle)Create(Tile.TileType.Barrier);
+                    land[borderTnB, horizontal -1] = (Obstacle)Create(Tile.TileType.Barrier);
+                
+            }
+            for (int borderLnR = 0; borderLnR < horizontal ; borderLnR++) // Border Left and Right
+            {
+
+                
+                    land[0, borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
+                   land[vertical -1, borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
+                
+            }
             Create(Tile.TileType.Hero);
              enemy = new Enemy[enemyNum];
                
@@ -53,10 +68,13 @@ namespace GADE6112_POE_part_1
                 if (enemyGen == 1)
                 {
                     enemy[i] = (SwampCreature)Create(Tile.TileType.Enemy);
+                    land[enemy[i].getX(), enemy[i].getY()] = (SwampCreature)Create(Tile.TileType.Enemy);
+                    
                 }
                 if (enemyGen == 2)
                 {
                     enemy[i] = (Mage)Create(Tile.TileType.Enemy);
+                    land[enemy[i].getX(), enemy[i].getY()] = (Mage)Create(Tile.TileType.Enemy);
                 }
                
 
@@ -130,7 +148,7 @@ namespace GADE6112_POE_part_1
 
 
 
-
+        
         public Tile UpdateVision(Character vision, Character.Movement move) // Hero or Swampcreature is added into the params to gift Visions values and Character.Move.Example is written in to recieve moves 
         {
             switch (move) // Depending on the entered enum the following is carried out
@@ -189,13 +207,14 @@ namespace GADE6112_POE_part_1
         private Tile Create(Tile.TileType type  )// Creates Objects for the map
         {
 
-            enemyY = randomGen.Next(horizontal -1); // random X and Y generated
-            enemyX = randomGen.Next(vertical -1);
+            enemyY = randomGen.Next(horizontal ); // random X and Y generated
+            enemyX = randomGen.Next(vertical );
 
+            
             while (land[enemyX, enemyY].getTileType() != Tile.TileType.Clear) // If X and Y already contain an Character or Border then generate a new X and Y until there is a new clean space
             {
-                enemyX = randomGen.Next(horizontal - 1);
-                enemyY = randomGen.Next(vertical - 1);
+                enemyX = randomGen.Next(horizontal );
+                enemyY = randomGen.Next(vertical);
             }
 
          
@@ -213,7 +232,7 @@ namespace GADE6112_POE_part_1
                 Mage mageEn = new Mage(enemyX, enemyY); // Generates a new mage enemy at the generated X and Y locations
                 mageEn.setX(enemyX); // sets those locations to ensure it is set
                 mageEn.setY(enemyY);
-                
+               
                 return mageEn; // returns to be created
                 
             }
@@ -223,10 +242,17 @@ namespace GADE6112_POE_part_1
                
                 return gold;
             }
+            if (type == Tile.TileType.Clear)
+            {
+
+                EmptyTile empty = new EmptyTile();
+                return empty;
+
+            }
             if (type == Tile.TileType.Barrier)// Creates a new border at that X and Y
             {
 
-                Obstacle bush = new Obstacle(0, 0, Tile.TileType.Barrier); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
+                Obstacle bush = new Obstacle(); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
                 // Add Code to Create to create border
                 return bush;
 
