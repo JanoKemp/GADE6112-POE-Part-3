@@ -13,6 +13,7 @@ namespace GADE6112_POE_part_1
         Mage mage = new Mage();
         Map mapLand;
         GameEngine gameEngine = new GameEngine();
+        Tile [,]landArray;
 
 
         
@@ -21,7 +22,7 @@ namespace GADE6112_POE_part_1
         private void mainForm_Load(object sender, EventArgs e)
         {
             mapLand = gameEngine.getMap();
-
+            landArray = mapLand.getLand();
             MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
             MapGeneration();
             EnemyCreation();
@@ -44,7 +45,7 @@ namespace GADE6112_POE_part_1
             textBoxes[0, 5] = textBox05;
             textBoxes[0, 6] = textBox06;
             
-            textBoxes[hero.getX(), hero.getY()].Text = hero.getHeroSymbol().ToString();
+            //textBoxes[hero.getX(), hero.getY()].Text = hero.getHeroSymbol().ToString();
         
             //Second Row
             textBoxes[1, 0] = textBox10;
@@ -144,7 +145,6 @@ namespace GADE6112_POE_part_1
                 for (int z = 0; z < textBoxes.GetLength(0); z++)
                 {
 
-
                     textBoxes[z, c].Visible = false; // Deals in Y Axis
                 }
 
@@ -152,17 +152,20 @@ namespace GADE6112_POE_part_1
         }
         public void EnemyCreation() // Calls enemy array from Map to be compared and added to main TextBox output array
         {
-            Tile [,] enemyArr;
+            
              
             
            
-            enemyArr = mapLand.getLand();
+           
 
-            for ( int x = 0; x < enemyArr.GetLength(0); x++)
+            for ( int x = 0; x < landArray.GetLength(0); x++)
             {
-                for (int y = 0; y < enemyArr.GetLength(1); y++)
+                for (int y = 0; y < landArray.GetLength(1); y++)
                 {
-                    textBoxes[enemyArr[x, y].getX(), enemyArr[x, y].getY()].Text = enemyArr[x, y].getSymbols(1).ToString();// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
+                    //textBoxes[x, y].Text = landArray[x, y].getTileType().ToString() ; USED TO CHECK TILE TYPES OF TEXTBOXES 
+                        if (landArray[x, y].getTileType() == Tile.TileType.Enemy)
+                        textBoxes[landArray[x, y].getX(), landArray[x, y].getY()].Text = creature.getEnemySym().ToString();// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
+                    
                 }
                
                 //textBoxes[enemyArr[x].getX(), enemyArr[x].getY()].Text = creature.getEnemySym().ToString();
@@ -170,18 +173,19 @@ namespace GADE6112_POE_part_1
         }
         public void HeroCreation()
         {
-            Tile[,] heroArr;
-            heroArr = mapLand.getLand();
+            
+            
             int landVertical = mapLand.getLand().GetLength(0);
             int landHorizontal = mapLand.getLand().GetLength(1);
             for (int i = 0; i < landVertical; i++)
             {
                 for (int x = 0; x < landHorizontal; x++)
                 {
-                    if (heroArr[i,x].getTileType() == Tile.TileType.Hero)
-                    {
-                        textBoxes[heroArr[i, x].getX(), heroArr[i, x].getY()].Text = hero.getHeroSymbol().ToString();
-                    }
+                    landArray[i, x].getTileType();
+                    if (landArray[i,x].getTileType() == Tile.TileType.Hero)
+                    
+                        textBoxes[landArray[i, x].getX(), landArray[i, x].getY()].Text = hero.getHeroSymbol().ToString();
+                    
                 }
             }
         }
