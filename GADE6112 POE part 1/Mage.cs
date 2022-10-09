@@ -8,6 +8,7 @@ namespace GADE6112_POE_part_1
 {
     internal class Mage: Enemy
     {
+        char mageSym;
         public Mage()
         {
 
@@ -16,7 +17,7 @@ namespace GADE6112_POE_part_1
         {
             this.x = getX();// gets X and Y
             this.y = getY();
-            
+            this.mageSym = getSymbols(4); 
             this.hp = 5;
             this.damage = 5;
         }
@@ -26,6 +27,7 @@ namespace GADE6112_POE_part_1
 
             return Movement.noMovement;
         }
+        public char getMageSym() { return mageSym; }
         public override bool CheckRange(Character target)
         {
             int targetX, targetY;
