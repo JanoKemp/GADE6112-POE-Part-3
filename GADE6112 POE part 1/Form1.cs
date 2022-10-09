@@ -3,6 +3,7 @@ namespace GADE6112_POE_part_1
 {
     public partial class mainForm : Form
     {
+        TextBox[,] textBoxes = new TextBox[9, 7];
         public mainForm()
         {
             InitializeComponent();
@@ -10,29 +11,28 @@ namespace GADE6112_POE_part_1
         Hero hero = new Hero();
         SwampCreature creature = new SwampCreature();
         Mage mage = new Mage();
+        Map mapLand;
         GameEngine gameEngine = new GameEngine();
+
+
         
         
 
         private void mainForm_Load(object sender, EventArgs e)
         {
-            
+            mapLand = gameEngine.getMap();
+
             MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
-            
+            MapGeneration();
+            EnemyCreation();
+            HeroCreation();
+
             
             
         }
         public void MapAssignment()
         {
-            Map mapLand = gameEngine.getMap();
-            TextBox[,] textBoxes = new TextBox[9,7];
-            int landVertical = mapLand.getLand().GetLength(0);
-            int landHorizontal = mapLand.getLand().GetLength(1);
-            
-            
-            
-
-            
+          
             //Map array [ Row , Column ] = TextBox[ X , Y]
             //First Column
             //First Row 
@@ -110,26 +110,7 @@ namespace GADE6112_POE_part_1
             textBoxes[8, 4] = textBox84;
             textBoxes[8, 5] = textBox85;
             textBoxes[8, 6] = textBox86;
-            for (  int i = landVertical; i < textBoxes.GetLength(0); i++ )
-            {
-                for (int j = 0; j < textBoxes.GetLength(1); j++)
-                {
-
-
-                    textBoxes[i,j ].Visible = false; // Sets textBoxes visible based on randomly Generated Map and Map class ( Deals in X axis)
-                }
-               
-            }
-            for (int c = landHorizontal; c < textBoxes.GetLength(1); c++)
-            {
-                for (int z = 0; z < textBoxes.GetLength(0); z++)
-                {
-
-
-                    textBoxes[z,c].Visible = false; // Deals in Y Axis
-                }
-
-            }
+           
             //map.setLand(land); // Assigns textboxes to fill Map array, Change setLand to textbox to make work again
 
 
@@ -141,6 +122,68 @@ namespace GADE6112_POE_part_1
 
             // Possibly add text boxes into array
 
+        }
+        public void MapGeneration()
+        {
+             mapLand = gameEngine.getMap();
+            int landVertical = mapLand.getLand().GetLength(0);
+            int landHorizontal = mapLand.getLand().GetLength(1);
+
+            for (int i = landVertical; i < textBoxes.GetLength(0); i++)
+            {
+                for (int j = 0; j < textBoxes.GetLength(1); j++)
+                {
+
+
+                    textBoxes[i, j].Visible = false; // Sets textBoxes visible based on randomly Generated Map and Map class ( Deals in X axis)
+                }
+
+            }
+            for (int c = landHorizontal; c < textBoxes.GetLength(1); c++)
+            {
+                for (int z = 0; z < textBoxes.GetLength(0); z++)
+                {
+
+
+                    textBoxes[z, c].Visible = false; // Deals in Y Axis
+                }
+
+            }
+        }
+        public void EnemyCreation() // Calls enemy array from Map to be compared and added to main TextBox output array
+        {
+            Tile [,] enemyArr;
+             
+            
+           
+            enemyArr = mapLand.getLand();
+
+            for ( int x = 0; x < enemyArr.GetLength(0); x++)
+            {
+                for (int y = 0; y < enemyArr.GetLength(1); y++)
+                {
+                    textBoxes[enemyArr[x, y].getX(), enemyArr[x, y].getY()].Text = enemyArr[x, y].getSymbols(1).ToString();// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
+                }
+               
+                //textBoxes[enemyArr[x].getX(), enemyArr[x].getY()].Text = creature.getEnemySym().ToString();
+            }
+        }
+        public void HeroCreation()
+        {
+            Tile[,] heroArr;
+            heroArr = mapLand.getLand();
+            int landVertical = mapLand.getLand().GetLength(0);
+            int landHorizontal = mapLand.getLand().GetLength(1);
+            for (int i = 0; i < landVertical; i++)
+            {
+                for (int x = 0; x < landHorizontal; x++)
+                {
+                    if (heroArr[i,x].getTileType() == Tile.TileType.Hero)
+                    {
+                        textBoxes[heroArr[i, x].getX(), heroArr[i, x].getY()].Text = hero.getHeroSymbol().ToString();
+                    }
+                }
+            }
         }
 
         private void textBox00_TextChanged(object sender, EventArgs e)
