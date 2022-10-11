@@ -20,6 +20,7 @@ namespace GADE6112_POE_part_1
             this.mageSym = getSymbols(4); 
             this.hp = 5;
             this.damage = 5;
+            
         }
 
         public override Movement ReturnMove(Movement direction = 0)

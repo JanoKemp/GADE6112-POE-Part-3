@@ -55,6 +55,7 @@ namespace GADE6112_POE_part_1
                     hero.setX(hero.getX());
                     hero.setY(hero.getY());
                     movement = false;
+                    movementDet = 0;
                 }
             }
             if (map.getLocation(hero.getX(),hero.getY()).getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 

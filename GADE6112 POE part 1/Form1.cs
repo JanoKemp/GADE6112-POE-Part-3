@@ -14,11 +14,11 @@ namespace GADE6112_POE_part_1
         Map mapLand;
         GameEngine gameEngine = new GameEngine();
         Obstacle barrier = new Obstacle();
-        Tile [,]landArray;
+        Tile[,] landArray;
 
 
-        
-        
+
+
 
         private void mainForm_Load(object sender, EventArgs e)
         {
@@ -29,14 +29,14 @@ namespace GADE6112_POE_part_1
             BorderCreation();
             EnemyCreation();
             HeroCreation();
-            
 
-            
-            
+
+
+
         }
         public void MapAssignment()
         {
-          
+
             //Map array [ Row , Column ] = TextBox[ X , Y]
             //First Column
             //First Row 
@@ -47,9 +47,9 @@ namespace GADE6112_POE_part_1
             textBoxes[0, 4] = textBox04;
             textBoxes[0, 5] = textBox05;
             textBoxes[0, 6] = textBox06;
-            
+
             //textBoxes[hero.getX(), hero.getY()].Text = hero.getHeroSymbol().ToString();
-        
+
             //Second Row
             textBoxes[1, 0] = textBox10;
             textBoxes[1, 1] = textBox11;
@@ -114,7 +114,7 @@ namespace GADE6112_POE_part_1
             textBoxes[8, 4] = textBox84;
             textBoxes[8, 5] = textBox85;
             textBoxes[8, 6] = textBox86;
-           
+
             //map.setLand(land); // Assigns textboxes to fill Map array, Change setLand to textbox to make work again
 
 
@@ -129,7 +129,7 @@ namespace GADE6112_POE_part_1
         }
         public void MapGeneration()
         {
-             mapLand = gameEngine.getMap();
+            mapLand = gameEngine.getMap();
             int landVertical = mapLand.getLand().GetLength(0);
             int landHorizontal = mapLand.getLand().GetLength(1);
 
@@ -159,10 +159,11 @@ namespace GADE6112_POE_part_1
             {
                 for (int y = 0; y < landArray.GetLength(1); y++)
                 {
+
                     landArray[x, y].getTileType();
                     if (landArray[x, y].getTileType() == Tile.TileType.Barrier)
                     {
-                        textBoxes[x,y].Text = barrier.getBarrierSym().ToString();// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
+                        textBoxes[x, y].Text = barrier.getBarrierSym().ToString();// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
                     }
                 }
 
@@ -172,25 +173,42 @@ namespace GADE6112_POE_part_1
         }
         public void EnemyCreation() // Calls enemy array from Map to be compared and added to main TextBox output array
         {
-     
-            for ( int x = 0; x < landArray.GetLength(0); x++)
+
+            for (int x = 0; x < landArray.GetLength(0); x++)
             {
                 for (int y = 0; y < landArray.GetLength(1); y++)
                 {
-                   // textBoxes[x, y].Text = landArray[x, y].getTileType().ToString() ;// USED TO CHECK TILE TYPES OF TEXTBOXES 
+                    Enemy[] enemyArr = mapLand.getEnemies();
+                    // textBoxes[x, y].Text = landArray[x, y].getTileType().ToString() ;// USED TO CHECK TILE TYPES OF TEXTBOXES 
                     landArray[x, y].getTileType();
-                        if (landArray[x, y].getTileType() == Tile.TileType.Enemy)
-                        textBoxes[landArray[x, y].getX(), landArray[x, y].getY()].Text = creature.getEnemySym().ToString();// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
-                    
+                    if (landArray[x, y].getTileType() == Tile.TileType.Enemy)
+                    {
+                        for (int i = 0; i < mapLand.getEnemies().GetLength(0); i++)
+                        {
+                           // if (landArray[x, y].getX() == enemyArr[i].getX() && landArray[x, y].getY() == enemyArr[i].getY())
+                            
+                                enemyArr[i].GetType();
+                                if (enemyArr[i].GetType() == typeof(SwampCreature))
+                                {
+                                textBoxes[landArray[x, y].getX(), landArray[x, y].getY()].Text = "Creature";// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
+                                }
+                                if (enemyArr[i].GetType() == typeof(Mage))
+                                {
+                                textBoxes[landArray[x, y].getX(), landArray[x, y].getY()].Text = "mage";
+                                }
+                            
+                        }
+                    }
+
                 }
-               
+
                 //textBoxes[enemyArr[x].getX(), enemyArr[x].getY()].Text = creature.getEnemySym().ToString();
             }
         }
         public void HeroCreation()
         {
-            
-            
+
+
             int landVertical = mapLand.getLand().GetLength(0);
             int landHorizontal = mapLand.getLand().GetLength(1);
             for (int i = 0; i < landVertical; i++)
@@ -198,10 +216,10 @@ namespace GADE6112_POE_part_1
                 for (int x = 0; x < landHorizontal; x++)
                 {
                     landArray[i, x].getTileType();
-                    if (landArray[i,x].getTileType() == Tile.TileType.Hero)
-                    
+                    if (landArray[i, x].getTileType() == Tile.TileType.Hero)
+
                         textBoxes[landArray[i, x].getX(), landArray[i, x].getY()].Text = hero.getHeroSymbol().ToString();
-                    
+
                 }
             }
         }
@@ -213,7 +231,7 @@ namespace GADE6112_POE_part_1
 
         private void buttonUp_Click(object sender, EventArgs e)
         {
-           
+
             gameEngine.MovePlayer(Character.Movement.up, hero); // Calls Move player method which changes the X and Y accordingly 
             gameEngine.getMap().UpdateVision(hero, Character.Movement.up); // Updates vision based on new movement
         }
@@ -227,14 +245,15 @@ namespace GADE6112_POE_part_1
         private void buttonRight_Click(object sender, EventArgs e)
         {
             gameEngine.MovePlayer(Character.Movement.right, hero);
+            HeroCreation();
             gameEngine.getMap().UpdateVision(hero, Character.Movement.right);
-            
+
 
         }
 
         private void buttonDown_Click(object sender, EventArgs e)
         {
-           
+
             gameEngine.MovePlayer(Character.Movement.down, hero);
             gameEngine.getMap().UpdateVision(hero, Character.Movement.down);
 
@@ -248,11 +267,11 @@ namespace GADE6112_POE_part_1
 
         private void buttonAttack_Click(object sender, EventArgs e)
         {
-            if(hero.CheckRange(creature) == true) // Checks if creature is within range
+            if (hero.CheckRange(creature) == true) // Checks if creature is within range
             {
                 hero.Attack(creature); // Creature hp - hero damage. Then sets new Creature hp
             }
-            
+
         }
     }
 }

@@ -232,7 +232,7 @@ namespace GADE6112_POE_part_1
          
             if (type == Tile.TileType.Enemy && enemyGen == 1) //Creates an enemy when called
             {
-
+               
                 SwampCreature swampEn = new SwampCreature(); // Creates a new Enemy at the X and Y
                 swampEn.setTileType(Tile.TileType.Enemy);
                 swampEn.setX(enemyX); // Sets new X and Y for Creature 
