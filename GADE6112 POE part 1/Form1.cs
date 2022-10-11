@@ -13,6 +13,7 @@ namespace GADE6112_POE_part_1
         Mage mage = new Mage();
         Map mapLand;
         GameEngine gameEngine = new GameEngine();
+        Obstacle barrier = new Obstacle();
         Tile [,]landArray;
 
 
@@ -25,8 +26,10 @@ namespace GADE6112_POE_part_1
             landArray = mapLand.getLand();
             MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
             MapGeneration();
+            BorderCreation();
             EnemyCreation();
             HeroCreation();
+            
 
             
             
@@ -150,19 +153,32 @@ namespace GADE6112_POE_part_1
 
             }
         }
+        public void BorderCreation()
+        {
+            for (int x = 0; x < landArray.GetLength(0); x++)
+            {
+                for (int y = 0; y < landArray.GetLength(1); y++)
+                {
+                    landArray[x, y].getTileType();
+                    if (landArray[x, y].getTileType() == Tile.TileType.Barrier)
+                    {
+                        textBoxes[x,y].Text = barrier.getBarrierSym().ToString();// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
+                    }
+                }
+
+                //textBoxes[enemyArr[x].getX(), enemyArr[x].getY()].Text = creature.getEnemySym().ToString();
+            }
+
+        }
         public void EnemyCreation() // Calls enemy array from Map to be compared and added to main TextBox output array
         {
-            
-             
-            
-           
-           
-
+     
             for ( int x = 0; x < landArray.GetLength(0); x++)
             {
                 for (int y = 0; y < landArray.GetLength(1); y++)
                 {
-                    //textBoxes[x, y].Text = landArray[x, y].getTileType().ToString() ; USED TO CHECK TILE TYPES OF TEXTBOXES 
+                   // textBoxes[x, y].Text = landArray[x, y].getTileType().ToString() ;// USED TO CHECK TILE TYPES OF TEXTBOXES 
+                    landArray[x, y].getTileType();
                         if (landArray[x, y].getTileType() == Tile.TileType.Enemy)
                         textBoxes[landArray[x, y].getX(), landArray[x, y].getY()].Text = creature.getEnemySym().ToString();// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
                     
