@@ -36,8 +36,8 @@ namespace GADE6112_POE_part_1
             horizontal = randomGen.Next(minWidth, maxWidth);//TOADD IF ISSUES: +1 because random gens stop 1 number before max. Eg if range is 0-9 then it will only calc between 0-8
             vertical = randomGen.Next(minHeight, maxHeight);
             land = new Tile[vertical+1,horizontal+1]; //one less than the map border for playable map. For borders to be done.
-            heroY = randomGen.Next(land.GetLength(1)); // random X and Y generated
-            heroX = randomGen.Next(land.GetLength(0));
+            heroY = randomGen.Next(1,land.GetLength(1)- 1); // random X and Y generated
+            heroX = randomGen.Next(1,land.GetLength(0) -1);
             
             for (int x = 0; x < land.GetLength(0) ; x++)
             {
@@ -50,20 +50,24 @@ namespace GADE6112_POE_part_1
             {
 
                 
-                    land[borderTnB, 0] = (Obstacle)Create(Tile.TileType.Barrier);
-                    land[borderTnB, horizontal ] = (Obstacle)Create(Tile.TileType.Barrier);
+                land[borderTnB, 0] = (Obstacle)Create(Tile.TileType.Barrier);
+
+                land[borderTnB, horizontal ] = (Obstacle)Create(Tile.TileType.Barrier);
+               
                 
             }
-            for (int borderLnR = 0; borderLnR < horizontal ; borderLnR++) // Border Left and Right
+            for (int borderLnR = 0; borderLnR < horizontal+ 1; borderLnR++) // Border Left and Right
             {
 
                 
-                    land[0, borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
-                   land[vertical , borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
-                
+                land[0, borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
+                land[vertical , borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
+               
+
+
             }
             land[heroX,heroY] = Create(Tile.TileType.Hero);
-            land[heroX,heroY].setTileType(Tile.TileType.Hero);
+            //land[heroX,heroY].setTileType(Tile.TileType.Hero);
              enemy = new Enemy[enemyNum];
                
             for (int i = 0; i < enemy.Length; i++) //Loops through enemy to create() new enemies in the array
@@ -74,14 +78,14 @@ namespace GADE6112_POE_part_1
                 {
                     enemy[i] = (SwampCreature)Create(Tile.TileType.Enemy);
                     land[enemy[i].getX(), enemy[i].getY()] = (SwampCreature)Create(Tile.TileType.Enemy);
-                    land[enemy[i].getX(), enemy[i].getY()].setTileType(Tile.TileType.Enemy);
+                    //land[enemy[i].getX(), enemy[i].getY()].setTileType(Tile.TileType.Enemy);
 
                 }
                 if (enemyGen == 2)
                 {
                     enemy[i] = (Mage)Create(Tile.TileType.Enemy);
                     land[enemy[i].getX(), enemy[i].getY()] = (Mage)Create(Tile.TileType.Enemy);
-                    land[enemy[i].getX(), enemy[i].getY()].setTileType(Tile.TileType.Enemy);
+                    //land[enemy[i].getX(), enemy[i].getY()].setTileType(Tile.TileType.Enemy);
                 }
                
 
@@ -215,14 +219,14 @@ namespace GADE6112_POE_part_1
         private Tile Create(Tile.TileType type  )// Creates Objects for the map
         {
 
-            enemyY = randomGen.Next(land.GetLength(1)); // random X and Y generated
-            enemyX = randomGen.Next(land.GetLength(0));
+            enemyY = randomGen.Next(1,land.GetLength(1) - 1); // random X and Y generated
+            enemyX = randomGen.Next(1,land.GetLength(0) -1);
 
 
             while (land[enemyX, enemyY].getTileType() != Tile.TileType.Clear) // If X and Y already contain an Character or Border then generate a new X and Y until there is a new clean space
             {
-                enemyX = randomGen.Next(land.GetLength(0));
-                enemyY = randomGen.Next(land.GetLength(1));
+                enemyX = randomGen.Next(1,land.GetLength(0) -1);
+                enemyY = randomGen.Next(1,land.GetLength(1) -1);
             }
 
          
@@ -230,6 +234,7 @@ namespace GADE6112_POE_part_1
             {
 
                 SwampCreature swampEn = new SwampCreature(); // Creates a new Enemy at the X and Y
+                swampEn.setTileType(Tile.TileType.Enemy);
                 swampEn.setX(enemyX); // Sets new X and Y for Creature 
                 swampEn.setY(enemyY);
                 
@@ -238,6 +243,7 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Enemy && enemyGen == 2) // Creates Mage on the board
             {
                 Mage mageEn = new Mage(enemyX, enemyY); // Generates a new mage enemy at the generated X and Y locations
+                mageEn.setTileType(Tile.TileType.Enemy);
                 mageEn.setX(enemyX); // sets those locations to ensure it is set
                 mageEn.setY(enemyY);
                
@@ -247,13 +253,14 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Gold)// Creates gold item
             {
                 Gold gold = new Gold(enemyX,enemyY); // gives it an X and Y and in the contructor the ammount of gold is randomised 
-               
+               gold.setTileType(Tile.TileType.Gold);
                 return gold;
             }
             if (type == Tile.TileType.Clear)
             {
 
                 EmptyTile empty = new EmptyTile();
+                empty.setTileType(Tile.TileType.Clear);
                 return empty;
 
             }
@@ -261,6 +268,8 @@ namespace GADE6112_POE_part_1
             {
 
                 Obstacle bush = new Obstacle(); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
+                bush.setTileType(Tile.TileType.Barrier);
+                
                 // Add Code to Create to create border
                 return bush;
 
@@ -268,6 +277,7 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Hero) // Creates the Hero at the X and Y 
             {
                 Hero hero = new Hero();
+                hero.setTileType(Tile.TileType.Hero); 
                 hero.setX(enemyX);
                 hero.setY(enemyY);
                 land[hero.getX(), hero.getY()] = hero;
