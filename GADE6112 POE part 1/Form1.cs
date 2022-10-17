@@ -23,15 +23,15 @@ namespace GADE6112_POE_part_1
         private void mainForm_Load(object sender, EventArgs e)
         {
             mapLand = gameEngine.getMap();
-            
+
             landArray = mapLand.getLand();
             MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
             MapGeneration();
             BorderCreation();
             EnemyCreation();
             HeroCreation();
-            
-            
+
+
 
 
 
@@ -186,22 +186,23 @@ namespace GADE6112_POE_part_1
                     landArray[x, y].getTileType();
                     if (landArray[x, y].getTileType() == Tile.TileType.Enemy)
                     {
-                        for (int i = 0; i < mapLand.getEnemies().GetLength(0); i++)
+                        for (int i = 0; i < mapLand.getEnemies().Length; i++)
                         {
                             // if (landArray[x, y].getX() == enemyArr[i].getX() && landArray[x, y].getY() == enemyArr[i].getY())
 
-                            
-                                if (enemyArr[i].GetType() == typeof(SwampCreature))
-                                {
-                                    textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = creature.getEnemySym().ToString();// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
-                                    //richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
-                                }
-                                if (enemyArr[i].GetType() == typeof(Mage))
-                                {
-                                textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = mage.getMageSym().ToString() ;
-                                //richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
-                                 }
-                            
+
+                            if (enemyArr[i].GetType() == typeof(SwampCreature))
+                            {
+                                textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = creature.getEnemySym().ToString();// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
+                                // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
+                            }
+                            if (enemyArr[i].GetType() == typeof(Mage))
+                            {
+                                textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = mage.getMageSym().ToString();
+                                richTextBox1.Text = enemyArr[i].ToString();
+                                // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
+                            }
+
                         }
                     }
 

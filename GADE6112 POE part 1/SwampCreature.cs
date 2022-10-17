@@ -27,8 +27,9 @@ namespace GADE6112_POE_part_1
             this.y=getY();
             this.hp = 10;
             this.damage = 1;
-            
-            
+            enemySym = getSymbols(1);
+
+
         }
         public char getEnemySym() { return enemySym; } // Fetches enemy symbol to be used when outputting to the form
         override public Movement ReturnMove(Movement move = 0) // If movement is invalid then the movement is returned to its original

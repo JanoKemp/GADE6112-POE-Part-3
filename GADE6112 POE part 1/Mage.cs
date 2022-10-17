@@ -11,16 +11,16 @@ namespace GADE6112_POE_part_1
         char mageSym;
         public Mage()
         {
-
+            mageSym = getSymbols(4);
         }
         public Mage(int x, int y)
         {
             this.x = getX();// gets X and Y
-            this.y = getY();
-            this.mageSym = getSymbols(4); 
+            this.y = getY(); 
             this.hp = 5;
             this.damage = 5;
-            
+            mageSym = getSymbols(4);
+
         }
 
         public override Movement ReturnMove(Movement direction = 0)
