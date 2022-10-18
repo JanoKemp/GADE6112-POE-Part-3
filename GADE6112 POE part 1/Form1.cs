@@ -182,7 +182,7 @@ namespace GADE6112_POE_part_1
                 for (int y = 0; y < landArray.GetLength(1); y++)
                 {
                     Enemy[] enemyArr = mapLand.getEnemies();
-                    // textBoxes[x, y].Text = landArray[x, y].getTileType().ToString() ;// USED TO CHECK TILE TYPES OF TEXTBOXES 
+                     //textBoxes[x, y].Text = landArray[x, y].getTileType().ToString() ;// USED TO CHECK TILE TYPES OF TEXTBOXES 
                     landArray[x, y].getTileType();
                     if (landArray[x, y].getTileType() == Tile.TileType.Enemy)
                     {
@@ -191,15 +191,16 @@ namespace GADE6112_POE_part_1
                             // if (landArray[x, y].getX() == enemyArr[i].getX() && landArray[x, y].getY() == enemyArr[i].getY())
 
 
-                            if (enemyArr[i].GetType() == typeof(SwampCreature))
+                            if (enemyArr[i].GetType() == typeof(SwampCreature)) // if enemyArr[at location] returns type SwampCreature then it runs the following code
                             {
                                 textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = creature.getEnemySym().ToString();// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
                                 // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
+                                richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
                             }
                             if (enemyArr[i].GetType() == typeof(Mage))
                             {
                                 textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = mage.getMageSym().ToString();
-                                richTextBox1.Text = enemyArr[i].ToString();
+                                richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
                                 // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
                             }
 
@@ -229,6 +230,7 @@ namespace GADE6112_POE_part_1
                 }
             }
         }
+       
 
         private void textBox00_TextChanged(object sender, EventArgs e)
         {
