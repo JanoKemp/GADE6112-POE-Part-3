@@ -246,6 +246,23 @@ namespace GADE6112_POE_part_1
                 }
             }
         }
+        public void CheckMovement()
+        {
+            for (int x = 0; x < mapLand.getLand().GetLength(0); x++)
+            {
+                for (int y = 0; y < mapLand.getLand().GetLength(1); y++)
+                {
+                   if(landArray[x,y].getTileType() == Tile.TileType.Hero && textBoxes[x,y].Text != hero.getHeroSymbol().ToString())
+                    {
+                        textBoxes[x,y].Text = hero.getHeroSymbol().ToString();
+                    }
+                    if (landArray[x, y].getTileType() == Tile.TileType.Clear && textBoxes[x, y].Text == hero.getHeroSymbol().ToString())
+                    {
+                        textBoxes[x, y].Text = String.Empty;
+                    }
+                }
+            }
+        }
        
 
         private void textBox00_TextChanged(object sender, EventArgs e)
@@ -258,20 +275,23 @@ namespace GADE6112_POE_part_1
 
             gameEngine.MovePlayer(Character.Movement.up, hero); // Calls Move player method which changes the X and Y accordingly 
             gameEngine.getMap().UpdateVision(hero, Character.Movement.up); // Updates vision based on new movement
+            CheckMovement();
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
             gameEngine.MovePlayer(Character.Movement.left, hero);
             gameEngine.getMap().UpdateVision(hero, Character.Movement.left);
+            CheckMovement();
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
         {
+            gameEngine.getMap().UpdateVision(hero, Character.Movement.right);
             gameEngine.MovePlayer(Character.Movement.right, hero);
             HeroCreation();
-            gameEngine.getMap().UpdateVision(hero, Character.Movement.right);
-
+            
+            CheckMovement();
 
         }
 
@@ -280,13 +300,13 @@ namespace GADE6112_POE_part_1
 
             gameEngine.MovePlayer(Character.Movement.down, hero);
             gameEngine.getMap().UpdateVision(hero, Character.Movement.down);
+            CheckMovement();
 
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            hero.ToString(); // Outputs Hero information
-            creature.ToString(); // Outputs Enemy information
+            
         }
 
         private void buttonAttack_Click(object sender, EventArgs e)
