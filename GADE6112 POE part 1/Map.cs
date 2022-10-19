@@ -254,6 +254,7 @@ namespace GADE6112_POE_part_1
             {
                 Gold gold = new Gold(enemyX,enemyY); // gives it an X and Y and in the contructor the ammount of gold is randomised 
                gold.setTileType(Tile.TileType.Gold);
+                land[enemyX, enemyY] = gold;
                 return gold;
             }
             if (type == Tile.TileType.Clear)

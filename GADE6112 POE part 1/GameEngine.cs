@@ -16,7 +16,7 @@ namespace GADE6112_POE_part_1
         public GameEngine()
         {
             
-           map = new Map(4,7,6,9,3,6,5); // Creates a map with overloaded constructor
+           map = new Map(4,7,6,9,3,6,3); // Creates a map with overloaded constructor
             
             
          
