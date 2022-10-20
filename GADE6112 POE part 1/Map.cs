@@ -156,13 +156,15 @@ namespace GADE6112_POE_part_1
         public int getEnemyY() { return enemyY; }
         public Enemy[] getEnemies() { return enemy; } // gets the enemy array from map constructor
         public Item[] getItems() { return items; }
-        
+
+        public Hero getHero() { return hero; }
+
         #endregion
 
 
 
 
-        
+
         public Tile UpdateVision(Character vision, Character.Movement move) // Hero or Swampcreature is added into the params to gift Visions values and Character.Move.Example is written in to recieve moves 
         {
             switch (move) // Depending on the entered enum the following is carried out
