@@ -336,5 +336,21 @@ namespace GADE6112_POE_part_1
            
 
         }
+
+        private void SaveBtn_Click(object sender, EventArgs e)
+        {
+            gameEngine.Save();
+        }
+
+        private void LoadBtn_Click(object sender, EventArgs e)
+        {
+            gameEngine.Load();
+            MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
+            MapGeneration();
+            BorderCreation();
+            EnemyCreation();
+            HeroCreation();
+            GoldCreation();
+        }
     }
 }

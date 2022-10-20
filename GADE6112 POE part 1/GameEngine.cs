@@ -128,7 +128,7 @@ namespace GADE6112_POE_part_1
         }
         public void Load()
         {
-            FileStream outFile = new FileStream("gameLoad.bin", FileMode.Open);
+            FileStream outFile = new FileStream("gameSave.bin", FileMode.Open);
             BinaryReader load = new BinaryReader(outFile);
             map.setEnemyNum(load.ReadInt32());
             map.getHero().setX(load.ReadInt32());
