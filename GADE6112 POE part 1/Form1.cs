@@ -333,6 +333,7 @@ namespace GADE6112_POE_part_1
             {
                 richTextBox1.Text =  " \n "+ enemyArr[i].ToString();
             }
+           
 
         }
     }

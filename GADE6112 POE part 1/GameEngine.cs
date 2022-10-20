@@ -98,9 +98,14 @@ namespace GADE6112_POE_part_1
             return MoveEnemies(hero,enemyDirection,swamp,mage,gameEngine);
         }
 
-        public bool EnemyAttack()
+        public void EnemyAttack(bool status)
         {
-            return true;
+           if(status = true)
+            {
+
+            }    
+                
+            
         }
         public void Save()
             {
