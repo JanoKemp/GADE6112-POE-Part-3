@@ -96,5 +96,23 @@ namespace GADE6112_POE_part_1
             map.getLand();// gets 2d map array
             return MoveEnemies(hero,enemyDirection,swamp,mage,gameEngine);
         }
+        public void Save()
+        {
+            FileStream outFile = new FileStream("gameSave.bin", FileMode.Create, FileAccess.Write);
+            BinaryWriter save = new BinaryWriter(outFile);
+            save.Write(map.getEnemyNum());
+            save.Write(map.getHero().getX());
+            save.Write(map.getHero().getY());
+            for (int i = 0; i < map.getEnemies().GetLength(0); i++)
+            {
+                Enemy[] enemyArr = map.getEnemies();
+                save.Write(enemyArr[i].getX());
+                save.Write(enemyArr[i].getY());
+            }
+            save.Write(map.getHorizontal());
+            save.Write(map.getVertical());
+            save.Close();
+            outFile.Close();
+        }
     }
 }
