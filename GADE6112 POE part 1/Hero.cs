@@ -14,7 +14,7 @@ namespace GADE6112_POE_part_1
             // Sets heros values
             this.x = getX();
             this.y = getY();
-            this.hp = getHP();
+            this.hp = 10;
             this.maxHp = getHP();
             this.damage = 2;
             heroSym = getSymbols(0); // "H" symbol
