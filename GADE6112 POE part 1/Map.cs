@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
 
+
 namespace GADE6112_POE_part_1
 {
 
-
+   
 
     internal class Map 
 
     {
-        
+       
         private int width;
         private int height;
-        
         private Tile[,] land = new Tile[,] { };  // Come back and maybe make it TextBoxes
         private Enemy [] enemy;
         Item[] items;  
@@ -28,10 +29,10 @@ namespace GADE6112_POE_part_1
         private int horizontal, vertical, enemyNum, enemyX, enemyY , enemyGen , heroX, heroY;
 
 
-   
+
         public Map(int minWidth , int maxWidth , int minHeight , int maxHeight , int minEnemy , int maxEnemy, int numGoldDrops)
         {
-
+            
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             horizontal = randomGen.Next(minWidth, maxWidth);//TOADD IF ISSUES: +1 because random gens stop 1 number before max. Eg if range is 0-9 then it will only calc between 0-8
             vertical = randomGen.Next(minHeight, maxHeight);
@@ -62,8 +63,8 @@ namespace GADE6112_POE_part_1
                 
                 land[0, borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
                 land[vertical , borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
-               
 
+          
 
             }
             land[heroX,heroY] = Create(Tile.TileType.Hero);
@@ -155,6 +156,7 @@ namespace GADE6112_POE_part_1
         public int getEnemyY() { return enemyY; }
         public Enemy[] getEnemies() { return enemy; } // gets the enemy array from map constructor
         public Item[] getItems() { return items; }
+        
         #endregion
 
 

@@ -12,6 +12,7 @@ namespace GADE6112_POE_part_1
     internal class GameEngine 
     {
         private Map map;
+        
         public int movementDet = 0; // increments if the hero moves / used to tell enemies when to move
         public GameEngine()
         {
@@ -95,6 +96,10 @@ namespace GADE6112_POE_part_1
             }
             map.getLand();// gets 2d map array
             return MoveEnemies(hero,enemyDirection,swamp,mage,gameEngine);
+        }
+        public bool EnemyAttack()
+        {
+            return true;
         }
     }
 }
