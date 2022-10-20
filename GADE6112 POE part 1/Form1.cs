@@ -18,6 +18,7 @@ namespace GADE6112_POE_part_1
         Tile[,] landArray;
         Item[] items;
         Enemy[] enemyArr;
+        
 
 
 
@@ -333,7 +334,9 @@ namespace GADE6112_POE_part_1
             {
                 richTextBox1.Text =  " \n "+ enemyArr[i].ToString();
             }
-           
+            gameEngine.EnemyAttack(creature.CheckRange(hero), hero, creature);
+            gameEngine.EnemyAttack(mage.CheckRange(hero), hero, mage);
+
 
         }
 

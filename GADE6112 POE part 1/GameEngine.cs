@@ -98,12 +98,16 @@ namespace GADE6112_POE_part_1
             return MoveEnemies(hero,enemyDirection,swamp,mage,gameEngine);
         }
 
-        public void EnemyAttack(bool status)
+        public void EnemyAttack(bool status, Hero hero , Enemy enemy)
         {
            if(status = true)
             {
-
+                hero.setHP(hero.getHP() - enemy.getDamage());
             }    
+           else if (status = false)
+            {
+
+            }
                 
             
         }
