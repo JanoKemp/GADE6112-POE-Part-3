@@ -148,10 +148,8 @@ namespace GADE6112_POE_part_1
         
        
 
-        public bool isDead() // Checks the Heros Hp and Enemies Hp and returns a Bool value based on if statement.
+        public bool isDead(Hero hero , SwampCreature creature) // Checks the Heros Hp and Enemies Hp and returns a Bool value based on if statement.
         {
-            Hero hero = new Hero();
-            SwampCreature creature = new SwampCreature();
             int heroHp = hero.getHP();
             int enemyHp = creature.getHP();
             bool dead = false;
