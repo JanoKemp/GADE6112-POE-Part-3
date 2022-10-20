@@ -11,7 +11,7 @@ namespace GADE6112_POE_part_1
         Hero hero = new Hero();
         SwampCreature creature = new SwampCreature();
         Mage mage = new Mage();
-        Gold gold = new Gold();
+        Gold gold;
         Map mapLand;
         GameEngine gameEngine = new GameEngine();
         Obstacle barrier = new Obstacle();
@@ -240,7 +240,7 @@ namespace GADE6112_POE_part_1
                 {
                     if (landArray[x, y].getTileType() == Tile.TileType.Gold)
                     {
-
+                        gold = new Gold(x, y);
                         items = mapLand.getItems();
                         for (int i = 0; i < items.Length; i++)
                         {
