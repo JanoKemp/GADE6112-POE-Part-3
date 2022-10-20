@@ -12,7 +12,7 @@ namespace GADE6112_POE_part_1
         private int goldDrop; // Private member variable Q2.2 ?
         private Random goldAm = new Random();
         char goldSymbol;
-        public Gold ()
+        public Gold()
         {
             x = getX();
             y = getY();
