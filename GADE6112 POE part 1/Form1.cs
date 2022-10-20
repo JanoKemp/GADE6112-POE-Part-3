@@ -11,12 +11,12 @@ namespace GADE6112_POE_part_1
         Hero hero = new Hero();
         SwampCreature creature = new SwampCreature();
         Mage mage = new Mage();
-        Gold gold;
+        Gold gold = new Gold();
         Map mapLand;
         GameEngine gameEngine = new GameEngine();
         Obstacle barrier = new Obstacle();
         Tile[,] landArray;
-
+        Item[] items;
 
 
 
@@ -184,7 +184,7 @@ namespace GADE6112_POE_part_1
                 for (int y = 0; y < landArray.GetLength(1); y++)
                 {
                     Enemy[] enemyArr = mapLand.getEnemies();
-                     //textBoxes[x, y].Text = landArray[x, y].getTileType().ToString() ;// USED TO CHECK TILE TYPES OF TEXTBOXES 
+                    //textBoxes[x, y].Text = landArray[x, y].getTileType().ToString() ;// USED TO CHECK TILE TYPES OF TEXTBOXES 
                     landArray[x, y].getTileType();
                     if (landArray[x, y].getTileType() == Tile.TileType.Enemy)
                     {
@@ -234,14 +234,21 @@ namespace GADE6112_POE_part_1
         }
         public void GoldCreation()
         {
-          for (int x = 0; x < mapLand.getLand().GetLength(0);x++)
+            for (int x = 0; x < mapLand.getLand().GetLength(0); x++)
             {
-                for (int y = 0; y < mapLand.getLand().GetLength(1);y++)
+                for (int y = 0; y < mapLand.getLand().GetLength(1); y++)
                 {
-                    if(landArray[x,y].getTileType() == Tile.TileType.Gold)
+                    if (landArray[x, y].getTileType() == Tile.TileType.Gold)
                     {
-                        gold = new Gold(x,y);
-                        textBoxes[x, y].Text = gold.getGoldSymbol().ToString();
+
+                        items = mapLand.getItems();
+                        for (int i = 0; i < items.Length; i++)
+                        {
+                            if (items[i].GetType() == typeof(Gold))
+                            {
+                                textBoxes[items[i].getX(), items[i].getY()].Text = gold.getGoldSymbol().ToString();
+                            }
+                        }
                     }
                 }
             }
@@ -252,9 +259,9 @@ namespace GADE6112_POE_part_1
             {
                 for (int y = 0; y < mapLand.getLand().GetLength(1); y++)
                 {
-                   if(landArray[x,y].getTileType() == Tile.TileType.Hero && textBoxes[x,y].Text != hero.getHeroSymbol().ToString())
+                    if (landArray[x, y].getTileType() == Tile.TileType.Hero && textBoxes[x, y].Text != hero.getHeroSymbol().ToString())
                     {
-                        textBoxes[x,y].Text = hero.getHeroSymbol().ToString();
+                        textBoxes[x, y].Text = hero.getHeroSymbol().ToString();
                     }
                     if (landArray[x, y].getTileType() == Tile.TileType.Clear && textBoxes[x, y].Text == hero.getHeroSymbol().ToString())
                     {
@@ -263,7 +270,7 @@ namespace GADE6112_POE_part_1
                 }
             }
         }
-       
+
 
         private void textBox00_TextChanged(object sender, EventArgs e)
         {
@@ -290,7 +297,7 @@ namespace GADE6112_POE_part_1
             gameEngine.getMap().UpdateVision(hero, Character.Movement.right);
             gameEngine.MovePlayer(Character.Movement.right, hero);
             HeroCreation();
-            
+
             CheckMovement();
 
         }
@@ -306,7 +313,7 @@ namespace GADE6112_POE_part_1
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void buttonAttack_Click(object sender, EventArgs e)
