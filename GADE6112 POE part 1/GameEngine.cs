@@ -114,5 +114,24 @@ namespace GADE6112_POE_part_1
             save.Close();
             outFile.Close();
         }
+        public void Load()
+        {
+            FileStream outFile = new FileStream("gameLoad.bin", FileMode.Open);
+            BinaryReader load = new BinaryReader(outFile);
+            map.setEnemyNum(load.ReadInt32());
+            map.getHero().setX(load.ReadInt32());
+            map.getHero().setY(load.ReadInt32());
+            for (int i = 0; i < map.getEnemies().GetLength(0); i++)
+            {
+                Enemy[] enemyArr = map.getEnemies();
+                enemyArr[i].setX(load.ReadInt32());
+                enemyArr[i].setY(load.ReadInt32());
+
+            }
+            map.setHorizontal(load.ReadInt32());
+            map.setVertical(load.ReadInt32());
+            load.Close();
+            outFile.Close();
+        }
     }
 }
