@@ -289,22 +289,22 @@ namespace GADE6112_POE_part_1
         private void buttonUp_Click(object sender, EventArgs e)
         {
 
-            gameEngine.MovePlayer(Character.Movement.up, hero); // Calls Move player method which changes the X and Y accordingly 
-            gameEngine.getMap().UpdateVision(hero, Character.Movement.up); // Updates vision based on new movement
+            gameEngine.MovePlayer(Character.Movement.up); // Calls Move player method which changes the X and Y accordingly 
+            gameEngine.getMap().UpdateVision(); // Updates vision based on new movement
             //CheckMovement();
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
-            gameEngine.MovePlayer(Character.Movement.left, hero);
-            gameEngine.getMap().UpdateVision(hero, Character.Movement.left);
+            gameEngine.MovePlayer(Character.Movement.left);
+            gameEngine.getMap().UpdateVision();
            // CheckMovement();
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
         {
-            gameEngine.getMap().UpdateVision(hero, Character.Movement.right);
-            gameEngine.MovePlayer(Character.Movement.right, hero);
+            gameEngine.getMap().UpdateVision();
+            gameEngine.MovePlayer(Character.Movement.right);
            
 
             //CheckMovement();
@@ -314,7 +314,7 @@ namespace GADE6112_POE_part_1
         private void buttonDown_Click(object sender, EventArgs e)
         {
 
-            gameEngine.MovePlayer(Character.Movement.down, hero);
+            gameEngine.MovePlayer(Character.Movement.down);
            // gameEngine.getMap().UpdateVision(hero, Character.Movement.down);
             //CheckMovement();
 

@@ -70,6 +70,8 @@ namespace GADE6112_POE_part_1
 
             }
             land[heroX, heroY] = Create(Tile.TileType.Hero);
+            hero.setX(heroX);
+            hero.setY(heroY);
             //land[heroX,heroY].setTileType(Tile.TileType.Hero);
             enemy = new Enemy[enemyNum];
 
@@ -104,7 +106,9 @@ namespace GADE6112_POE_part_1
                 items[c] = (Gold)Create(Tile.TileType.Gold);
             }
             visionArr = land;
-            UpdateVision(hero, Character.Movement.noMovement);
+            hero.setCurrentVision(visionArr);
+            
+            UpdateVision();
         }
         #region Gets and setters
         internal Tile getLocation(int x, int y)
@@ -168,61 +172,32 @@ namespace GADE6112_POE_part_1
 
 
 
-        public void UpdateVision(Character character, Character.Movement move ) // Hero or Swampcreature is added into the params to gift Visions values and Character.Move.Example is written in to recieve moves 
+        public void UpdateVision() // Hero or Swampcreature is added into the params to gift Visions values and Character.Move.Example is written in to recieve moves 
         {
-            
-             north = visionArr[character.getX() , character.getY()];
-             north.setX(character.getX() - 1);
-             south = visionArr[character.getX() + 1, character.getY()];
-             west =  visionArr[character.getX(),character.getY()];
-             west.setY(character.getY() - 1);
-             east = visionArr[character.getX(), character.getY() + 1];
+            int x = hero.getX();
+            int y = enemy[1].getX();
+            north = land[hero.getX() - 1, hero.getY()]; // A new tile is created above the Character 
+            hero.setNorth(north);
+            south = land[hero.getX() + 1, hero.getY()];
+            hero.setSouth(south);
+            east = land[hero.getX(), hero.getY() + 1];
+            hero.setEast(east);
+            west = land[hero.getX(), hero.getY() - 1];
+            hero.setWest(west);
 
-            if (character.getX() != 0 && move == Character.Movement.up) // Stops user from crashing Array from out of bounds
+            for (int i = 0; i < enemy.Length; i++)
             {
-                character.setX(character.getX());
-                character.setY(character.getY());
-                north = visionArr[character.getX(), character.getY()];
-                north.setX(character.getX() - 1);
-                south = visionArr[character.getX() + 1, character.getY()];
-                west = visionArr[character.getX(), character.getY()];
-                west.setY(character.getY() - 1);
-                east = visionArr[character.getX(), character.getY() + 1];
+                north = land[enemy[i].getX() - 1, enemy[i].getY()]; // A new tile is created above the Character 
+                enemy[i].setNorth(north);
+                south = land[enemy[i].getX() + 1, enemy[i].getY()];
+                enemy[i].setSouth(south);
+                east = land[enemy[i].getX(), enemy[i].getY() + 1];
+                enemy[i].setEast(east);
+                west = land[enemy[i].getX(), enemy[i].getY() - 1];
+                enemy[i].setWest(west);
+
             }
-            if (character.getX() != 0 && move == Character.Movement.left) // Stops user from crashing Array from out of bounds
-            {
-                character.setX(character.getX());
-                character.setY(character.getY());
-                north = visionArr[character.getX(), character.getY()];
-                north.setX(character.getX() - 1);
-                south = visionArr[character.getX() + 1, character.getY()];
-                west = visionArr[character.getX(), character.getY()];
-                west.setY(character.getY() - 1);
-                east = visionArr[character.getX(), character.getY() + 1];
-            }
-
-
-            if (character.getY() != 0 && move == Character.Movement.right) // Stops user from crashing Array from out of bounds
-            {
-                character.setX(character.getX());
-                character.setY(character.getY());
-                north = visionArr[character.getX(), character.getY()];
-                north.setX(character.getX() - 1);
-                south = visionArr[character.getX() + 1, character.getY()];
-                west = visionArr[character.getX(), character.getY()];
-                west.setY(character.getY() - 1);
-                east = visionArr[character.getX(), character.getY() + 1];
-            }
-            if (character.getY() != 0 && move == Character.Movement.noMovement) // Stops user from crashing Array from out of bounds
-            {
-                character.setX(character.getX());
-                character.setY(character.getY());
-               
-            }
-
-
-
-
+          
 
         }
         private Tile Create(Tile.TileType type)// Creates Objects for the map

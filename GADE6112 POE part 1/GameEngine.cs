@@ -23,9 +23,10 @@ namespace GADE6112_POE_part_1
          
         }
         public Map getMap() { return map; } // public get accessor for the private map variable
-        public bool MovePlayer(Character.Movement direction, Hero hero)
+        public bool MovePlayer(Character.Movement direction)
         {
-            
+            Hero hero;
+            hero = map.getHero();
             map.getLocation(hero.getX(), hero.getY()).setTileType(Tile.TileType.Clear); // Gets the current location of the hero and sets the tile type to Clear
                                                                                         // Possibly add this somewhere else for it to be called (unknown)
             bool movement = true;
@@ -89,7 +90,7 @@ namespace GADE6112_POE_part_1
                     {
                         enemyDirection = swamp.ReturnMove(); // Checks if movement is valid against Vision array
                         enemyArr[i].Move(enemyDirection); //Moves the X and Y location
-                        map.UpdateVision(enemyArr[i],enemyDirection);//Updates the vision array of the enemy at the new location
+                        map.UpdateVision();//Updates the vision array of the enemy at the new location
                         
                     }
                     
