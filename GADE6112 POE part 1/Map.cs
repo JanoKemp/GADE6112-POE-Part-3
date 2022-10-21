@@ -170,27 +170,34 @@ namespace GADE6112_POE_part_1
 
         public void UpdateVision(Character character, Character.Movement move ) // Hero or Swampcreature is added into the params to gift Visions values and Character.Move.Example is written in to recieve moves 
         {
-             north = visionArr[character.getX()  - 1, character.getY()];
+            
+             north = visionArr[character.getX() , character.getY()];
+             north.setX(character.getX() - 1);
              south = visionArr[character.getX() + 1, character.getY()];
-             west =  visionArr[character.getX(),character.getY() -1];
+             west =  visionArr[character.getX(),character.getY()];
+             west.setY(character.getY() - 1);
              east = visionArr[character.getX(), character.getY() + 1];
 
             if (character.getX() != 0 && move == Character.Movement.up) // Stops user from crashing Array from out of bounds
             {
                 character.setX(character.getX());
                 character.setY(character.getY());
-                 north = visionArr[character.getX() - 1, character.getY()];
-                 south = visionArr[character.getX() + 1, character.getY()];
-                 west = visionArr[character.getX(), character.getY() - 1];
-                 east = visionArr[character.getX(), character.getY() + 1];
+                north = visionArr[character.getX(), character.getY()];
+                north.setX(character.getX() - 1);
+                south = visionArr[character.getX() + 1, character.getY()];
+                west = visionArr[character.getX(), character.getY()];
+                west.setY(character.getY() - 1);
+                east = visionArr[character.getX(), character.getY() + 1];
             }
             if (character.getX() != 0 && move == Character.Movement.left) // Stops user from crashing Array from out of bounds
             {
                 character.setX(character.getX());
                 character.setY(character.getY());
-                north = visionArr[character.getX() - 1, character.getY()];
+                north = visionArr[character.getX(), character.getY()];
+                north.setX(character.getX() - 1);
                 south = visionArr[character.getX() + 1, character.getY()];
-                west = visionArr[character.getX(), character.getY() - 1];
+                west = visionArr[character.getX(), character.getY()];
+                west.setY(character.getY() - 1);
                 east = visionArr[character.getX(), character.getY() + 1];
             }
 
@@ -199,9 +206,11 @@ namespace GADE6112_POE_part_1
             {
                 character.setX(character.getX());
                 character.setY(character.getY());
-                north = visionArr[character.getX() - 1, character.getY()];
+                north = visionArr[character.getX(), character.getY()];
+                north.setX(character.getX() - 1);
                 south = visionArr[character.getX() + 1, character.getY()];
-                west = visionArr[character.getX(), character.getY() - 1];
+                west = visionArr[character.getX(), character.getY()];
+                west.setY(character.getY() - 1);
                 east = visionArr[character.getX(), character.getY() + 1];
             }
             if (character.getY() != 0 && move == Character.Movement.noMovement) // Stops user from crashing Array from out of bounds
