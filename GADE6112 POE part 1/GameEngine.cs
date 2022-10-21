@@ -27,21 +27,22 @@ namespace GADE6112_POE_part_1
         {
             
             map.getLocation(hero.getX(), hero.getY()).setTileType(Tile.TileType.Clear); // Gets the current location of the hero and sets the tile type to Clear
-            bool movement = true; // Possibly add this somewhere else for it to be called (unknown)
-            if (movement = true)
-            {
+                                                                                        // Possibly add this somewhere else for it to be called (unknown)
+            bool movement = true;
                 movementDet = 1;
-            }
+            
             if (hero.ReturnMove(hero.getMovement()) == direction) // Return move checks if movement is valid with Vision array , getMovement gets the players input
             {
+               
                 if (direction == Character.Movement.down)
                 {
                     hero.setX(hero.getX() + 1); //Changes the Y position of the hero to one up from it current location
-
+                    
                 }
                 if (direction == Character.Movement.up)
                 {
                     hero.setX(hero.getX() - 1);
+                    
                 }
                 if (direction == Character.Movement.left)
                 {
@@ -88,7 +89,7 @@ namespace GADE6112_POE_part_1
                     {
                         enemyDirection = swamp.ReturnMove(); // Checks if movement is valid against Vision array
                         enemyArr[i].Move(enemyDirection); //Moves the X and Y location
-                        enemyArr[i] = (Enemy)map.UpdateVision(enemyArr[i],enemyDirection);//Updates the vision array of the enemy at the new location
+                        map.UpdateVision(enemyArr[i],enemyDirection);//Updates the vision array of the enemy at the new location
                         
                     }
                     

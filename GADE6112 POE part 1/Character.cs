@@ -10,7 +10,7 @@ namespace GADE6112_POE_part_1
     {
         protected int hp, maxHp, damage, goldPurse;
 
-        public Character[,] currentVision;  // Vision Array - stores N S E W for vision meant to be used to validate the movement
+        public Tile [,] currentVision;  // Vision Array - stores N S E W for vision meant to be used to validate the movement
 
         public enum Movement
         {
@@ -55,6 +55,10 @@ namespace GADE6112_POE_part_1
         {
             this.goldPurse = goldPurse;
         }
+        public void setCurrentVision(Tile [,] vision)
+        {
+            currentVision = vision;
+        }
        /* public void setVision(Tile[] vision)
         {
             this.vision = vision;
@@ -66,6 +70,7 @@ namespace GADE6112_POE_part_1
        // public Tile[] getVision() { return vision; }
         public Movement getMovement() { return direction; }
         public int getGoldPurse() { return goldPurse; }
+        public Tile [,] getCurrentVision() { return currentVision; } // gets the contents of the vision array
 
 
 
