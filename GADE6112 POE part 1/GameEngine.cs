@@ -111,42 +111,42 @@ namespace GADE6112_POE_part_1
                 
             
         }
-        public void Save()
+        public void Save() //method to save map class and the varibales that it contains
             {
-                FileStream outFile = new FileStream("gameSave.bin", FileMode.Create, FileAccess.Write);
+                FileStream outFile = new FileStream("gameSave.bin", FileMode.Create, FileAccess.Write);//creating file
                 BinaryWriter save = new BinaryWriter(outFile);
-                save.Write(map.getEnemyNum());
-                save.Write(map.getHero().getX());
-                save.Write(map.getHero().getY());
+                save.Write(map.getEnemyNum());//saving enemyNum to file
+                save.Write(map.getHero().getX());//saving x position of hero to file
+                save.Write(map.getHero().getY());//saving Y position of hero to file
                 for (int i = 0; i < map.getEnemies().GetLength(0); i++)
                 {
                     Enemy[] enemyArr = map.getEnemies();
-                    save.Write(enemyArr[i].getX());
-                    save.Write(enemyArr[i].getY());
+                    save.Write(enemyArr[i].getX());//saving x postion of enemies
+                    save.Write(enemyArr[i].getY());//saving Y position of enemies
                 }
-                save.Write(map.getHorizontal());
-                save.Write(map.getVertical());
-                save.Close();
+                save.Write(map.getHorizontal());//saving map height to file
+                save.Write(map.getVertical());//saving map length to file
+                save.Close();//closing file
                 outFile.Close();
             
         }
         public void Load()
         {
-            FileStream outFile = new FileStream("gameSave.bin", FileMode.Open);
+            FileStream outFile = new FileStream("gameSave.bin", FileMode.Open);//opening file
             BinaryReader load = new BinaryReader(outFile);
-            map.setEnemyNum(load.ReadInt32());
-            map.getHero().setX(load.ReadInt32());
-            map.getHero().setY(load.ReadInt32());
+            map.setEnemyNum(load.ReadInt32());//retrieving number of enemies from file
+            map.getHero().setX(load.ReadInt32());//retrieving X position of hero from file
+            map.getHero().setY(load.ReadInt32());//retrieving Y position of hero from file
             for (int i = 0; i < map.getEnemies().GetLength(0); i++)
             {
                 Enemy[] enemyArr = map.getEnemies();
-                enemyArr[i].setX(load.ReadInt32());
-                enemyArr[i].setY(load.ReadInt32());
+                enemyArr[i].setX(load.ReadInt32());//retrieving x postion of enemies from file
+                enemyArr[i].setY(load.ReadInt32());//retrieving Y position of enemies from file
 
             }
-            map.setHorizontal(load.ReadInt32());
-            map.setVertical(load.ReadInt32());
-            load.Close();
+            map.setHorizontal(load.ReadInt32());//retrieving map height from file
+            map.setVertical(load.ReadInt32());//retrievig maop length from file
+            load.Close();//closing file
             outFile.Close();
         }
     }

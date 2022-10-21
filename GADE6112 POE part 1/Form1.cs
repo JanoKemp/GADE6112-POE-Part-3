@@ -342,12 +342,12 @@ namespace GADE6112_POE_part_1
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            gameEngine.Save();
+            gameEngine.Save();//calling save method from GameEngine class
         }
 
         private void LoadBtn_Click(object sender, EventArgs e)
         {
-            gameEngine.Load();
+            gameEngine.Load();//calls Load method from GameEngine class
             MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
             MapGeneration();
             BorderCreation();
