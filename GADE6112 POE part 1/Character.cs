@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,16 +25,15 @@ namespace GADE6112_POE_part_1
 
         }
         public Movement direction;
-        public Character()
-        {
-            this.y = getY();
-            this.x = getX();
-            this.type = getTileType();
-        }
+       
 
-        public Character(int x, int y, Tile.TileType type) // Must get symbol from Tile Class
+        public Character(int x, int y, Tile.TileType type , int hp, int maxHp, int damage) : base (x,y,type)// Must get symbol from Tile Class
         {
-           
+            this.hp = hp;
+            this.damage = damage;
+            this.maxHp = maxHp;
+            this.type = getTileType();
+            currentVision = new Tile[7,9];
 
         }
 
@@ -66,15 +67,15 @@ namespace GADE6112_POE_part_1
         }
         public void setSouth(Tile tile)
         {
-            north = tile;
+            south = tile;
         }
         public void setEast(Tile tile)
         {
-            north = tile;
+            east = tile;
         }
         public void setWest(Tile tile)
         {
-            north = tile;
+            west = tile;
         }
         /* public void setVision(Tile[] vision)
          {
@@ -93,8 +94,8 @@ namespace GADE6112_POE_part_1
 
         public virtual void Attack(Character target) //Used to attack enemies
         {
-            Hero hero = new Hero();
-            int targetHp, heroDamage;
+            target.hp -= hp;
+            /*int targetHp, heroDamage;
             targetHp = target.getHP(); // gets target Hp 
             heroDamage = hero.getDamage();
             CheckRange(target);//Checks if target is in range for an attack
@@ -103,6 +104,7 @@ namespace GADE6112_POE_part_1
                 targetHp = targetHp - heroDamage; // Enemy health - damage
                 target.setHP(targetHp);
             }
+            */
         }
         public virtual bool CheckRange(Character target)//add target
         {
@@ -115,19 +117,19 @@ namespace GADE6112_POE_part_1
         }
         private int DistanceTo(Character target)//Wants the number of tiles in between hero and target
         {
-            Hero hero = new Hero();
+            
 
             int targetX , targetY,distance; // Local variables created for assigning Target X and Y values to be checked against distance
             targetX = target.getX();
             targetY = target.getY();
-            if (targetX > hero.getX() && targetY > hero.getY()) // Ensures distance cannot be negative
+            if (targetX > x && targetY > y) // Ensures distance cannot be negative
             {
-                distance = (targetX + targetY) - (hero.getX() + hero.getX()); // Adds X and Y of each object and then subtracts from the bigger X and Y. Gives a distance to be used , later for checking
+                distance = (targetX + targetY) - (x + y); // Adds X and Y of each object and then subtracts from the bigger X and Y. Gives a distance to be used , later for checking
                 return distance;
             }
-            if (targetX < hero.getX() && targetY < hero.getY())
+            if (targetX < x && targetY < y)
             {
-                distance = (hero.getX() + hero.getY() - (targetX + targetY));
+                distance = (x + y- (targetX + targetY));
                 return distance;
             }
             else

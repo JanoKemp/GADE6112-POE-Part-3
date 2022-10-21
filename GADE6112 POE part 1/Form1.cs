@@ -8,13 +8,13 @@ namespace GADE6112_POE_part_1
         {
             InitializeComponent();
         }
-        Hero hero = new Hero();
-        SwampCreature creature = new SwampCreature();
-        Mage mage = new Mage();
+        Hero hero;
+        SwampCreature creature;
+        Mage mage;
         Gold gold;
         Map mapLand;
         GameEngine gameEngine = new GameEngine();
-        Obstacle barrier = new Obstacle();
+        Obstacle barrier;
         Tile[,] landArray;
         Item[] items;
         Enemy[] enemyArr;
@@ -261,24 +261,58 @@ namespace GADE6112_POE_part_1
                 }
             }
         }
-        /*public void CheckMovement()
+        public void CheckMovement()
         {
             for (int x = 0; x < mapLand.getLand().GetLength(0); x++)
             {
                 for (int y = 0; y < mapLand.getLand().GetLength(1); y++)
                 {
-                    if (landArray[x, y].getTileType() == Tile.TileType.Hero && textBoxes[x, y].Text != hero.getHeroSymbol().ToString())
+                    if (landArray[x, y].getTileType() == Tile.TileType.Hero)
                     {
                         textBoxes[x, y].Text = hero.getHeroSymbol().ToString();
                     }
-                    if (landArray[x, y].getTileType() == Tile.TileType.Clear && textBoxes[x, y].Text == hero.getHeroSymbol().ToString())
+                    if (landArray[x, y].getTileType() == Tile.TileType.Clear )
                     {
                         textBoxes[x, y].Text = String.Empty;
+                    }
+                    if (landArray[x,y].getTileType() == Tile.TileType.Barrier)
+                    {
+                        textBoxes[x, y].Text = barrier.getBarrierSym().ToString() ;
+                    }
+                    if (landArray[x,y].getTileType() == Tile.TileType.Gold)
+                    {
+                        textBoxes[x, y].Text = gold.getGoldSymbol().ToString();
+                    }
+                    if (landArray[x, y].getTileType() == Tile.TileType.Enemy)
+                    {
+                        if (landArray[x, y].getTileType() == Tile.TileType.Enemy)
+                        {
+                            for (int i = 0; i < mapLand.getEnemies().Length; i++)
+                            {
+                                // if (landArray[x, y].getX() == enemyArr[i].getX() && landArray[x, y].getY() == enemyArr[i].getY())
+
+
+                                if (enemyArr[i].GetType() == typeof(SwampCreature)) // if enemyArr[at location] returns type SwampCreature then it runs the following code
+                                {
+                                    textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = creature.getEnemySym().ToString();// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
+                                                                                                                               // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
+                                                                                                                               //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                }
+                                if (enemyArr[i].GetType() == typeof(Mage))
+                                {
+                                    textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = mage.getMageSym().ToString();
+                                    // richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                    // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
+                                }
+
+
+                            }
+                        }
                     }
                 }
             }
         }
-        */
+        
 
 
         private void textBox00_TextChanged(object sender, EventArgs e)
@@ -291,23 +325,25 @@ namespace GADE6112_POE_part_1
 
             gameEngine.MovePlayer(Character.Movement.up); // Calls Move player method which changes the X and Y accordingly 
             gameEngine.getMap().UpdateVision(); // Updates vision based on new movement
-            //CheckMovement();
+            CheckMovement();
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
             gameEngine.MovePlayer(Character.Movement.left);
             gameEngine.getMap().UpdateVision();
-           // CheckMovement();
+            CheckMovement();
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
         {
-            gameEngine.getMap().UpdateVision();
+            
             gameEngine.MovePlayer(Character.Movement.right);
-           
+            
+            gameEngine.getMap().UpdateVision();
 
-            //CheckMovement();
+
+            CheckMovement();
 
         }
 
@@ -316,7 +352,7 @@ namespace GADE6112_POE_part_1
 
             gameEngine.MovePlayer(Character.Movement.down);
            // gameEngine.getMap().UpdateVision(hero, Character.Movement.down);
-            //CheckMovement();
+           CheckMovement();
 
         }
 

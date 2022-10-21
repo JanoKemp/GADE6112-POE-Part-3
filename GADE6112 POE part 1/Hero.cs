@@ -10,7 +10,7 @@ namespace GADE6112_POE_part_1
     {
         char heroSym; // Used to get the symbol from Class and then Get it to the mainform
         
-        public Hero()
+       /* public Hero()
         {
             // Sets heros values
             this.x = getX();
@@ -21,10 +21,12 @@ namespace GADE6112_POE_part_1
             heroSym = getSymbols(0); // "H" symbol
             
         }
+       */
 
-        public Hero(int x, int y, int hP, TileType type)
+        public Hero(int x, int y, int hp, int maxHp , int damage) : base(x,y,Tile.TileType.Hero,hp,maxHp,damage)
         {
             
+            heroSym = getSymbols(0); // "H" symbol
         }
 
         override public Movement ReturnMove(Movement move = 0) // If tile is not empty automatically returns user to previous location

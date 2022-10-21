@@ -9,17 +9,15 @@ namespace GADE6112_POE_part_1
     internal class Mage: Enemy
     {
         char mageSym;
-        public Mage()
+        /*public Mage()
         {
             mageSym = getSymbols(4);
         }
-        public Mage(int x, int y)
+        */
+        public Mage(int x, int y) : base( x,y,5,5,5,Tile.TileType.Enemy)
         {
-            this.x = getX();// gets X and Y
-            this.y = getY(); 
-            this.hp = 5;
-            this.damage = 5;
-            mageSym = getSymbols(4);
+            
+            //mageSym = getSymbols(4);
 
         }
 

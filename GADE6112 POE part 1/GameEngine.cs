@@ -28,37 +28,46 @@ namespace GADE6112_POE_part_1
             Hero hero;
             hero = map.getHero();
             map.getLocation(hero.getX(), hero.getY()).setTileType(Tile.TileType.Clear); // Gets the current location of the hero and sets the tile type to Clear
-                                                                                        // Possibly add this somewhere else for it to be called (unknown)
             bool movement = true;
-                movementDet = 1;
-            
             if (hero.ReturnMove(hero.getMovement()) == direction) // Return move checks if movement is valid with Vision array , getMovement gets the players input
             {
                
                 if (direction == Character.Movement.down)
                 {
                     hero.setX(hero.getX() + 1); //Changes the Y position of the hero to one up from it current location
+                    movement = true;
+                    return movement;
                     
                 }
                 if (direction == Character.Movement.up)
                 {
                     hero.setX(hero.getX() - 1);
-                    
+                    movementDet = 1;
+                    movement = true;
+                    return movement;
                 }
                 if (direction == Character.Movement.left)
                 {
                     hero.setY(hero.getY() - 1);
+                    movementDet = 1;
+                    movement = true;
+                    return movement;
                 }
                 if (direction == Character.Movement.right)
                 {
                     hero.setY(hero.getY() + 1);
+                    movementDet = 1;
+                    movement = true;
+                    return movement;
                 }
                 if (direction == Character.Movement.noMovement)
                 {
                     hero.setX(hero.getX());
                     hero.setY(hero.getY());
-                    movement = false;
+                    
                     movementDet = 0;
+                    movement = false;
+                    return movement;
                 }
             }
             if (map.getLocation(hero.getX(),hero.getY()).getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 

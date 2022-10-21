@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +25,7 @@ namespace GADE6112_POE_part_1
         }
         public TileType type;
 
-        public Tile()
+        public Tile(int x, int y, TileType type)
         {
             this.x = getX();
             this.y = getY();

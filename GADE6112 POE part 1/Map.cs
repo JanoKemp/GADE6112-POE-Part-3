@@ -23,9 +23,9 @@ namespace GADE6112_POE_part_1
         private Tile[,] land = new Tile[,] { };  // Come back and maybe make it TextBoxes
         private Enemy[] enemy;
         Item[] items;
-        Tile[,] visionArr;
+        
         Random randomGen = new Random();
-        Hero hero = new Hero(); // Hero object
+        Hero hero; // Hero object
         Tile north, south, west, east;
 
         private int horizontal, vertical, enemyNum, enemyX, enemyY, enemyGen, heroX, heroY;
@@ -46,7 +46,7 @@ namespace GADE6112_POE_part_1
             {
                 for (int y = 0; y < land.GetLength(1); y++)
                 {
-                    land[x, y] = new EmptyTile();
+                    land[x, y] = new EmptyTile(x,y);
                 }
             }
             for (int borderTnB = 0; borderTnB < vertical; borderTnB++) //Border top and bottom
@@ -69,9 +69,8 @@ namespace GADE6112_POE_part_1
 
 
             }
-            land[heroX, heroY] = Create(Tile.TileType.Hero);
-            hero.setX(heroX);
-            hero.setY(heroY);
+            Create(Tile.TileType.Hero);
+            
             //land[heroX,heroY].setTileType(Tile.TileType.Hero);
             enemy = new Enemy[enemyNum];
 
@@ -82,6 +81,7 @@ namespace GADE6112_POE_part_1
                 if (enemyGen == 1)
                 {
                     enemy[i] = (SwampCreature)Create(Tile.TileType.Enemy);
+                    enemy[i].setCurrentVision(land);
                     land[enemy[i].getX(), enemy[i].getY()] = (SwampCreature)Create(Tile.TileType.Enemy);
                     //land[enemy[i].getX(), enemy[i].getY()].setTileType(Tile.TileType.Enemy);
 
@@ -89,6 +89,7 @@ namespace GADE6112_POE_part_1
                 if (enemyGen == 2)
                 {
                     enemy[i] = (Mage)Create(Tile.TileType.Enemy);
+                    enemy[i].setCurrentVision(land);
                     land[enemy[i].getX(), enemy[i].getY()] = (Mage)Create(Tile.TileType.Enemy);
                     //land[enemy[i].getX(), enemy[i].getY()].setTileType(Tile.TileType.Enemy);
                 }
@@ -105,8 +106,8 @@ namespace GADE6112_POE_part_1
             {
                 items[c] = (Gold)Create(Tile.TileType.Gold);
             }
-            visionArr = land;
-            hero.setCurrentVision(visionArr);
+            hero.setCurrentVision(land);
+            
             
             UpdateVision();
         }
@@ -174,33 +175,34 @@ namespace GADE6112_POE_part_1
 
         public void UpdateVision() // Hero or Swampcreature is added into the params to gift Visions values and Character.Move.Example is written in to recieve moves 
         {
-            int x = hero.getX();
-            int y = enemy[1].getX();
-            north = land[hero.getX() - 1, hero.getY()]; // A new tile is created above the Character 
-            hero.setNorth(north);
-            south = land[hero.getX() + 1, hero.getY()];
-            hero.setSouth(south);
-            east = land[hero.getX(), hero.getY() + 1];
-            hero.setEast(east);
-            west = land[hero.getX(), hero.getY() - 1];
-            hero.setWest(west);
+            
+                
+                north = land[hero.getX() -1, hero.getY()]; // A new tile is created above the Character 
+                hero.setNorth(north);
+                south = land[hero.getX() + 1, hero.getY()];
+                hero.setSouth(south);
+                east = land[hero.getX(), hero.getY() + 1];
+                hero.setEast(east);
+                west = land[hero.getX(), hero.getY() - 1];
+                hero.setWest(west);
 
-            for (int i = 0; i < enemy.Length; i++)
-            {
-                north = land[enemy[i].getX() - 1, enemy[i].getY()]; // A new tile is created above the Character 
-                enemy[i].setNorth(north);
-                south = land[enemy[i].getX() + 1, enemy[i].getY()];
-                enemy[i].setSouth(south);
-                east = land[enemy[i].getX(), enemy[i].getY() + 1];
-                enemy[i].setEast(east);
-                west = land[enemy[i].getX(), enemy[i].getY() - 1];
-                enemy[i].setWest(west);
+                for (int i = 0; i < enemy.Length; i++)
+                {
+                    north = land[enemy[i].getX() - 1, enemy[i].getY()]; // A new tile is created above the Character 
+                    enemy[i].setNorth(north);
+                    south = land[enemy[i].getX() + 1, enemy[i].getY()];
+                    enemy[i].setSouth(south);
+                    east = land[enemy[i].getX(), enemy[i].getY() + 1];
+                    enemy[i].setEast(east);
+                    west = land[enemy[i].getX(), enemy[i].getY() - 1];
+                    enemy[i].setWest(west);
 
-            }
-          
+                }
 
+
+            
         }
-        private Tile Create(Tile.TileType type)// Creates Objects for the map
+    private Tile Create(Tile.TileType type)// Creates Objects for the map
         {
 
             enemyY = randomGen.Next(1, land.GetLength(1) - 1); // random X and Y generated
@@ -217,7 +219,7 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Enemy && enemyGen == 1) //Creates an enemy when called
             {
 
-                SwampCreature swampEn = new SwampCreature(); // Creates a new Enemy at the X and Y
+                SwampCreature swampEn = new SwampCreature(enemyX,enemyY); // Creates a new Enemy at the X and Y
                 swampEn.setTileType(Tile.TileType.Enemy);
                 swampEn.setX(enemyX); // Sets new X and Y for Creature 
                 swampEn.setY(enemyY);
@@ -246,7 +248,7 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Clear)
             {
 
-                EmptyTile empty = new EmptyTile();
+                EmptyTile empty = new EmptyTile(enemyX,enemyY);
                 empty.setTileType(Tile.TileType.Clear);
                 return empty;
 
@@ -254,7 +256,7 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Barrier)// Creates a new border at that X and Y
             {
 
-                Obstacle bush = new Obstacle(); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
+                Obstacle bush = new Obstacle(enemyX,enemyY); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
                 bush.setTileType(Tile.TileType.Barrier);
 
                 // Add Code to Create to create border
@@ -263,11 +265,8 @@ namespace GADE6112_POE_part_1
             }
             if (type == Tile.TileType.Hero) // Creates the Hero at the X and Y 
             {
-                Hero hero = new Hero();
-                hero.setTileType(Tile.TileType.Hero);
-                hero.setX(enemyX);
-                hero.setY(enemyY);
-                land[hero.getX(), hero.getY()] = hero;
+                hero = new Hero(enemyX, enemyY, 100,100,5);
+                land[enemyX, enemyY] = hero;
 
                 return hero; // Filler , fill with code to create hero 
             }

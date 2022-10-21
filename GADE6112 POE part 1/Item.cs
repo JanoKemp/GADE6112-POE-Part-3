@@ -8,11 +8,8 @@ namespace GADE6112_POE_part_1
 {
     abstract internal class Item : Tile
     {
-        public Item()
-        {
-
-        }
-        public Item(int x, int y) :base()
+       
+        public Item(int x, int y,TileType type) :base(x,y, type)
         {
             this.x = getX();// gets X and Y
             this.y = getY();

@@ -11,23 +11,11 @@ namespace GADE6112_POE_part_1
     {
          Random creatureMove = new Random();
         char enemySym; // Global variable to allow for the symbol to be gotten and returned to the main form
-        public SwampCreature() // Basic constructor that sets up every enemy with and X, Y , hp of 10 , damage of 1 , symbol of "E" Stated in TIle class
+        
+        public SwampCreature(int x , int y) :base (x,y,10,10,1,TileType.Enemy) // Allows for X and Y locations to set by programmer
         {
-            this.x = getX();
-            this.y = getY();
-            this.hp = 10;
-            this.damage = 1;
-            enemySym = getSymbols(1);
             
-            
-        }
-        public SwampCreature(int x , int y) // Allows for X and Y locations to set by programmer
-        {
-            this.x = getX();
-            this.y=getY();
-            this.hp = 10;
-            this.damage = 1;
-            enemySym = getSymbols(1);
+            //enemySym = getSymbols(1);
 
 
         }

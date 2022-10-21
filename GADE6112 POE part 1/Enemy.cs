@@ -10,7 +10,7 @@ namespace GADE6112_POE_part_1
     {
         protected Random enemyRand = new Random(); 
         
-        public Enemy()
+      /*  public Enemy()
         {
             //Sets enemy info
             this.x = getX();
@@ -19,8 +19,9 @@ namespace GADE6112_POE_part_1
             this.maxHp = getMaxHP();
             this.damage = getDamage();
         }
+      */
 
-        public Enemy(int x , int y, int hP, int maxHP, int damage) // Needs to call its symbol
+        public Enemy(int x , int y, int hP, int maxHp, int damage, TileType type) :base(x,y , TileType.Enemy,hP,maxHp,damage) // Needs to call its symbol
         {
            
         }
