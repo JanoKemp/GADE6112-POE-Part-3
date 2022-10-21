@@ -50,26 +50,7 @@ namespace GADE6112_POE_part_1
                     land[x, y] = new EmptyTile(x,y);
                 }
             }
-            for (int borderTnB = 0; borderTnB < vertical; borderTnB++) //Border top and bottom
-            {
-
-
-                land[borderTnB, 0] = (Obstacle)Create(Tile.TileType.Barrier);
-
-                land[borderTnB, horizontal] = (Obstacle)Create(Tile.TileType.Barrier);
-
-
-            }
-            for (int borderLnR = 0; borderLnR < horizontal + 1; borderLnR++) // Border Left and Right
-            {
-
-
-                land[0, borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
-                land[vertical, borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
-
-
-
-            }
+            
             land[heroX,heroY] = Create(Tile.TileType.Hero);
             
             
@@ -112,6 +93,26 @@ namespace GADE6112_POE_part_1
 
             
             UpdateVision();
+            for (int borderTnB = 0; borderTnB < vertical; borderTnB++) //Border top and bottom
+            {
+
+
+                land[borderTnB, 0] = (Obstacle)Create(Tile.TileType.Barrier);
+
+                land[borderTnB, horizontal] = (Obstacle)Create(Tile.TileType.Barrier);
+
+
+            }
+            for (int borderLnR = 0; borderLnR < horizontal + 1; borderLnR++) // Border Left and Right
+            {
+
+
+                land[0, borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
+                land[vertical, borderLnR] = (Obstacle)Create(Tile.TileType.Barrier);
+
+
+
+            }
         }
         #region Gets and setters
         internal Tile getLocation(int x, int y)
@@ -150,6 +151,10 @@ namespace GADE6112_POE_part_1
         public void setLand(Tile[,] land) // Come back and make textbox if issues
         {
             this.land = land;
+        }
+        public void setHero(Hero hero)
+        {
+            this.hero = hero;
         }
 
 
@@ -234,8 +239,15 @@ namespace GADE6112_POE_part_1
             }
             if (type == Tile.TileType.Hero) // Creates the Hero at the X and Y 
             {
+                
                 hero = new Hero(enemyX, enemyY, 110, 10, 5, Tile.TileType.Hero);
                 
+                hero.setX(enemyX);
+                hero.setY(enemyY);
+                hero.setHP(100);
+                hero.setMaxHP(100);
+                hero.setDamage(5);
+                hero.setTileType(Tile.TileType.Hero);
                 land[heroX, heroY] = hero;
 
                 return hero; // Filler , fill with code to create hero 
@@ -250,14 +262,15 @@ namespace GADE6112_POE_part_1
 
         public void UpdateVision() // Hero or Swampcreature is added into the params to gift Visions values and Character.Move.Example is written in to recieve moves 
         {
-            
+
+
 
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                   
-                    hero.currentVision[i, j] = land[hero.getX()-1+j, +hero.getY()-1+i];
+
+                    hero.currentVision[i, j] = land[hero.getX() - 1 + j, +hero.getY() - 1 + i];
                 }
             }
             for (int k = 0; k < enemy.Length; k++)
@@ -265,23 +278,24 @@ namespace GADE6112_POE_part_1
                 Enemy enemyArr = enemy[k];
                 if (enemyArr != null)
                 {
-                    int enemyX = enemyArr.getX() -1;
-                    int enemyY = enemyArr.getY() -1;
+                    int enemyX = enemyArr.getX() - 1;
+                    int enemyY = enemyArr.getY() - 1;
                     for (int j = 0; j < 3; j++)
                     {
                         for (int x = 0; x < 3; x++)
                         {
                             enemyArr.currentVision[j, x] = land[enemyX + x, enemyY + j];
-                            
+
                         }
                     }
                 }
             }
 
 
-            
+
+
         }
-   
+
 
         public Item GetItemAtPosition(int x, int y)
         {
