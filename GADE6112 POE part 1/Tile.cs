@@ -27,8 +27,8 @@ namespace GADE6112_POE_part_1
 
         public Tile(int x, int y, TileType type)
         {
-            this.x = getX();
-            this.y = getY();
+            this.x = x;
+            this.y = y;
             this.type = TileType.Clear;
             
 

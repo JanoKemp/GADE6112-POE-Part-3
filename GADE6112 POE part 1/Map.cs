@@ -25,8 +25,8 @@ namespace GADE6112_POE_part_1
         Item[] items;
         
         Random randomGen = new Random();
-        Hero hero; // Hero object
-        Tile north, south, west, east;
+        private Hero hero; // Hero object
+        
 
         private int horizontal, vertical, enemyNum, enemyX, enemyY, enemyGen, heroX, heroY;
 
@@ -34,13 +34,14 @@ namespace GADE6112_POE_part_1
 
         public Map(int minWidth, int maxWidth, int minHeight, int maxHeight, int minEnemy, int maxEnemy, int numGoldDrops)
         {
-
+            
             enemyNum = randomGen.Next(minEnemy, maxEnemy);
             horizontal = randomGen.Next(minWidth, maxWidth);//TOADD IF ISSUES: +1 because random gens stop 1 number before max. Eg if range is 0-9 then it will only calc between 0-8
             vertical = randomGen.Next(minHeight, maxHeight);
             land = new Tile[vertical + 1, horizontal + 1]; //one less than the map border for playable map. For borders to be done.
             heroY = randomGen.Next(1, land.GetLength(1) - 1); // random X and Y generated
             heroX = randomGen.Next(1, land.GetLength(0) - 1);
+           
 
             for (int x = 0; x < land.GetLength(0); x++)
             {
@@ -69,7 +70,8 @@ namespace GADE6112_POE_part_1
 
 
             }
-            Create(Tile.TileType.Hero);
+            land[heroX,heroY] = Create(Tile.TileType.Hero);
+            
             
             //land[heroX,heroY].setTileType(Tile.TileType.Hero);
             enemy = new Enemy[enemyNum];
@@ -106,8 +108,8 @@ namespace GADE6112_POE_part_1
             {
                 items[c] = (Gold)Create(Tile.TileType.Gold);
             }
-            hero.setCurrentVision(land);
-            
+
+
             
             UpdateVision();
         }
@@ -169,40 +171,7 @@ namespace GADE6112_POE_part_1
 
         #endregion
 
-
-
-
-
-        public void UpdateVision() // Hero or Swampcreature is added into the params to gift Visions values and Character.Move.Example is written in to recieve moves 
-        {
-            
-                
-                north = land[hero.getX() -1, hero.getY()]; // A new tile is created above the Character 
-                hero.setNorth(north);
-                south = land[hero.getX() + 1, hero.getY()];
-                hero.setSouth(south);
-                east = land[hero.getX(), hero.getY() + 1];
-                hero.setEast(east);
-                west = land[hero.getX(), hero.getY() - 1];
-                hero.setWest(west);
-
-                for (int i = 0; i < enemy.Length; i++)
-                {
-                    north = land[enemy[i].getX() - 1, enemy[i].getY()]; // A new tile is created above the Character 
-                    enemy[i].setNorth(north);
-                    south = land[enemy[i].getX() + 1, enemy[i].getY()];
-                    enemy[i].setSouth(south);
-                    east = land[enemy[i].getX(), enemy[i].getY() + 1];
-                    enemy[i].setEast(east);
-                    west = land[enemy[i].getX(), enemy[i].getY() - 1];
-                    enemy[i].setWest(west);
-
-                }
-
-
-            
-        }
-    private Tile Create(Tile.TileType type)// Creates Objects for the map
+        private Tile Create(Tile.TileType type)// Creates Objects for the map
         {
 
             enemyY = randomGen.Next(1, land.GetLength(1) - 1); // random X and Y generated
@@ -219,7 +188,7 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Enemy && enemyGen == 1) //Creates an enemy when called
             {
 
-                SwampCreature swampEn = new SwampCreature(enemyX,enemyY); // Creates a new Enemy at the X and Y
+                SwampCreature swampEn = new SwampCreature(enemyX, enemyY); // Creates a new Enemy at the X and Y
                 swampEn.setTileType(Tile.TileType.Enemy);
                 swampEn.setX(enemyX); // Sets new X and Y for Creature 
                 swampEn.setY(enemyY);
@@ -248,7 +217,7 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Clear)
             {
 
-                EmptyTile empty = new EmptyTile(enemyX,enemyY);
+                EmptyTile empty = new EmptyTile(enemyX, enemyY);
                 empty.setTileType(Tile.TileType.Clear);
                 return empty;
 
@@ -256,7 +225,7 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Barrier)// Creates a new border at that X and Y
             {
 
-                Obstacle bush = new Obstacle(enemyX,enemyY); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
+                Obstacle bush = new Obstacle(enemyX, enemyY); // X , Y and then Tile Enum type (eg Hero , Enemy , or Obstacle)
                 bush.setTileType(Tile.TileType.Barrier);
 
                 // Add Code to Create to create border
@@ -265,8 +234,9 @@ namespace GADE6112_POE_part_1
             }
             if (type == Tile.TileType.Hero) // Creates the Hero at the X and Y 
             {
-                hero = new Hero(enemyX, enemyY, 100,100,5);
-                land[enemyX, enemyY] = hero;
+                hero = new Hero(enemyX, enemyY, 110, 10, 5, Tile.TileType.Hero);
+                
+                land[heroX, heroY] = hero;
 
                 return hero; // Filler , fill with code to create hero 
             }
@@ -275,6 +245,43 @@ namespace GADE6112_POE_part_1
 
 
         }
+
+
+
+        public void UpdateVision() // Hero or Swampcreature is added into the params to gift Visions values and Character.Move.Example is written in to recieve moves 
+        {
+            
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                   
+                    hero.currentVision[i, j] = land[hero.getX()-1+j, +hero.getY()-1+i];
+                }
+            }
+            for (int k = 0; k < enemy.Length; k++)
+            {
+                Enemy enemyArr = enemy[k];
+                if (enemyArr != null)
+                {
+                    int enemyX = enemyArr.getX() -1;
+                    int enemyY = enemyArr.getY() -1;
+                    for (int j = 0; j < 3; j++)
+                    {
+                        for (int x = 0; x < 3; x++)
+                        {
+                            enemyArr.currentVision[j, x] = land[enemyX + x, enemyY + j];
+                            
+                        }
+                    }
+                }
+            }
+
+
+            
+        }
+   
 
         public Item GetItemAtPosition(int x, int y)
         {

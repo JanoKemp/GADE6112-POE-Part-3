@@ -6,45 +6,33 @@ using System.Threading.Tasks;
 
 namespace GADE6112_POE_part_1
 {
-    internal class Hero:Character 
+     class Hero:Character 
     {
         char heroSym; // Used to get the symbol from Class and then Get it to the mainform
-        
-       /* public Hero()
-        {
-            // Sets heros values
-            this.x = getX();
-            this.y = getY();
-            this.hp = 10;
-            this.maxHp = getHP();
-            this.damage = 2;
-            heroSym = getSymbols(0); // "H" symbol
-            
-        }
-       */
 
-        public Hero(int x, int y, int hp, int maxHp , int damage) : base(x,y,Tile.TileType.Hero,hp,maxHp,damage)
+
+        public Hero(int x, int y, int hP, int maxHp, int damage, TileType type) : base(x,y,Tile.TileType.Hero,hP,maxHp,damage)
         {
             
-            heroSym = getSymbols(0); // "H" symbol
+           // heroSym = getSymbols(0); // "H" symbol
         }
 
         override public Movement ReturnMove(Movement move = 0) // If tile is not empty automatically returns user to previous location
         {
             
-            if (move == Movement.up && north.getTileType() == Tile.TileType.Clear) // if Tile user is trying to go to is Empty then Move and accepted and carried out
+            if (move == Movement.up && this.currentVision[1,0].getTileType() != Tile.TileType.Clear && this.currentVision[1,0].getTileType() == Tile.TileType.Gold) // if Tile user is trying to go to is Empty then Move and accepted and carried out
             {
                 return Movement.up;
             }
-            if (move == Movement.down && south.getTileType() == Tile.TileType.Clear)
+            if (move == Movement.down && this.currentVision[1, 2].getTileType() != Tile.TileType.Clear && this.currentVision[1,2].getTileType() == Tile.TileType.Gold)
             {
                 return Movement.down;
             }
-            if (move == Movement.left && west.getTileType() == Tile.TileType.Clear)
+            if (move == Movement.left && this.currentVision[0, 1].getTileType() != Tile.TileType.Clear && this.currentVision[0,1].getTileType() == Tile.TileType.Gold)
             {
                 return Movement.left;
             }
-            if(move == Movement.right && east.getTileType() ==  Tile.TileType.Clear)
+            if(move == Movement.right && this.currentVision[2, 1].getTileType() != Tile.TileType.Clear && this.currentVision[2,1].getTileType() == Tile.TileType.Gold)
             {
                 return Movement.right;
             }

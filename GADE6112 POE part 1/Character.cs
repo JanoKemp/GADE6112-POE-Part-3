@@ -12,8 +12,7 @@ namespace GADE6112_POE_part_1
     {
         protected int hp, maxHp, damage, goldPurse;
 
-        public Tile [,] currentVision;  // Vision Array - stores N S E W for vision meant to be used to validate the movement
-        public Tile north, south, west, east;
+        public Tile [,] currentVision = new Tile[3,3];
 
         public enum Movement
         {
@@ -33,7 +32,7 @@ namespace GADE6112_POE_part_1
             this.damage = damage;
             this.maxHp = maxHp;
             this.type = getTileType();
-            currentVision = new Tile[7,9];
+            this.currentVision = new Tile[3,3];
 
         }
 
@@ -61,22 +60,7 @@ namespace GADE6112_POE_part_1
         {
             currentVision = vision;
         }
-        public void setNorth(Tile tile)
-        {
-            north = tile;
-        }
-        public void setSouth(Tile tile)
-        {
-            south = tile;
-        }
-        public void setEast(Tile tile)
-        {
-            east = tile;
-        }
-        public void setWest(Tile tile)
-        {
-            west = tile;
-        }
+        
         /* public void setVision(Tile[] vision)
          {
              this.vision = vision;
