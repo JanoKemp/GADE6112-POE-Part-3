@@ -256,11 +256,11 @@ namespace GADE6112_POE_part_1
 
 
         public void UpdateVision() // Hero or Swampcreature is added into the params to gift Visions values and Character.Move.Example is written in to recieve moves 
-        {
+        { // 0 - up , 1 - down , 2 - left , 3 right -----==== INDEX LOCATION ASSOCIATION
             if (hero.getX()  >= 1 && hero.getX()  <= land.GetLength(0)-1 && hero.getY()  >= 1 && hero.getY() <= land.GetLength(1) -1) // Check for issues at the end of the array
             {
-                hero.currentVision[0] = land[hero.getX() + 1, hero.getY()];
-                hero.currentVision[1] = land[hero.getX() - 1, hero.getY()];
+                hero.currentVision[0] = land[hero.getX() -1, hero.getY()];
+                hero.currentVision[1] = land[hero.getX() + 1, hero.getY()];
                 hero.currentVision[2] = land[hero.getX(), hero.getY() - 1];
                 hero.currentVision[3] = land[hero.getX(), hero.getY() + 1];
                 for (int i = 0; i < enemy.Length; i++)

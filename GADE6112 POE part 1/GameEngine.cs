@@ -42,7 +42,7 @@ namespace GADE6112_POE_part_1
                     map.setLand(LandArray);
                     movementDet = 1;
                     movement = true;
-                    LandArray[hero.getX(), hero.getY()].setTileType(Tile.TileType.Hero);
+                    
                     return movement;
                     
                 }
