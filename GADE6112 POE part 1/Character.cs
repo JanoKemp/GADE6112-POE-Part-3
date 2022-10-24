@@ -12,7 +12,7 @@ namespace GADE6112_POE_part_1
     {
         protected int hp, maxHp, damage, goldPurse;
 
-        public Tile [,] currentVision = new Tile[3,3];
+        public Tile[] currentVision; // Index locations | 0 - North , 1 - South , 2 - West , 3 - East |
 
         public enum Movement
         {
@@ -24,15 +24,15 @@ namespace GADE6112_POE_part_1
 
         }
         public Movement direction;
-       
 
-        public Character(int x, int y, Tile.TileType type , int hp, int maxHp, int damage) : base (x,y,type)// Must get symbol from Tile Class
+
+        public Character(int x, int y, Tile.TileType type, int hp, int maxHp, int damage) : base(x, y, type)// Must get symbol from Tile Class
         {
             this.hp = hp;
             this.damage = damage;
             this.maxHp = maxHp;
             this.type = getTileType();
-            this.currentVision = new Tile[3,3];
+            this.currentVision = new Tile[4];
 
         }
 
@@ -56,11 +56,11 @@ namespace GADE6112_POE_part_1
         {
             this.goldPurse = goldPurse;
         }
-        public void setCurrentVision(Tile [,] vision)
+        public void setCurrentVision(Tile[] vision)
         {
             currentVision = vision;
         }
-        
+
         /* public void setVision(Tile[] vision)
          {
              this.vision = vision;
@@ -69,10 +69,10 @@ namespace GADE6112_POE_part_1
         public int getHP() { return hp; }
         public int getMaxHP() { return maxHp; }
         public int getDamage() { return damage; }
-       // public Tile[] getVision() { return vision; }
+        // public Tile[] getVision() { return vision; }
         public Movement getMovement() { return direction; }
         public int getGoldPurse() { return goldPurse; }
-        public Tile [,] getCurrentVision() { return currentVision; } // gets the contents of the vision array
+        public Tile[] getCurrentVision() { return currentVision; } // gets the contents of the vision array
 
 
 
@@ -101,9 +101,9 @@ namespace GADE6112_POE_part_1
         }
         private int DistanceTo(Character target)//Wants the number of tiles in between hero and target
         {
-            
 
-            int targetX , targetY,distance; // Local variables created for assigning Target X and Y values to be checked against distance
+
+            int targetX, targetY, distance; // Local variables created for assigning Target X and Y values to be checked against distance
             targetX = target.getX();
             targetY = target.getY();
             if (targetX > x && targetY > y) // Ensures distance cannot be negative
@@ -113,48 +113,53 @@ namespace GADE6112_POE_part_1
             }
             if (targetX < x && targetY < y)
             {
-                distance = (x + y- (targetX + targetY));
+                distance = (x + y - (targetX + targetY));
                 return distance;
             }
             else
                 distance = 0;
-                    return distance;
+            return distance;
 
-                //Calculate distance to a certain grid
+            //Calculate distance to a certain grid
         }
-        public void Move(Movement direction) //Implementation of movement by changing X and Y values for each character
+        public void Move(Movement direction, Character character) //Implementation of movement by changing X and Y values for each character
         {
             int currentX;
             int currentY;
-            currentX = getX();
-            currentY = getY();
-            if ( direction == Movement.up)
+            currentX = character.getX();
+            currentY = character.getY();
+            if (direction == Movement.up)
             {
-                currentX = currentX - 1; 
+                currentX = currentX - 1;
+                character.setX(currentX);
             }
             if (direction == Movement.down)
             {
-                currentX = currentX  + 1;
+                currentX = currentX + 1;
+                character.setX(currentX);
             }
-            if(direction == Movement.left)
+            if (direction == Movement.left)
             {
                 currentY = currentY - 1;
+                character.setY(currentY);
             }
             if (direction == Movement.right)
             {
                 currentY = currentY + 1;
+                character.setY(currentY);
             }
             else
                 direction = Movement.noMovement; // No movement , used for mage class as it never moves.
-            
-           
+
+
             //Modify to be able to move left right up or down for both the x and the y later use when buttons are added
         }
-        public abstract Movement ReturnMove(Movement direction = 0);
 
-        public abstract override string ToString();
+
+        public abstract Movement ReturnMove(Movement move = 0);
         
-       
+
+
 
         public bool isDead(Hero hero , Enemy enemy) // Checks the Heros Hp and Enemies Hp and returns a Bool value based on if statement.
         {

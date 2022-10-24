@@ -11,7 +11,7 @@ namespace GADE6112_POE_part_1
         
         Map mapLand;
         GameEngine gameEngine = new GameEngine();
-        
+        Hero hero;
         Tile[,] landArray;
         Item[] items;
         Enemy[] enemyArr;
@@ -23,7 +23,7 @@ namespace GADE6112_POE_part_1
         private void mainForm_Load(object sender, EventArgs e)
         {
             mapLand = gameEngine.getMap();
-
+            hero = mapLand.getHero();
             landArray = mapLand.getLand();
             MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
             MapGeneration();
@@ -183,7 +183,7 @@ namespace GADE6112_POE_part_1
                 for (int y = 0; y < landArray.GetLength(1); y++)
                 {
                      enemyArr = mapLand.getEnemies();
-                    //textBoxes[x, y].Text = landArray[x, y].getTileType().ToString() ;// USED TO CHECK TILE TYPES OF TEXTBOXES 
+                   // textBoxes[x, y].Text = landArray[x, y].getTileType().ToString() ;// USED TO CHECK TILE TYPES OF TEXTBOXES 
                     landArray[x, y].getTileType();
                     if (landArray[x, y].getTileType() == Tile.TileType.Enemy)
                     {
@@ -258,7 +258,7 @@ namespace GADE6112_POE_part_1
                 }
             }
         }
-        public void CheckMovement()
+        public void UpdateMap()
         {
             for (int x = 0; x < mapLand.getLand().GetLength(0); x++)
             {
@@ -319,38 +319,46 @@ namespace GADE6112_POE_part_1
 
         private void buttonUp_Click(object sender, EventArgs e)
         {
-
+            hero.setMovement(Character.Movement.up);
             gameEngine.MovePlayer(Character.Movement.up); // Calls Move player method which changes the X and Y accordingly 
             gameEngine.getMap().UpdateVision(); // Updates vision based on new movement
-            CheckMovement();
+            UpdateMap();
+            /*for (int x = 0; x < landArray.GetLength(0); x++)
+            {
+                for (int y = 0; y < landArray.GetLength(1); y++)
+                {
+                    textBoxes[x,y].Text = landArray[x, y].getTileType().ToString();// USED TO CHECK TILE TYPES OF TEXTBOXES 
+                }
+            }
+            */
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
+            hero.setMovement(Character.Movement.left);
             gameEngine.MovePlayer(Character.Movement.left);
             gameEngine.getMap().UpdateVision();
-            CheckMovement();
+            UpdateMap();
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
         {
-            
+            hero.setMovement(Character.Movement.right);
             gameEngine.MovePlayer(Character.Movement.right);
-            
             gameEngine.getMap().UpdateVision();
-
-
-            CheckMovement();
+            UpdateMap();
 
         }
 
         private void buttonDown_Click(object sender, EventArgs e)
         {
-            CheckMovement();
-            
+            hero.setMovement(Character.Movement.down);
             gameEngine.MovePlayer(Character.Movement.down);
-           // gameEngine.getMap().UpdateVision(hero, Character.Movement.down);
-           
+             gameEngine.getMap().UpdateVision();
+            UpdateMap();
+            
+
+
 
         }
 

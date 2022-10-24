@@ -27,44 +27,58 @@ namespace GADE6112_POE_part_1
         {
             Hero hero;
             hero = map.getHero();
-            map.getLocation(hero.getX(), hero.getY()).setTileType(Tile.TileType.Clear); // Gets the current location of the hero and sets the tile type to Clear
+            Tile [, ] LandArray = map.getLand();
+           // LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(),hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
             bool movement = true;
-            if (hero.ReturnMove(hero.getMovement()) == direction) // Return move checks if movement is valid with Vision array , getMovement gets the players input
-            {
+            
+           if (hero.ReturnMove(hero.getMovement()) == direction) // Return move checks if movement is valid with Vision array , getMovement gets the players input
+           {
                
                 if (direction == Character.Movement.down)
                 {
+                    LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(), hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
                     hero.setX(hero.getX() + 1); //Changes the Y position of the hero to one up from it current location
+                    LandArray[hero.getX(), hero.getY()] = hero;
+                    map.setLand(LandArray);
+                    movementDet = 1;
                     movement = true;
+                    LandArray[hero.getX(), hero.getY()].setTileType(Tile.TileType.Hero);
                     return movement;
                     
                 }
                 if (direction == Character.Movement.up)
                 {
+                    LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(), hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
                     hero.setX(hero.getX() - 1);
+                    LandArray[hero.getX(), hero.getY()] = hero;
                     movementDet = 1;
+                    map.setLand(LandArray);
                     movement = true;
                     return movement;
                 }
                 if (direction == Character.Movement.left)
                 {
+                    LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(), hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
                     hero.setY(hero.getY() - 1);
+                    LandArray[hero.getX(), hero.getY()] = hero;
                     movementDet = 1;
+                    map.setLand(LandArray);
                     movement = true;
                     return movement;
                 }
                 if (direction == Character.Movement.right)
                 {
+                    LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(), hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
                     hero.setY(hero.getY() + 1);
+                    LandArray[hero.getX(), hero.getY()] = hero;
                     movementDet = 1;
+                    map.setLand(LandArray);
                     movement = true;
                     return movement;
                 }
                 if (direction == Character.Movement.noMovement)
                 {
-                    hero.setX(hero.getX());
-                    hero.setY(hero.getY());
-                    
+                   
                     movementDet = 0;
                     movement = false;
                     return movement;
@@ -80,8 +94,8 @@ namespace GADE6112_POE_part_1
 
                 hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY()));
             }
-            
-            map.getLocation(hero.getX(), hero.getY()).setTileType(Tile.TileType.Hero); // Gets the new position of the hero and sets its Tile type to Clear ( empty) 
+
+            LandArray[hero.getX(), hero.getY()].setTileType(Tile.TileType.Hero); // Gets the new position of the hero and sets its Tile type to Clear ( empty) 
 
             // map.setLand(map.getLand(map.getTileType(Tile.TileType.Hero))); -------> sets new hero location to tile type hero
             //This updates the move is the movement is valid via button presses
@@ -98,7 +112,7 @@ namespace GADE6112_POE_part_1
                     if (enemyArr[i] != mage) // Mages cannot move therefore they must not use the following code
                     {
                         enemyDirection = swamp.ReturnMove(); // Checks if movement is valid against Vision array
-                        enemyArr[i].Move(enemyDirection); //Moves the X and Y location
+                        enemyArr[i].Move(enemyDirection, enemyArr[i]); //Moves the X and Y location
                         map.UpdateVision();//Updates the vision array of the enemy at the new location
                         
                     }

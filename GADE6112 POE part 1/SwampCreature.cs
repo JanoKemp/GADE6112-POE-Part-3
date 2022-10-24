@@ -24,19 +24,19 @@ namespace GADE6112_POE_part_1
         {
             int moveDirection; // Local variable used for assigning random direction
             moveDirection = creatureMove.Next(4); // randomly generates a number which is then correlated with a direction.
-            if (moveDirection == 0 && currentVision[x,y - 1].getTileType() == TileType.Clear ) // if random num is 0 then get tiles around Character and their respective Tiletypes. And if they are empty then move in the returned direction.
+            if (moveDirection == 0 && currentVision[0].getTileType() == TileType.Clear ) // if random num is 0 then get tiles around Character and their respective Tiletypes. And if they are empty then move in the returned direction.
             {
                 return Movement.up;
             }
-            if(moveDirection == 1 && currentVision[x,y + 1].getTileType() == TileType.Clear )
+            if(moveDirection == 1 && currentVision[1].getTileType() == TileType.Clear )
             {
                 return Movement.down;
             }
-            if(moveDirection == 2 && currentVision[x - 1,y].getTileType() == TileType.Clear )
+            if(moveDirection == 2 && currentVision[2].getTileType() == TileType.Clear )
             {
                 return Movement.left;
             }
-            if(moveDirection == 3 && currentVision[x + 1,y].getTileType() == TileType.Clear )
+            if(moveDirection == 3 && currentVision[3].getTileType() == TileType.Clear )
             {
                 return Movement.right;
             }
