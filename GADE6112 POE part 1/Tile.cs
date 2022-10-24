@@ -24,12 +24,13 @@ namespace GADE6112_POE_part_1
 
         }
         public TileType type;
+       
 
         public Tile(int x, int y, TileType type)
         {
             this.x = x;
             this.y = y;
-            this.type = TileType.Clear;
+            this.type = type;
             
 
         }
