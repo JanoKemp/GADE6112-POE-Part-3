@@ -322,6 +322,7 @@ namespace GADE6112_POE_part_1
             hero.setMovement(Character.Movement.up);
             gameEngine.MovePlayer(Character.Movement.up); // Calls Move player method which changes the X and Y accordingly 
             gameEngine.getMap().UpdateVision(); // Updates vision based on new movement
+            gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
             /*for (int x = 0; x < landArray.GetLength(0); x++)
@@ -339,6 +340,7 @@ namespace GADE6112_POE_part_1
             hero.setMovement(Character.Movement.left);
             gameEngine.MovePlayer(Character.Movement.left);
             gameEngine.getMap().UpdateVision();
+            gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
         }
@@ -348,6 +350,7 @@ namespace GADE6112_POE_part_1
             hero.setMovement(Character.Movement.right);
             gameEngine.MovePlayer(Character.Movement.right);
             gameEngine.getMap().UpdateVision();
+            gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
         }
@@ -357,6 +360,7 @@ namespace GADE6112_POE_part_1
             hero.setMovement(Character.Movement.down);
             gameEngine.MovePlayer(Character.Movement.down);
              gameEngine.getMap().UpdateVision();
+            gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
 
