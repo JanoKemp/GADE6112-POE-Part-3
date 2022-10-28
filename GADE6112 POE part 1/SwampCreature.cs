@@ -20,28 +20,36 @@ namespace GADE6112_POE_part_1
 
         }
         public char getEnemySym() { return enemySym; } // Fetches enemy symbol to be used when outputting to the form
-        override public Movement ReturnMove(Movement move = 0) // If movement is invalid then the movement is returned to its original
+        override public Movement ReturnMove(Movement move) // If movement is invalid then the movement is returned to its original
         {
             int moveDirection; // Local variable used for assigning random direction
-            moveDirection = creatureMove.Next(4); // randomly generates a number which is then correlated with a direction.
-            if (moveDirection == 0 && currentVision[0].getTileType() == TileType.Clear ) // if random num is 0 then get tiles around Character and their respective Tiletypes. And if they are empty then move in the returned direction.
+            moveDirection = creatureMove.Next(5); // randomly generates a number which is then correlated with a direction.
+            if (moveDirection == 0 && currentVision[0].getTileType() == Tile.TileType.Clear || moveDirection == 0 && currentVision[0].getTileType() == Tile.TileType.Gold) // if random num is 0 then get tiles around Character and their respective Tiletypes. And if they are empty then move in the returned direction.
             {
+                setMovement(Movement.up);
                 return Movement.up;
+
             }
-            if(moveDirection == 1 && currentVision[1].getTileType() == TileType.Clear )
+            if (moveDirection == 1 && currentVision[1].getTileType() == Tile.TileType.Clear || moveDirection == 1 && currentVision[1].getTileType() == Tile.TileType.Gold)
             {
+                setMovement(Movement.down);
                 return Movement.down;
             }
-            if(moveDirection == 2 && currentVision[2].getTileType() == TileType.Clear )
+            if (moveDirection == 2 && currentVision[2].getTileType() == Tile.TileType.Clear || moveDirection == 2 && currentVision[2].getTileType() == Tile.TileType.Gold)
             {
+                setMovement(Movement.left);
                 return Movement.left;
             }
-            if(moveDirection == 3 && currentVision[3].getTileType() == TileType.Clear )
-            {
+            if  (moveDirection == 3 && currentVision[3].getTileType() == Tile.TileType.Clear || moveDirection == 3 && currentVision[3].getTileType() == Tile.TileType.Gold)
+                {
+                setMovement(Movement.right);
                 return Movement.right;
             }
-           else
+            else 
+            {
+                setMovement(Movement.noMovement);
                 return Movement.noMovement;
+            }
         }
 
     }

@@ -265,10 +265,10 @@ namespace GADE6112_POE_part_1
                 hero.currentVision[3] = land[hero.getX(), hero.getY() + 1];
                 for (int i = 0; i < enemy.Length; i++)
                 {
-                    enemy[i].currentVision[0] = land[hero.getX() + 1, hero.getY()];
-                    enemy[i].currentVision[1] = land[hero.getX() - 1, hero.getY()];
-                    enemy[i].currentVision[2] = land[hero.getX(), hero.getY() - 1];
-                    enemy[i].currentVision[3] = land[hero.getX(), hero.getY() + 1];
+                    enemy[i].currentVision[0] = land[enemy[i].getX() - 1, enemy[i].getY()];
+                    enemy[i].currentVision[1] = land[enemy[i].getX() + 1, enemy[i].getY()];
+                    enemy[i].currentVision[2] = land[enemy[i].getX(), enemy[i].getY() - 1];
+                    enemy[i].currentVision[3] = land[enemy[i].getX(), enemy[i].getY() + 1];
 
                 }
             }
@@ -291,11 +291,11 @@ namespace GADE6112_POE_part_1
                 }
                 else
                 {
-                    items[g] = null; // sets array location to null if X and Y dont add up
+                     // sets array location to null if X and Y dont add up
                     return items[g];
                 }
             }
-            return GetItemAtPosition((int)x, (int)y);
+            return null;
         }
 
 
