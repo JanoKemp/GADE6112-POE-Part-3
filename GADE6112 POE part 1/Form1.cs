@@ -323,6 +323,7 @@ namespace GADE6112_POE_part_1
             gameEngine.MovePlayer(Character.Movement.up); // Calls Move player method which changes the X and Y accordingly 
             gameEngine.getMap().UpdateVision(); // Updates vision based on new movement
             UpdateMap();
+            richTextBox1.Text = hero.ToString();
             /*for (int x = 0; x < landArray.GetLength(0); x++)
             {
                 for (int y = 0; y < landArray.GetLength(1); y++)
@@ -339,6 +340,7 @@ namespace GADE6112_POE_part_1
             gameEngine.MovePlayer(Character.Movement.left);
             gameEngine.getMap().UpdateVision();
             UpdateMap();
+            richTextBox1.Text = hero.ToString();
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
@@ -347,7 +349,7 @@ namespace GADE6112_POE_part_1
             gameEngine.MovePlayer(Character.Movement.right);
             gameEngine.getMap().UpdateVision();
             UpdateMap();
-
+            richTextBox1.Text = hero.ToString();
         }
 
         private void buttonDown_Click(object sender, EventArgs e)
@@ -356,7 +358,8 @@ namespace GADE6112_POE_part_1
             gameEngine.MovePlayer(Character.Movement.down);
              gameEngine.getMap().UpdateVision();
             UpdateMap();
-            
+            richTextBox1.Text = hero.ToString();
+
 
 
 

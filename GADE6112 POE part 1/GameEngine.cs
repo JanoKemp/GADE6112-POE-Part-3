@@ -38,6 +38,11 @@ namespace GADE6112_POE_part_1
                 {
                     LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(), hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
                     hero.setX(hero.getX() + 1); //Changes the Y position of the hero to one up from it current location
+                    if (LandArray[hero.getX(),hero.getY()].getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+                    {
+
+                        hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY())); // Adds item to player after given movement based on its location
+                    }
                     LandArray[hero.getX(), hero.getY()] = hero;
                     map.setLand(LandArray);
                     movementDet = 1;
@@ -50,6 +55,11 @@ namespace GADE6112_POE_part_1
                 {
                     LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(), hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
                     hero.setX(hero.getX() - 1);
+                    if (map.getLocation(hero.getX(), hero.getY()).getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+                    {
+
+                        hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY())); // Adds item to player after given movement based on its location
+                    }
                     LandArray[hero.getX(), hero.getY()] = hero;
                     movementDet = 1;
                     map.setLand(LandArray);
@@ -60,6 +70,11 @@ namespace GADE6112_POE_part_1
                 {
                     LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(), hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
                     hero.setY(hero.getY() - 1);
+                    if (map.getLocation(hero.getX(), hero.getY()).getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+                    {
+
+                        hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY())); // Adds item to player after given movement based on its location
+                    }
                     LandArray[hero.getX(), hero.getY()] = hero;
                     movementDet = 1;
                     map.setLand(LandArray);
@@ -70,6 +85,11 @@ namespace GADE6112_POE_part_1
                 {
                     LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(), hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
                     hero.setY(hero.getY() + 1);
+                    if (map.getLocation(hero.getX(), hero.getY()).getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+                    {
+
+                        hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY())); // Adds item to player after given movement based on its location
+                    }
                     LandArray[hero.getX(), hero.getY()] = hero;
                     movementDet = 1;
                     map.setLand(LandArray);

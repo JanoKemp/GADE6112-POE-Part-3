@@ -291,11 +291,11 @@ namespace GADE6112_POE_part_1
                 }
                 else
                 {
-                    items[g] = null; // sets array location to null if X and Y dont add up
+                     // sets array location to null if X and Y dont add up
                     return items[g];
                 }
             }
-            return GetItemAtPosition((int)x, (int)y);
+            return null;
         }
 
 

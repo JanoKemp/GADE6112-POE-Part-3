@@ -184,7 +184,8 @@ namespace GADE6112_POE_part_1
             
             if (item.getTileType() == Tile.TileType.Gold)
             {
-                Gold item2 = new Gold(x, y);
+                item = new Gold(item.getX(),item.getY());
+                Gold item2  = new Gold(item.getX(),item.getY());
                 int goldPickUp = item2.getGoldDrop();
                 goldPurse = goldPurse + goldPickUp;
             }
