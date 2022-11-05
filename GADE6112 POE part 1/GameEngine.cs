@@ -12,13 +12,14 @@ namespace GADE6112_POE_part_1
     internal class GameEngine 
     {
         private Map map;
+        private Shop shop;
         
         public int movementDet = 0; // increments if the hero moves / used to tell enemies when to move
         public GameEngine()
         {
             
            map = new Map(4,7,6,9,3,6,3); // Creates a map with overloaded constructor
-            
+           
             
          
         }
