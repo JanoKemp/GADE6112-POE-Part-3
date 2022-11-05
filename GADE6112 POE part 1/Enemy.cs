@@ -29,7 +29,7 @@ namespace GADE6112_POE_part_1
         
         public override string ToString()
         {
-            String enemyInfo = "Enemy at [" + x + "," + y + "] (" + damage + ")";
+            String enemyInfo = "Enemy at [" + x + "," + y + "] (" + damage + ")" + "current HP: [" + hp + "]" + "GOLD--> (" + goldPurse+")" ;
             return enemyInfo; // Displays enemy information to be called to the Rich textbox
         }
     }

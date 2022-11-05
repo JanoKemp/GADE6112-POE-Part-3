@@ -99,6 +99,7 @@
             this.buttonAttack = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.LoadBtn = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBox00
@@ -711,7 +712,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(539, 39);
+            this.richTextBox1.Location = new System.Drawing.Point(602, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(183, 204);
             this.richTextBox1.TabIndex = 123;
@@ -750,11 +751,21 @@
             this.LoadBtn.UseVisualStyleBackColor = true;
             this.LoadBtn.Click += new System.EventHandler(this.LoadBtn_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(451, 56);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(128, 23);
+            this.comboBox1.TabIndex = 127;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.LoadBtn);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.buttonAttack);
@@ -907,5 +918,6 @@
         private Button buttonAttack;
         private Button SaveBtn;
         private Button LoadBtn;
+        private ComboBox comboBox1;
     }
 }

@@ -78,17 +78,17 @@ namespace GADE6112_POE_part_1
 
         public virtual void Attack(Character target) //Used to attack enemies
         {
-            target.hp -= hp;
-            /*int targetHp, heroDamage;
+            //target.hp -= hp;
+            int targetHp, heroDamage;
             targetHp = target.getHP(); // gets target Hp 
-            heroDamage = hero.getDamage();
+            heroDamage = 5;
             CheckRange(target);//Checks if target is in range for an attack
             if(CheckRange(target) == true)//when target is in range
             {
                 targetHp = targetHp - heroDamage; // Enemy health - damage
                 target.setHP(targetHp);
             }
-            */
+            
         }
         public virtual bool CheckRange(Character target)//add target
         {
@@ -166,10 +166,15 @@ namespace GADE6112_POE_part_1
             int heroHp = hero.getHP();
             int enemyHp = enemy.getHP();
             bool dead = false;
-            if (heroHp <= 0 || enemyHp <= 0)
+            if (heroHp <= 0 )
             {
                 dead = true;
                 hero.setTileType(Tile.TileType.Clear);
+            }
+            if (enemyHp <= 0)
+            {
+                dead = true;
+                enemy.setTileType(Tile.TileType.Clear);
             }
             else
             {
