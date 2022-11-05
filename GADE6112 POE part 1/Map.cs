@@ -241,7 +241,7 @@ namespace GADE6112_POE_part_1
             if (type == Tile.TileType.Hero) // Creates the Hero at the X and Y 
             {
                 
-                hero = new Hero(enemyX, enemyY, 110, 10, 5, Tile.TileType.Hero);
+                hero = new Hero(enemyX, enemyY, 100, 100, 5, Tile.TileType.Hero);
 
                 land[hero.getX(),hero.getY()] = hero;
 

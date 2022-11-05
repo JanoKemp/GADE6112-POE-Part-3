@@ -135,7 +135,7 @@ namespace GADE6112_POE_part_1
             {
                 movement = true;
                
-                for (int i = 0; i < map.getEnemies().GetLength(0); i++)
+                for (int i = 0; i < enemyArr.Length; i++)
                 {
                     if (enemyArr[i].GetType() != typeof(Mage)) // Mages cannot move therefore they must not use the following code
                     {

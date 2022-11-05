@@ -196,12 +196,12 @@ namespace GADE6112_POE_part_1
                             {
                                 textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "SC";// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
                                 // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
-                                //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
                             }
                             if (enemyArr[i].GetType() == typeof(Mage))
                             {
                                 textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "M";
-                               // richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
                                 // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
                             }
                           
@@ -209,7 +209,7 @@ namespace GADE6112_POE_part_1
                         }
                        
                         
-                            richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr.ToString();
+                            //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[].ToString();
                         
 
                     }
@@ -325,6 +325,14 @@ namespace GADE6112_POE_part_1
             gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
+            comboBox1.Items.Clear();//Resets combo Box to not cont add same items
+            for (int i = 0; i < enemyArr.Length; i++) //loops through enemyArr
+            {
+                if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                {
+                    comboBox1.Items.Add(enemyArr[i].ToString()); // Adds Enemies within range to ComboBox
+                }
+            }
             /*for (int x = 0; x < landArray.GetLength(0); x++)
             {
                 for (int y = 0; y < landArray.GetLength(1); y++)
@@ -340,9 +348,18 @@ namespace GADE6112_POE_part_1
             hero.setMovement(Character.Movement.left);
             gameEngine.MovePlayer(Character.Movement.left);
             gameEngine.getMap().UpdateVision();
+            
             gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
+            comboBox1.Items.Clear();//Resets combo Box to not cont add same items
+            for (int i = 0; i < enemyArr.Length; i++)
+            {
+                if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                {
+                    comboBox1.Items.Add(enemyArr[i].ToString());
+                }
+            }
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
@@ -353,6 +370,14 @@ namespace GADE6112_POE_part_1
             gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
+            comboBox1.Items.Clear();//Resets combo Box to not cont add same items
+            for (int i = 0; i < enemyArr.Length; i++)
+            {
+                if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                {
+                    comboBox1.Items.Add(enemyArr[i].ToString());
+                }
+            }
         }
 
         private void buttonDown_Click(object sender, EventArgs e)
@@ -363,7 +388,14 @@ namespace GADE6112_POE_part_1
             gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
-
+            comboBox1.Items.Clear();//Resets combo Box to not cont add same items
+            for (int i = 0; i < enemyArr.Length; i++)
+            {
+                if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                {
+                    comboBox1.Items.Add(enemyArr[i].ToString());
+                }
+            }
 
 
 
@@ -376,18 +408,22 @@ namespace GADE6112_POE_part_1
 
         private void buttonAttack_Click(object sender, EventArgs e)
         {
-            /*if (hero.CheckRange(creature) == true) // Checks if creature is within range
+            for (int i = 0; i < enemyArr.Length; i++)
             {
-                hero.Attack(creature); // Creature hp - hero damage. Then sets new Creature hp
+                if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                {
+                    hero.Attack(enemyArr[i]); // Creature hp - hero damage. Then sets new Creature hp
+                    enemyArr[i].isDead(hero, enemyArr[i]);
+                }
             }
             for (int i = 0; i < enemyArr.Length; i++)
             {
-                richTextBox1.Text =  " \n "+ enemyArr[i].ToString();
+                richTextBox1.Text =  hero.ToString() +" \n "+ enemyArr[i].ToString();
             }
-            gameEngine.EnemyAttack(creature.CheckRange(hero), hero, creature);
-            gameEngine.EnemyAttack(mage.CheckRange(hero), hero, mage);
+            //gameEngine.EnemyAttack(creature.CheckRange(hero), hero, creature);
+            //gameEngine.EnemyAttack(mage.CheckRange(hero), hero, mage);
 
-            */
+            
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
@@ -404,6 +440,11 @@ namespace GADE6112_POE_part_1
             EnemyCreation();
             HeroCreation();
             GoldCreation();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
