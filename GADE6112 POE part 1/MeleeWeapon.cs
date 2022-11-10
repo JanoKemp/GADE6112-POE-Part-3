@@ -52,6 +52,7 @@ namespace GADE6112_POE_part_1
             else return meleeInfo;
         }
         override public int getWeaponRange() { return 1; }
+        
 
     }
 }

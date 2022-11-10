@@ -11,10 +11,13 @@ namespace GADE6112_POE_part_1
         protected int damage, range, durability, cost;
         protected string weaponType;
 
-        public Weapon(int x , int y , Tile.TileType type) : base (x, y, Tile.TileType.Weapon)
+        public Weapon(int x , int y , Tile.TileType type) : base (x, y, Tile.TileType.Weapon) // Learn how to use optional params
         {
-
+            this.x = x;
+            this.y = y;
+            
         }
+     
         public int getWeaponDamage() { return damage; }
         public virtual int getWeaponRange() { return range; } // Set as virtual to be later overridden
         public int getWeaponDurability() { return durability; }
