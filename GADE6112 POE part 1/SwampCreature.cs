@@ -14,9 +14,9 @@ namespace GADE6112_POE_part_1
         
         public SwampCreature(int x , int y) :base (x,y,10,10,1,TileType.Enemy) // Allows for X and Y locations to set by programmer
         {
-            
-            //enemySym = getSymbols(1);
 
+            //enemySym = getSymbols(1);
+            weapon = new MeleeWeapon(MeleeWeapon.Types.Dagger);
 
         }
         public char getEnemySym() { return enemySym; } // Fetches enemy symbol to be used when outputting to the form

@@ -11,6 +11,7 @@ namespace GADE6112_POE_part_1
     internal abstract class Character : Tile
     {
         protected int hp, maxHp, damage, goldPurse;
+        protected Weapon weapon;
 
         public Tile[] currentVision; // Index locations | 0 - North , 1 - South , 2 - West , 3 - East |
 
@@ -60,7 +61,7 @@ namespace GADE6112_POE_part_1
         {
             currentVision = vision;
         }
-
+        
         /* public void setVision(Tile[] vision)
          {
              this.vision = vision;
@@ -73,26 +74,12 @@ namespace GADE6112_POE_part_1
         public Movement getMovement() { return direction; }
         public int getGoldPurse() { return goldPurse; }
         public Tile[] getCurrentVision() { return currentVision; } // gets the contents of the vision array
+        public Weapon getWeapon() { return weapon; } // Fetches the characters current weapon
 
-
-
-        public virtual void Attack(Character target) //Used to attack enemies
-        {
-            //target.hp -= hp;
-            int targetHp, heroDamage;
-            targetHp = target.getHP(); // gets target Hp 
-            heroDamage = 5;
-            CheckRange(target);//Checks if target is in range for an attack
-            if(CheckRange(target) == true)//when target is in range
-            {
-                targetHp = targetHp - heroDamage; // Enemy health - damage
-                target.setHP(targetHp);
-            }
-            
-        }
+       
         public virtual bool CheckRange(Character target)//add target
         {
-            if (DistanceTo(target) <= 2)// if distance to target is less than 2(max range) then returns true(is within range)
+            if (DistanceTo(target) < 2)// if distance to target is less than 2(max range) then returns true(is within range)
             {
                 return true;
             }
@@ -106,6 +93,7 @@ namespace GADE6112_POE_part_1
             int targetX, targetY, distance; // Local variables created for assigning Target X and Y values to be checked against distance
             targetX = target.getX();
             targetY = target.getY();
+
             if (targetX > x && targetY > y) // Ensures distance cannot be negative
             {
                 distance = (targetX + targetY) - (x + y); // Adds X and Y of each object and then subtracts from the bigger X and Y. Gives a distance to be used , later for checking
@@ -121,6 +109,20 @@ namespace GADE6112_POE_part_1
             return distance;
 
             //Calculate distance to a certain grid
+        }
+        public virtual void Attack(Character target) //Used to attack enemies
+        {
+            //target.hp -= hp;
+            int targetHp;
+            targetHp = target.getHP(); // gets target Hp 
+
+            CheckRange(target);//Checks if target is in range for an attack
+            if (CheckRange(target) == true)//when target is in range
+            {
+                targetHp = targetHp - damage; // Enemy health - damage
+                target.setHP(targetHp);
+            }
+
         }
         public void Move(Movement direction, Character character) //Implementation of movement by changing X and Y values for each character
         {
@@ -161,39 +163,40 @@ namespace GADE6112_POE_part_1
 
 
 
-        public bool isDead(Hero hero , Enemy enemy) // Checks the Heros Hp and Enemies Hp and returns a Bool value based on if statement.
+        public bool isDead() // Checks the Heros Hp and Enemies Hp and returns a Bool value based on if statement.
         {
-            int heroHp = hero.getHP();
-            int enemyHp = enemy.getHP();
-            bool dead = false;
-            if (heroHp <= 0 )
-            {
-                dead = true;
-                hero.setTileType(Tile.TileType.Clear);
-            }
-            if (enemyHp <= 0)
-            {
-                dead = true;
-                enemy.setTileType(Tile.TileType.Clear);
-            }
-            else
-            {
-                dead = false;
 
+            if (hp <= 0)
+            {
+                setTileType(Tile.TileType.Clear);
+                return true;
             }
-            return dead;
-            
+            else return false;
         }
-        public void PickUp(Item item) // Check if is correct ( Question 3.2)
+        public void PickUp(Item item) 
         {
             
             if (item.getTileType() == Tile.TileType.Gold)
             {
+                Gold gold = (Gold)item;
+                goldPurse = goldPurse + gold.getGoldDrop();
+                /*
                 item = new Gold(item.getX(),item.getY());
                 Gold item2  = new Gold(item.getX(),item.getY());
                 int goldPickUp = item2.getGoldDrop();
                 goldPurse = goldPurse + goldPickUp;
+                */
             }
+            if(item.GetType() == typeof(Weapon))
+            {
+                
+                Equip((Weapon)item); // Casts the item to Weapon as the based on the tileType. Weapon is then set to Characters weapon
+            }
+           
+        }
+        private void Equip(Weapon W)
+        {
+            weapon = W;
         }
     }
 }

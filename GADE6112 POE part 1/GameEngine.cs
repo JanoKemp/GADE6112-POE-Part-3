@@ -18,7 +18,7 @@ namespace GADE6112_POE_part_1
         public GameEngine()
         {
             
-           map = new Map(4,7,6,9,3,6,3); // Creates a map with overloaded constructor
+           map = new Map(4,7,6,9,3,6,3,2); // Creates a map with overloaded constructor
            
             
          
@@ -45,6 +45,10 @@ namespace GADE6112_POE_part_1
 
                         hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY())); // Adds item to player after given movement based on its location
                     }
+                    if (map.getLocation(hero.getX(), hero.getY()).getTileType() == Tile.TileType.Weapon)
+                    {
+                        hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY()));
+                    }
                     LandArray[hero.getX(), hero.getY()] = hero;
                     map.setLand(LandArray);
                     movementDet = 1;
@@ -63,6 +67,10 @@ namespace GADE6112_POE_part_1
 
                         hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY())); // Adds item to player after given movement based on its location
                     }
+                    if (map.getLocation(hero.getX(), hero.getY()).getTileType() == Tile.TileType.Weapon)
+                    {
+                        hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY()));
+                    }
                     LandArray[hero.getX(), hero.getY()] = hero;
                     movementDet = 1;
                     map.setLand(LandArray);
@@ -79,6 +87,10 @@ namespace GADE6112_POE_part_1
 
                         hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY())); // Adds item to player after given movement based on its location
                     }
+                    if (map.getLocation(hero.getX(), hero.getY()).getTileType() == Tile.TileType.Weapon)
+                    {
+                        hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY()));
+                    }
                     LandArray[hero.getX(), hero.getY()] = hero;
                     movementDet = 1;
                     map.setLand(LandArray);
@@ -94,6 +106,10 @@ namespace GADE6112_POE_part_1
                     {
 
                         hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY())); // Adds item to player after given movement based on its location
+                    }
+                    if (map.getLocation(hero.getX(), hero.getY()).getTileType() == Tile.TileType.Weapon)
+                    {
+                        hero.PickUp(map.GetItemAtPosition(hero.getX(), hero.getY()));
                     }
                     LandArray[hero.getX(), hero.getY()] = hero;
                     movementDet = 1;

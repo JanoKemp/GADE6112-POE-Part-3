@@ -8,14 +8,14 @@ namespace GADE6112_POE_part_1
         {
             InitializeComponent();
         }
-        
+
         Map mapLand;
         GameEngine gameEngine = new GameEngine();
         Hero hero;
         Tile[,] landArray;
         Item[] items;
         Enemy[] enemyArr;
-        
+
 
 
 
@@ -25,12 +25,13 @@ namespace GADE6112_POE_part_1
             mapLand = gameEngine.getMap();
             hero = mapLand.getHero();
             landArray = mapLand.getLand();
+            items = mapLand.getItems();
             MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
             MapGeneration();
             BorderCreation();
             EnemyCreation();
             HeroCreation();
-            GoldCreation();
+            ItemCreation();
 
 
 
@@ -182,8 +183,8 @@ namespace GADE6112_POE_part_1
             {
                 for (int y = 0; y < landArray.GetLength(1); y++)
                 {
-                     enemyArr = mapLand.getEnemies();
-                   // textBoxes[x, y].Text = landArray[x, y].getTileType().ToString() ;// USED TO CHECK TILE TYPES OF TEXTBOXES 
+                    enemyArr = mapLand.getEnemies();
+                   // textBoxes[x, y].Text = landArray[x, y].getTileType().ToString();// USED TO CHECK TILE TYPES OF TEXTBOXES 
                     landArray[x, y].getTileType();
                     if (landArray[x, y].getTileType() == Tile.TileType.Enemy)
                     {
@@ -204,13 +205,18 @@ namespace GADE6112_POE_part_1
                                 richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
                                 // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
                             }
-                          
+                            if (enemyArr[i].GetType() == typeof(Leader))
+                            {
+                                textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "L";
+                                richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                            }
+
 
                         }
-                       
-                        
-                            //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[].ToString();
-                        
+
+
+                        //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[].ToString();
+
 
                     }
 
@@ -237,7 +243,7 @@ namespace GADE6112_POE_part_1
                 }
             }
         }
-        public void GoldCreation()
+        public void ItemCreation()
         {
             for (int x = 0; x < mapLand.getLand().GetLength(0); x++)
             {
@@ -245,19 +251,16 @@ namespace GADE6112_POE_part_1
                 {
                     if (landArray[x, y].getTileType() == Tile.TileType.Gold)
                     {
-                        
-                        items = mapLand.getItems();
-                        for (int i = 0; i < items.Length; i++)
-                        {
-                            if (items[i].GetType() == typeof(Gold))
-                            {
-                                textBoxes[items[i].getX(), items[i].getY()].Text = "G";
-                            }
-                        }
+                        textBoxes[landArray[x, y].getX(), landArray[x, y].getY()].Text = "G";
+                    }
+                    if (landArray[x, y].getTileType() == Tile.TileType.Weapon)
+                    {
+                        textBoxes[landArray[x, y].getX(), landArray[x, y].getY()].Text = "W";
                     }
                 }
             }
         }
+
         public void UpdateMap()
         {
             for (int x = 0; x < mapLand.getLand().GetLength(0); x++)
@@ -268,17 +271,21 @@ namespace GADE6112_POE_part_1
                     {
                         textBoxes[x, y].Text = "H";
                     }
-                    if (landArray[x, y].getTileType() == Tile.TileType.Clear )
+                    if (landArray[x, y].getTileType() == Tile.TileType.Clear)
                     {
                         textBoxes[x, y].Text = String.Empty;
                     }
-                    if (landArray[x,y].getTileType() == Tile.TileType.Barrier)
+                    if (landArray[x, y].getTileType() == Tile.TileType.Barrier)
                     {
                         textBoxes[x, y].Text = "X";
                     }
-                    if (landArray[x,y].getTileType() == Tile.TileType.Gold)
+                    if (landArray[x, y].getTileType() == Tile.TileType.Gold)
                     {
                         textBoxes[x, y].Text = "G";
+                    }
+                    if (landArray[x, y].getTileType() == Tile.TileType.Weapon)
+                    {
+                        textBoxes[x, y].Text = "W";
                     }
                     if (landArray[x, y].getTileType() == Tile.TileType.Enemy)
                     {
@@ -292,12 +299,18 @@ namespace GADE6112_POE_part_1
                                 if (enemyArr[i].GetType() == typeof(SwampCreature)) // if enemyArr[at location] returns type SwampCreature then it runs the following code
                                 {
                                     textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "SC";// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
-                                                                                                                               // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
-                                                                                                                               //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                                                                                  // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
+                                                                                                  //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
                                 }
                                 if (enemyArr[i].GetType() == typeof(Mage))
                                 {
                                     textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "M";
+                                    // richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                    // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
+                                }
+                                if (enemyArr[i].GetType() == typeof(Leader))
+                                {
+                                    textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "L";
                                     // richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
                                     // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
                                 }
@@ -309,7 +322,7 @@ namespace GADE6112_POE_part_1
                 }
             }
         }
-        
+
 
 
         private void textBox00_TextChanged(object sender, EventArgs e)
@@ -345,10 +358,11 @@ namespace GADE6112_POE_part_1
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
+            
             hero.setMovement(Character.Movement.left);
             gameEngine.MovePlayer(Character.Movement.left);
             gameEngine.getMap().UpdateVision();
-            
+
             gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
@@ -384,7 +398,7 @@ namespace GADE6112_POE_part_1
         {
             hero.setMovement(Character.Movement.down);
             gameEngine.MovePlayer(Character.Movement.down);
-             gameEngine.getMap().UpdateVision();
+            gameEngine.getMap().UpdateVision();
             gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
@@ -413,17 +427,18 @@ namespace GADE6112_POE_part_1
                 if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
                 {
                     hero.Attack(enemyArr[i]); // Creature hp - hero damage. Then sets new Creature hp
-                    enemyArr[i].isDead(hero, enemyArr[i]);
+                    enemyArr[i].isDead();
+                    hero.isDead();
                 }
             }
             for (int i = 0; i < enemyArr.Length; i++)
             {
-                richTextBox1.Text =  hero.ToString() +" \n "+ enemyArr[i].ToString();
+                richTextBox1.Text = hero.ToString() + " \n " + enemyArr[i].ToString();
             }
             //gameEngine.EnemyAttack(creature.CheckRange(hero), hero, creature);
             //gameEngine.EnemyAttack(mage.CheckRange(hero), hero, mage);
 
-            
+
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
@@ -439,7 +454,7 @@ namespace GADE6112_POE_part_1
             BorderCreation();
             EnemyCreation();
             HeroCreation();
-            GoldCreation();
+            ItemCreation();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
