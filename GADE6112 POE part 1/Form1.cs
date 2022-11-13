@@ -362,7 +362,6 @@ namespace GADE6112_POE_part_1
             hero.setMovement(Character.Movement.left);
             gameEngine.MovePlayer(Character.Movement.left);
             gameEngine.getMap().UpdateVision();
-
             gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
@@ -435,6 +434,7 @@ namespace GADE6112_POE_part_1
             {
                 richTextBox1.Text = hero.ToString() + " \n " + enemyArr[i].ToString();
             }
+            UpdateMap();
             //gameEngine.EnemyAttack(creature.CheckRange(hero), hero, creature);
             //gameEngine.EnemyAttack(mage.CheckRange(hero), hero, mage);
 

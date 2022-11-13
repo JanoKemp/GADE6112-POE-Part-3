@@ -129,7 +129,7 @@ namespace GADE6112_POE_part_1
            // items[2] = (Gold)Create(Tile.TileType.Gold);
            // items[3] = (Weapon)Create(Tile.TileType.Weapon);
            // items[4] = (Weapon)Create(Tile.TileType.Weapon);
-           // items[5] = (Weapon)Create(Tile.TileType.Weapon);// Breaks Code in order to see Debug 
+            //items[5] = (Weapon)Create(Tile.TileType.Weapon);// Breaks Code in order to see Debug 
 
 
             UpdateVision();
@@ -347,25 +347,20 @@ namespace GADE6112_POE_part_1
 
         public Item GetItemAtPosition(int x, int y)
         {
-            if (x > 0 && y > 0)
+            int checkX, checkY;
+            for (int g = 0; g < items.GetLength(0); g++)
             {
-                for (int i = 0; i < items.Length; i++)
+                checkX = items[g].getX();
+                checkY = items[g].getY();
+                if (checkX == x && checkY == y)
                 {
-                    if (items[i].getX() == x && items[i].getY() == y)
-                    {
-                        return items[i];
-
-                    }
-                    if (items[i].getX() == x && items[i].getY() == y)
-                    {
-                        return items[i] = null;
-
-                    }
-                    else return null;
+                    Item item = items[g];
+                    return item; // if Gold does exist then it moves on
                 }
+                
             }
             return null;
-            
+
         }
 
 

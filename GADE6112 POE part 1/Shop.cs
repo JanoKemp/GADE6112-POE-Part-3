@@ -30,7 +30,7 @@ namespace GADE6112_POE_part_1
             if (randWeapon == 0)
             {
 
-                Weapon dagger = new MeleeWeapon(MeleeWeapon.Types.Dagger); // 1 , 1  IS FOR TESTING WILL BE ISSUES WITH ALL WEAPONS HAVING SAME ARRAY LOCATION
+                Weapon dagger = new MeleeWeapon(MeleeWeapon.Types.Dagger); //   IS FOR TESTING WILL BE ISSUES WITH ALL WEAPONS HAVING SAME ARRAY LOCATION
                 return dagger;
             }
             if (randWeapon == 1)

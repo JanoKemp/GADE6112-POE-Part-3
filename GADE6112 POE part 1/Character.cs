@@ -112,16 +112,8 @@ namespace GADE6112_POE_part_1
         }
         public virtual void Attack(Character target) //Used to attack enemies
         {
-            //target.hp -= hp;
-            int targetHp;
-            targetHp = target.getHP(); // gets target Hp 
-
-            CheckRange(target);//Checks if target is in range for an attack
-            if (CheckRange(target) == true)//when target is in range
-            {
-                targetHp = targetHp - damage; // Enemy health - damage
-                target.setHP(targetHp);
-            }
+            target.hp -= damage;
+            
 
         }
         public void Move(Movement direction, Character character) //Implementation of movement by changing X and Y values for each character
@@ -168,17 +160,16 @@ namespace GADE6112_POE_part_1
 
             if (hp <= 0)
             {
-                setTileType(Tile.TileType.Clear);
                 return true;
             }
             else return false;
         }
-        public void PickUp(Item item) 
+        public void PickUp(Item i) 
         {
             
-            if (item.getTileType() == Tile.TileType.Gold)
+            if (i.getTileType() == Tile.TileType.Gold)
             {
-                Gold gold = (Gold)item;
+                Gold gold = (Gold)i;
                 goldPurse = goldPurse + gold.getGoldDrop();
                 /*
                 item = new Gold(item.getX(),item.getY());
@@ -187,11 +178,12 @@ namespace GADE6112_POE_part_1
                 goldPurse = goldPurse + goldPickUp;
                 */
             }
-            if(item.GetType() == typeof(Weapon))
+            if(i.getTileType() == Tile.TileType.Weapon)
             {
                 
-                Equip((Weapon)item); // Casts the item to Weapon as the based on the tileType. Weapon is then set to Characters weapon
+                Equip((Weapon)i); // Casts the item to Weapon as the based on the tileType. Weapon is then set to Characters weapon
             }
+            
            
         }
         private void Equip(Weapon W)
