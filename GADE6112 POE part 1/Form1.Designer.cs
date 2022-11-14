@@ -100,6 +100,14 @@
             this.SaveBtn = new System.Windows.Forms.Button();
             this.LoadBtn = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.shopB1 = new System.Windows.Forms.Button();
+            this.shopB2 = new System.Windows.Forms.Button();
+            this.shopB3 = new System.Windows.Forms.Button();
+            this.labelShop = new System.Windows.Forms.Label();
+            this.itemLabel1 = new System.Windows.Forms.Label();
+            this.itemLabel2 = new System.Windows.Forms.Label();
+            this.itemLabel3 = new System.Windows.Forms.Label();
+            this.heroGoldLabel1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox00
@@ -760,11 +768,98 @@
             this.comboBox1.TabIndex = 127;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // shopB1
+            // 
+            this.shopB1.Location = new System.Drawing.Point(982, 76);
+            this.shopB1.Name = "shopB1";
+            this.shopB1.Size = new System.Drawing.Size(97, 59);
+            this.shopB1.TabIndex = 128;
+            this.shopB1.Text = "Shop1";
+            this.shopB1.UseVisualStyleBackColor = true;
+            this.shopB1.Click += new System.EventHandler(this.shopB1_Click);
+            // 
+            // shopB2
+            // 
+            this.shopB2.Location = new System.Drawing.Point(982, 157);
+            this.shopB2.Name = "shopB2";
+            this.shopB2.Size = new System.Drawing.Size(97, 59);
+            this.shopB2.TabIndex = 129;
+            this.shopB2.Text = "Shop2";
+            this.shopB2.UseVisualStyleBackColor = true;
+            this.shopB2.Click += new System.EventHandler(this.shopB2_Click);
+            // 
+            // shopB3
+            // 
+            this.shopB3.Location = new System.Drawing.Point(982, 248);
+            this.shopB3.Name = "shopB3";
+            this.shopB3.Size = new System.Drawing.Size(97, 59);
+            this.shopB3.TabIndex = 130;
+            this.shopB3.Text = "Shop3";
+            this.shopB3.UseVisualStyleBackColor = true;
+            this.shopB3.Click += new System.EventHandler(this.shopB3_Click);
+            // 
+            // labelShop
+            // 
+            this.labelShop.AutoSize = true;
+            this.labelShop.Location = new System.Drawing.Point(925, 15);
+            this.labelShop.Name = "labelShop";
+            this.labelShop.Size = new System.Drawing.Size(38, 15);
+            this.labelShop.TabIndex = 131;
+            this.labelShop.Text = "SHOP";
+            // 
+            // itemLabel1
+            // 
+            this.itemLabel1.AutoSize = true;
+            this.itemLabel1.Location = new System.Drawing.Point(804, 98);
+            this.itemLabel1.Name = "itemLabel1";
+            this.itemLabel1.Size = new System.Drawing.Size(100, 15);
+            this.itemLabel1.TabIndex = 132;
+            this.itemLabel1.Text = "itemInformation1";
+            this.itemLabel1.Click += new System.EventHandler(this.costLabel1_Click);
+            // 
+            // itemLabel2
+            // 
+            this.itemLabel2.AutoSize = true;
+            this.itemLabel2.Location = new System.Drawing.Point(804, 179);
+            this.itemLabel2.Name = "itemLabel2";
+            this.itemLabel2.Size = new System.Drawing.Size(100, 15);
+            this.itemLabel2.TabIndex = 133;
+            this.itemLabel2.Text = "itemInformation2";
+            this.itemLabel2.Click += new System.EventHandler(this.costLabel2_Click);
+            // 
+            // itemLabel3
+            // 
+            this.itemLabel3.AutoSize = true;
+            this.itemLabel3.Location = new System.Drawing.Point(804, 264);
+            this.itemLabel3.Name = "itemLabel3";
+            this.itemLabel3.Size = new System.Drawing.Size(100, 15);
+            this.itemLabel3.TabIndex = 134;
+            this.itemLabel3.Text = "itemInformation3";
+            this.itemLabel3.Click += new System.EventHandler(this.costLabel3_Click);
+            // 
+            // heroGoldLabel1
+            // 
+            this.heroGoldLabel1.AutoSize = true;
+            this.heroGoldLabel1.Location = new System.Drawing.Point(807, 48);
+            this.heroGoldLabel1.Name = "heroGoldLabel1";
+            this.heroGoldLabel1.Size = new System.Drawing.Size(58, 15);
+            this.heroGoldLabel1.TabIndex = 135;
+            this.heroGoldLabel1.Text = "HeroGold";
+            this.heroGoldLabel1.Click += new System.EventHandler(this.heroGoldLabel1_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1103, 450);
+            this.Controls.Add(this.heroGoldLabel1);
+            this.Controls.Add(this.itemLabel3);
+            this.Controls.Add(this.itemLabel2);
+            this.Controls.Add(this.itemLabel1);
+            this.Controls.Add(this.labelShop);
+            this.Controls.Add(this.shopB3);
+            this.Controls.Add(this.shopB2);
+            this.Controls.Add(this.shopB1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.LoadBtn);
             this.Controls.Add(this.SaveBtn);
@@ -919,5 +1014,13 @@
         private Button SaveBtn;
         private Button LoadBtn;
         private ComboBox comboBox1;
+        private Button shopB1;
+        private Button shopB2;
+        private Button shopB3;
+        private Label labelShop;
+        private Label itemLabel1;
+        private Label itemLabel2;
+        private Label itemLabel3;
+        private Label heroGoldLabel1;
     }
 }

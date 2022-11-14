@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace GADE6112_POE_part_1
 {
@@ -10,15 +11,15 @@ namespace GADE6112_POE_part_1
     {
         public enum Types
         {
-            rifle , longBow
+            Rifle , LongBow
         }
         public Types types;
-        public RangedWeapon(Types types, int x, int y) : base(x, y, Tile.TileType.Weapon)
+        public RangedWeapon(Types types, [Optional]int x, [Optional]int y) : base(x, y, Tile.TileType.Weapon)
         {
             this.types = types;
             this.y = y;
             this.x = x;
-            if (types == Types.rifle)
+            if (types == Types.Rifle)
             {
                 weaponType = "Rifle";
                 durability = 3;
@@ -26,7 +27,7 @@ namespace GADE6112_POE_part_1
                 range = 3;
                 cost = 7;
             }
-            if (types == Types.longBow)
+            if (types == Types.LongBow)
             {
                 weaponType = "LongBow";
                 durability = 4;
@@ -40,7 +41,7 @@ namespace GADE6112_POE_part_1
             this.types = types;
             this.y = y;
             this.x = x;
-            if (types == Types.rifle)
+            if (types == Types.Rifle)
             {
                 weaponType = "Rifle";
                 this.durability = durability;
@@ -48,7 +49,7 @@ namespace GADE6112_POE_part_1
                 range = 3;
                 cost = 7;
             }
-            if (types == Types.longBow)
+            if (types == Types.LongBow)
             {
                 weaponType = "LongBow";
                 this.durability = durability;
@@ -61,12 +62,12 @@ namespace GADE6112_POE_part_1
         {
             string meleeInfo;
             meleeInfo = "No information added";
-            if (types == Types.rifle)
+            if (types == Types.Rifle)
             {
                 meleeInfo = "Weapon Type: Ranged \n  Name: "+weaponType+" \n  Damage: " + damage + "\n Cost: " + cost;
                 return meleeInfo;
             }
-            if (types == Types.longBow)
+            if (types == Types.LongBow)
             {
                 meleeInfo = "Weapon Type: Ranged \n  Name: "+weaponType+" \n  Damage: " + damage + "\n Cost: " + cost;
                 return meleeInfo;

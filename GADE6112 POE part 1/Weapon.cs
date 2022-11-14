@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices; //Imports Optional params functionality
 
 namespace GADE6112_POE_part_1
 {
@@ -11,13 +12,13 @@ namespace GADE6112_POE_part_1
         protected int damage, range, durability, cost;
         protected string weaponType;
 
-        public Weapon(int x , int y , Tile.TileType type) : base (x, y, Tile.TileType.Weapon) // Learn how to use optional params
+        public Weapon([Optional]int x , [Optional]int y , Tile.TileType type) : base (x, y, Tile.TileType.Weapon) // [Optional] Means the params after the namespace are optional enteries
         {
-            this.x = x;
-            this.y = y;
+            this.x = getX();
+            this.y = getY();
             
         }
-     
+   
         public int getWeaponDamage() { return damage; }
         public virtual int getWeaponRange() { return range; } // Set as virtual to be later overridden
         public int getWeaponDurability() { return durability; }
