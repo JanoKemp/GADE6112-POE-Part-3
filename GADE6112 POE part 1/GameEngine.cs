@@ -24,9 +24,11 @@ namespace GADE6112_POE_part_1
             map = new Map(4, 7, 6, 9, 3, 6, 3, 2); // Creates a map with overloaded constructor
             enemyArr = map.getEnemies();
             heroGame = map.getHero();
+            shop = new Shop(map.getHero());
 
         }
         public Map getMap() { return map; } // public get accessor for the private map variable
+        public Shop getShop() { return shop; }  
         public bool MovePlayer(Character.Movement direction)
         {
             Hero hero;

@@ -13,7 +13,9 @@ namespace GADE6112_POE_part_1
 
         public Hero(int x, int y, int hP, int maxHp, int damage, TileType type) : base(x, y, Tile.TileType.Hero, hP, maxHp, damage)
         {
-
+            
+               
+            
             // heroSym = getSymbols(0); // "H" symbol
         }
 
@@ -49,6 +51,11 @@ namespace GADE6112_POE_part_1
         }
 
         public char getHeroSymbol() { return heroSym; }
+        public void setWeapon(Weapon weapon)
+        {
+            this.weapon = weapon;
+        }
+        
 
 
         override public string ToString()

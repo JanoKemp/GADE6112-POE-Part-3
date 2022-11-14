@@ -112,7 +112,12 @@ namespace GADE6112_POE_part_1
         }
         public virtual void Attack(Character target) //Used to attack enemies
         {
+            if(weapon == null)// If the attacker has barehands it uses their default attack damage
             target.hp -= damage;
+            if (weapon != null) // if the attacker has a weapon equiped it uses that weapons damage instead
+            {
+                target.hp -= weapon.getWeaponDamage();
+            }
             
 
         }

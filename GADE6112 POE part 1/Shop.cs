@@ -88,6 +88,7 @@ namespace GADE6112_POE_part_1
             }
             else return false;
         }
+        public Weapon [] getWeapons() { return weapons; }
         public void Buy(int num)
         {
             int customerPurse = customer.getGoldPurse();

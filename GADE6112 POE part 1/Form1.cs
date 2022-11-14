@@ -15,7 +15,8 @@ namespace GADE6112_POE_part_1
         Tile[,] landArray;
         Item[] items;
         Enemy[] enemyArr;
-
+        Shop shop;
+        Weapon [] weapons;
 
 
 
@@ -24,6 +25,8 @@ namespace GADE6112_POE_part_1
         {
             mapLand = gameEngine.getMap();
             hero = mapLand.getHero();
+            shop = gameEngine.getShop();
+            weapons = shop.getWeapons();
             landArray = mapLand.getLand();
             items = mapLand.getItems();
             MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
@@ -32,6 +35,7 @@ namespace GADE6112_POE_part_1
             EnemyCreation();
             HeroCreation();
             ItemCreation();
+            ShopMethod();
 
 
 
@@ -322,6 +326,30 @@ namespace GADE6112_POE_part_1
                 }
             }
         }
+        public void ShopMethod()
+        {
+            if (shop.CanBuy(0)) // if the hero can afford item 1 then enable the button
+            {
+                shopB1.Enabled = true;
+            }
+            else shopB1.Enabled = false; // else grey it out until the player can afford the item
+            if (shop.CanBuy(1))
+            {
+                shopB2.Enabled = true;
+            }
+            else shopB2.Enabled = false;
+            if (shop.CanBuy(2))
+            {
+                shopB3.Enabled = true;
+            }
+            else shopB3.Enabled = false;
+            itemLabel1.Text = shop.DisplayWeapon(0);
+            itemLabel2.Text = shop.DisplayWeapon(1);
+            itemLabel3.Text = shop.DisplayWeapon(2);
+            shopB1.Text = "Buy";
+            shopB2.Text = "Buy";
+            shopB3.Text = "Buy";
+        }
 
 
 
@@ -335,6 +363,7 @@ namespace GADE6112_POE_part_1
             hero.setMovement(Character.Movement.up);
             gameEngine.MovePlayer(Character.Movement.up); // Calls Move player method which changes the X and Y accordingly 
             gameEngine.getMap().UpdateVision(); // Updates vision based on new movement
+            heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
             gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
@@ -354,6 +383,7 @@ namespace GADE6112_POE_part_1
                 }
             }
             */
+            ShopMethod();
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
@@ -362,6 +392,7 @@ namespace GADE6112_POE_part_1
             hero.setMovement(Character.Movement.left);
             gameEngine.MovePlayer(Character.Movement.left);
             gameEngine.getMap().UpdateVision();
+            heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
             gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
@@ -373,6 +404,7 @@ namespace GADE6112_POE_part_1
                     comboBox1.Items.Add(enemyArr[i].ToString());
                 }
             }
+            ShopMethod();
         }
 
         private void buttonRight_Click(object sender, EventArgs e)
@@ -380,6 +412,7 @@ namespace GADE6112_POE_part_1
             hero.setMovement(Character.Movement.right);
             gameEngine.MovePlayer(Character.Movement.right);
             gameEngine.getMap().UpdateVision();
+            heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
             gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
@@ -391,6 +424,7 @@ namespace GADE6112_POE_part_1
                     comboBox1.Items.Add(enemyArr[i].ToString());
                 }
             }
+            ShopMethod();
         }
 
         private void buttonDown_Click(object sender, EventArgs e)
@@ -398,6 +432,7 @@ namespace GADE6112_POE_part_1
             hero.setMovement(Character.Movement.down);
             gameEngine.MovePlayer(Character.Movement.down);
             gameEngine.getMap().UpdateVision();
+            heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
             gameEngine.MoveEnemies();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
@@ -409,7 +444,7 @@ namespace GADE6112_POE_part_1
                     comboBox1.Items.Add(enemyArr[i].ToString());
                 }
             }
-
+            ShopMethod();
 
 
         }
@@ -458,6 +493,46 @@ namespace GADE6112_POE_part_1
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void shopB1_Click(object sender, EventArgs e)
+        {
+            if (shop.CanBuy(0))
+            {
+                shop.Buy(0);
+            }
+            else shopB1.Enabled = false;
+            
+        }
+
+        private void shopB2_Click(object sender, EventArgs e)
+        {
+            shop.Buy(1);
+        }
+
+        private void shopB3_Click(object sender, EventArgs e)
+        {
+            shop.Buy(2);
+        }
+
+        private void costLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void costLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void costLabel3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void heroGoldLabel1_Click(object sender, EventArgs e)
         {
 
         }
