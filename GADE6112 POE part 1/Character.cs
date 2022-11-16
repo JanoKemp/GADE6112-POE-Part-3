@@ -79,34 +79,61 @@ namespace GADE6112_POE_part_1
        
         public virtual bool CheckRange(Character target)//add target
         {
-            if (DistanceTo(target) < 2)// if distance to target is less than 2(max range) then returns true(is within range)
+            if (weapon != null)
             {
-                return true;
+                if (DistanceTo(target) > weapon.getWeaponRange())// Checks if you have a weapon, if you do then it checks if the target is within range of that weapon
+                {
+                    return false;
+                }
+                else
+                    return true;//any other range is unnacceptable and therefore not in range
             }
             else
-                return false;//any other range is unnacceptable and therefore not in range
+            if (DistanceTo(target) > 1)// if distance to target is less than 2(max range) then returns true(is within range)
+            {
+                return false;
+            }
+            else
+                return true;//any other range is unnacceptable and therefore not in range
         }
         private int DistanceTo(Character target)//Wants the number of tiles in between hero and target
         {
-
-
-            int targetX, targetY, distance; // Local variables created for assigning Target X and Y values to be checked against distance
-            targetX = target.getX();
-            targetY = target.getY();
-
-            if (targetX > x && targetY > y) // Ensures distance cannot be negative
+            int targetX, targetY, distanceX , distanceY; // Local variables created for assigning Target X and Y values to be checked against distance
+            targetX = target.x;
+            targetY = target.y;
+            distanceX = 0;
+            distanceY = 0;
+            /*for (int i = 0; i < currentVision.Length; i++)
             {
-                distance = (targetX + targetY) - (x + y); // Adds X and Y of each object and then subtracts from the bigger X and Y. Gives a distance to be used , later for checking
-                return distance;
+                if (targetX == currentVision[i].getX() && targetY == currentVision[i].getY())
+                {
+                    return distance = 1;
+                }
+                else return distance = 0;
             }
-            if (targetX < x && targetY < y)
-            {
-                distance = (x + y - (targetX + targetY));
-                return distance;
-            }
-            else
-                distance = 0;
             return distance;
+            */
+            if (targetX > this.x) // Ensures distance cannot be negative
+            {
+                distanceX = targetX - this.x; // Adds X and Y of each object and then subtracts from the bigger X and Y. Gives a distance to be used , later for checking
+              
+            }
+            if (this.x > targetX)
+            {
+                distanceX = this.x - targetX;
+                
+            }
+            if(targetY > this.y)
+            {
+                distanceY = targetY - this.y;
+              
+            }
+            if (this.y > targetY)
+            {
+                distanceY = this.y - targetY;
+            }
+            return distanceX + distanceY;
+            
 
             //Calculate distance to a certain grid
         }
@@ -118,8 +145,21 @@ namespace GADE6112_POE_part_1
             {
                 target.hp -= weapon.getWeaponDamage();
             }
+            if(target.isDead())
+            {
+                Loot(target);
+                
+            }
             
 
+        }
+        public void Loot(Character target)
+        {
+            goldPurse = goldPurse + target.getGoldPurse();
+            if (weapon == null && target.getWeapon() != null && GetType() != typeof(Mage)) //Mages may not pick up weapons
+            {
+                Equip(target.getWeapon());//if target has a weapon and attacker doesnt then equip their weapon
+            }
         }
         public void Move(Movement direction, Character character) //Implementation of movement by changing X and Y values for each character
         {
