@@ -201,22 +201,24 @@ namespace GADE6112_POE_part_1
                             {
                                 textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "SC";// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
                                 // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
-                                richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
                             }
                             if (enemyArr[i].GetType() == typeof(Mage))
                             {
                                 textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "M";
-                                richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
                                 // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
                             }
                             if (enemyArr[i].GetType() == typeof(Leader))
                             {
                                 textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "L";
-                                richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
                             }
+                            //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr.ToString();
 
 
                         }
+                        //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr.ToString();
 
 
                         //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[].ToString();
@@ -227,6 +229,10 @@ namespace GADE6112_POE_part_1
                 }
 
                 //textBoxes[enemyArr[x].getX(), enemyArr[x].getY()].Text = creature.getEnemySym().ToString();
+            }
+            for(int i = 0; i < mapLand.getEnemies().Length; i++)
+            {
+                richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
             }
         }
         public void HeroCreation()
@@ -364,7 +370,7 @@ namespace GADE6112_POE_part_1
             gameEngine.MovePlayer(Character.Movement.up); // Calls Move player method which changes the X and Y accordingly 
             gameEngine.getMap().UpdateVision(); // Updates vision based on new movement
             heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
-            gameEngine.MoveEnemies();
+            gameEngine.MoveEnemies(); // Calling it in hero PlayerMove in GameEngine
             UpdateMap();
             richTextBox1.Text = hero.ToString();
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items
@@ -393,7 +399,7 @@ namespace GADE6112_POE_part_1
             gameEngine.MovePlayer(Character.Movement.left);
             gameEngine.getMap().UpdateVision();
             heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
-            gameEngine.MoveEnemies();
+            gameEngine.MoveEnemies(); // Calling it in hero PlayerMove in GameEngine
             UpdateMap();
             richTextBox1.Text = hero.ToString();
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items
@@ -413,7 +419,7 @@ namespace GADE6112_POE_part_1
             gameEngine.MovePlayer(Character.Movement.right);
             gameEngine.getMap().UpdateVision();
             heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
-            gameEngine.MoveEnemies();
+            gameEngine.MoveEnemies(); // Calling it in hero PlayerMove in GameEngine
             UpdateMap();
             richTextBox1.Text = hero.ToString();
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items
@@ -433,7 +439,7 @@ namespace GADE6112_POE_part_1
             gameEngine.MovePlayer(Character.Movement.down);
             gameEngine.getMap().UpdateVision();
             heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
-            gameEngine.MoveEnemies();
+            gameEngine.MoveEnemies(); // Calling it in hero PlayerMove in GameEngine
             UpdateMap();
             richTextBox1.Text = hero.ToString();
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items

@@ -14,7 +14,7 @@ namespace GADE6112_POE_part_1
     {
         private Map map;
         private Shop shop;
-        Enemy [] enemyArr;
+        Enemy[] enemyArr;
         Hero heroGame;
 
         public int movementDet = 0; // increments if the hero moves / used to tell enemies when to move
@@ -28,7 +28,7 @@ namespace GADE6112_POE_part_1
 
         }
         public Map getMap() { return map; } // public get accessor for the private map variable
-        public Shop getShop() { return shop; }  
+        public Shop getShop() { return shop; }
         public bool MovePlayer(Character.Movement direction)
         {
             Hero hero;
@@ -37,12 +37,12 @@ namespace GADE6112_POE_part_1
             // LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(),hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
             bool movement = true;
             map.UpdateVision();
-            if (hero.ReturnMove(hero.getMovement()) == direction) // Return move checks if movement is valid with Vision array , getMovement gets the players input
+            if (hero.ReturnMove(hero.getMovement()) == direction) // Return move checks if movement is valid with Vision array , getMovement gets the players input, Hero.Move(direction) in form1 sets the Movement that getMovement is fetching
             {
 
                 if (direction == Character.Movement.down)
                 {
-                   
+
                     LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(), hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
                     //hero.setX(hero.getX() + 1); //Changes the Y position of the hero to one up from it current location
                     hero.Move(Character.Movement.down, hero);//Changes X and Y values based on Movement Param entered and of the object in param
@@ -156,49 +156,68 @@ namespace GADE6112_POE_part_1
             //This updates the move is the movement is valid via button presses
             return movement;
         }
-        public bool MoveEnemies()
+        public void MoveEnemies()
         {
             Character.Movement enemyDirection;
             Enemy[] enemyArr = map.getEnemies();
             Tile[,] LandArray = map.getLand();
             bool movement;
+            
             if (movementDet == 1)
             {
                 movement = true;
 
                 for (int i = 0; i < enemyArr.Length; i++)
                 {
-                    if (enemyArr[i].GetType()  == typeof(SwampCreature) || enemyArr[i].GetType() == typeof(Leader)) // Mages cannot move therefore they must not use the following code
-                    {
-                        if (enemyArr[i].ReturnMove() != Character.Movement.noMovement)
+                    if (enemyArr[i] != null)
+                    { 
+                        if (enemyArr[i].GetType() == typeof(SwampCreature))
                         {
-                            enemyDirection = enemyArr[i].ReturnMove(); // Checks if movement is valid against Vision array
-                            LandArray[enemyArr[i].getX(), enemyArr[i].getY()] = new EmptyTile(enemyArr[i].getX(), enemyArr[i].getY());//sets the current location to Empty before new location is set
-                            enemyArr[i].Move(enemyDirection, enemyArr[i]); //Moves the X and Y location
-                            if (LandArray[enemyArr[i].getX(), enemyArr[i].getY()].getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+                            SwampCreature creature = (SwampCreature)enemyArr[i];
+                            //creature.ReturnMove(creature.getMovement());   // Return move checks if movement is valid with Vision array , Creature.getMovement is fetching the movement set my ReturnMove. This is different to hero because enemies Random Movement rather than an input
+                            LandArray[creature.getX(), creature.getY()] = new EmptyTile(creature.getX(), creature.getY());//sets the current location to Empty before new location is set
+                            enemyDirection = creature.ReturnMove(creature.getMovement()); // Checks if movement is valid against Vision array
+                            creature.Move(enemyDirection, creature); //Moves the X and Y location
+                            if (LandArray[creature.getX(), creature.getY()].getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
                             {
 
-                                enemyArr[i].PickUp(map.GetItemAtPosition(enemyArr[i].getX(), enemyArr[i].getY())); // Adds item to player after given movement based on its location
+                                creature.PickUp(map.GetItemAtPosition(creature.getX(), creature.getY())); // Adds item to player after given movement based on its location
                             }
-                            if (LandArray[enemyArr[i].getX(), enemyArr[i].getY()].getTileType() == Tile.TileType.Weapon) // Checks current Tile where the player is currently moved onto 
+                            if (LandArray[creature.getX(), creature.getY()].getTileType() == Tile.TileType.Weapon) // Checks current Tile where the player is currently moved onto 
                             {
 
-                                enemyArr[i].PickUp(map.GetItemAtPosition(enemyArr[i].getX(), enemyArr[i].getY())); // Adds item to player after given movement based on its location
+                               creature.PickUp(map.GetItemAtPosition(creature.getX(), creature.getY())); // Adds item to player after given movement based on its location
                             }
                         }
+                        if (enemyArr[i].GetType() == typeof(Leader))
+                        {
+                            Leader leader = (Leader)enemyArr[i];
+                            //creature.ReturnMove(creature.getMovement());   // Return move checks if movement is valid with Vision array , Creature.getMovement is fetching the movement set my ReturnMove. This is different to hero because enemies Random Movement rather than an input
+                            LandArray[leader.getX(), leader.getY()] = new EmptyTile(leader.getX(), leader.getY());//sets the current location to Empty before new location is set
+                            enemyDirection = leader.ReturnMove(leader.getMovement()); // Checks if movement is valid against Vision array
+                            leader.Move(enemyDirection, leader); //Moves the X and Y location
+                            if (LandArray[leader.getX(), leader.getY()].getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+                            {
 
+                                leader.PickUp(map.GetItemAtPosition(leader.getX(), leader.getY())); // Adds item to player after given movement based on its location
+                            }
+                            if (LandArray[leader.getX(), leader.getY()].getTileType() == Tile.TileType.Weapon) // Checks current Tile where the player is currently moved onto 
+                            {
+
+                                leader.PickUp(map.GetItemAtPosition(leader.getX(), leader.getY())); // Adds item to player after given movement based on its location
+                            }
+                            
+                        }
+                        }
                         map.setLand(LandArray);//updates the Map
                         map.UpdateVision();//updates the enemies vision
-                        return movement;
+                        
 
-                    }
+                    
 
                 }
             }
-            else
-                movement = false;
-            return movement;
-
+            
 
         }
 
@@ -207,12 +226,12 @@ namespace GADE6112_POE_part_1
             for (int i = 0; i < map.getEnemies().Length; i++)
             {
                 Enemy enemy = enemyArr[i];
-                if(enemy.GetType() == typeof(SwampCreature))
+                if (enemy.GetType() == typeof(SwampCreature))
                 {
                     if (enemy.CheckRange(heroGame))
                     {
                         enemy.Attack(heroGame);
-                        
+
                     }
                 }
                 else if (enemy.GetType() == typeof(Mage))
@@ -220,26 +239,26 @@ namespace GADE6112_POE_part_1
                     if (enemy.CheckRange(heroGame))
                     {
                         enemy.Attack(heroGame);
-                        
+
                     }
                 }
-             }
+            }
 
 
         }
         public void HealthUpdate()
         {
             map.UpdateVision();
-            if(heroGame != null && heroGame.isDead())
+            if (heroGame != null && heroGame.isDead())
             {
                 Environment.Exit(0);
             }
             for (int i = 0; i < enemyArr.Length; i++)
             {
                 Enemy enemy = enemyArr[i];
-                if(enemy != null)
+                if (enemy != null)
                 {
-                    if(enemy.isDead())
+                    if (enemy.isDead())
                     {
                         Tile[,] land = map.getLand();
                         land[enemy.getX(), enemy.getY()] = new EmptyTile(enemy.getX(), enemy.getY());
