@@ -36,12 +36,13 @@ namespace GADE6112_POE_part_1
             Tile[,] LandArray = map.getLand();
             // LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(),hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
             bool movement = true;
-
+            map.UpdateVision();
             if (hero.ReturnMove(hero.getMovement()) == direction) // Return move checks if movement is valid with Vision array , getMovement gets the players input
             {
 
                 if (direction == Character.Movement.down)
                 {
+                   
                     LandArray[hero.getX(), hero.getY()] = new EmptyTile(hero.getX(), hero.getY()); // Gets the current location of the hero and sets the tile type to Clear
                     //hero.setX(hero.getX() + 1); //Changes the Y position of the hero to one up from it current location
                     hero.Move(Character.Movement.down, hero);//Changes X and Y values based on Movement Param entered and of the object in param
@@ -169,18 +170,21 @@ namespace GADE6112_POE_part_1
                 {
                     if (enemyArr[i].GetType()  == typeof(SwampCreature) || enemyArr[i].GetType() == typeof(Leader)) // Mages cannot move therefore they must not use the following code
                     {
-                        enemyDirection = enemyArr[i].ReturnMove(); // Checks if movement is valid against Vision array
-                        LandArray[enemyArr[i].getX(), enemyArr[i].getY()] = new EmptyTile(enemyArr[i].getX(), enemyArr[i].getY());//sets the current location to Empty before new location is set
-                        enemyArr[i].Move(enemyDirection, enemyArr[i]); //Moves the X and Y location
-                        if (LandArray[enemyArr[i].getX(), enemyArr[i].getY()].getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+                        if (enemyArr[i].ReturnMove() != Character.Movement.noMovement)
                         {
+                            enemyDirection = enemyArr[i].ReturnMove(); // Checks if movement is valid against Vision array
+                            LandArray[enemyArr[i].getX(), enemyArr[i].getY()] = new EmptyTile(enemyArr[i].getX(), enemyArr[i].getY());//sets the current location to Empty before new location is set
+                            enemyArr[i].Move(enemyDirection, enemyArr[i]); //Moves the X and Y location
+                            if (LandArray[enemyArr[i].getX(), enemyArr[i].getY()].getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+                            {
 
-                            enemyArr[i].PickUp(map.GetItemAtPosition(enemyArr[i].getX(), enemyArr[i].getY())); // Adds item to player after given movement based on its location
-                        }
-                        if (LandArray[enemyArr[i].getX(), enemyArr[i].getY()].getTileType() == Tile.TileType.Weapon) // Checks current Tile where the player is currently moved onto 
-                        {
+                                enemyArr[i].PickUp(map.GetItemAtPosition(enemyArr[i].getX(), enemyArr[i].getY())); // Adds item to player after given movement based on its location
+                            }
+                            if (LandArray[enemyArr[i].getX(), enemyArr[i].getY()].getTileType() == Tile.TileType.Weapon) // Checks current Tile where the player is currently moved onto 
+                            {
 
-                            enemyArr[i].PickUp(map.GetItemAtPosition(enemyArr[i].getX(), enemyArr[i].getY())); // Adds item to player after given movement based on its location
+                                enemyArr[i].PickUp(map.GetItemAtPosition(enemyArr[i].getX(), enemyArr[i].getY())); // Adds item to player after given movement based on its location
+                            }
                         }
 
                         map.setLand(LandArray);//updates the Map

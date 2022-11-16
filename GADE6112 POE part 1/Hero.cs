@@ -22,23 +22,23 @@ namespace GADE6112_POE_part_1
         override public Movement ReturnMove(Movement move) // Returns if the attempted Movement is viable by checking the vision array
         {
 
-            if (move == Movement.up && currentVision[0].getTileType() == Tile.TileType.Clear || move == Movement.up && currentVision[0].getTileType() == Tile.TileType.Gold || move == Movement.up && currentVision[0].getTileType() == Tile.TileType.Weapon) // if Tile user is trying to go to is Empty then Move and accepted and carried out
+            if (move == Movement.up && currentVision[0].GetType() == typeof(EmptyTile) || move == Movement.up && currentVision[0].getTileType() == Tile.TileType.Gold || move == Movement.up && currentVision[0].getTileType() == Tile.TileType.Weapon) // if Tile user is trying to go to is Empty then Move and accepted and carried out
             {
                 setMovement(move);
                 return Movement.up;
 
             }
-            if (move == Movement.down && currentVision[1].getTileType() == Tile.TileType.Clear || move == Movement.down && currentVision[1].getTileType() == Tile.TileType.Gold || move == Movement.down && currentVision[1].getTileType() == Tile.TileType.Weapon)
+            if (move == Movement.down && currentVision[1].GetType() == typeof(EmptyTile) || move == Movement.down && currentVision[1].getTileType() == Tile.TileType.Gold || move == Movement.down && currentVision[1].getTileType() == Tile.TileType.Weapon)
             {
                 setMovement(move);
                 return Movement.down;
             }
-            if (move == Movement.left && currentVision[2].getTileType() == Tile.TileType.Clear || move == Movement.left && currentVision[2].getTileType() == Tile.TileType.Gold || move == Movement.left && currentVision[2].getTileType() == Tile.TileType.Weapon)
+            if (move == Movement.left && currentVision[2].GetType() == typeof(EmptyTile) || move == Movement.left && currentVision[2].getTileType() == Tile.TileType.Gold || move == Movement.left && currentVision[2].getTileType() == Tile.TileType.Weapon)
             {
                 setMovement(move);
                 return Movement.left;
             }
-            if (move == Movement.right && currentVision[3].getTileType() == Tile.TileType.Clear || move == Movement.right && currentVision[3].getTileType() == Tile.TileType.Gold || move == Movement.right && currentVision[3].getTileType() == Tile.TileType.Weapon)
+            if (move == Movement.right && currentVision[3].GetType() == typeof(EmptyTile) || move == Movement.right && currentVision[3].getTileType() == Tile.TileType.Gold || move == Movement.right && currentVision[3].getTileType() == Tile.TileType.Weapon)
             {
                 setMovement(move);
                 return Movement.right;

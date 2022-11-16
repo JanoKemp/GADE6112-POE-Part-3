@@ -460,10 +460,22 @@ namespace GADE6112_POE_part_1
             {
                 if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
                 {
+
                     hero.Attack(enemyArr[i]); // Creature hp - hero damage. Then sets new Creature hp
+                    richTextBox1.Text = richTextBox1.Text + enemyArr[i].ToString();
                     enemyArr[i].isDead();
                     hero.isDead();
+                   /* if (enemyArr[i].ToString() == comboBox1.SelectedText.ToString()) // Attempt to attack selected Location
+                    {
+                        hero.Attack(enemyArr[i]);
+                    }
+                   */
                 }
+                if (enemyArr[i].CheckRange(hero) == true)
+                {
+                    enemyArr[i].Attack(hero);
+                    hero.isDead();
+                }    
             }
             for (int i = 0; i < enemyArr.Length; i++)
             {
@@ -499,22 +511,17 @@ namespace GADE6112_POE_part_1
 
         private void shopB1_Click(object sender, EventArgs e)
         {
-            if (shop.CanBuy(0))
-            {
-                shop.Buy(0);
-            }
-            else shopB1.Enabled = false;
-            
+             shop.Buy(0); // Buys the item at the first array location
         }
 
         private void shopB2_Click(object sender, EventArgs e)
         {
-            shop.Buy(1);
+            shop.Buy(1); // Buys the item at the second array location
         }
 
         private void shopB3_Click(object sender, EventArgs e)
         {
-            shop.Buy(2);
+            shop.Buy(2); // Buys the item at the third array location
         }
 
         private void costLabel1_Click(object sender, EventArgs e)
