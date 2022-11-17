@@ -174,41 +174,56 @@ namespace GADE6112_POE_part_1
                         if (enemyArr[i].GetType() == typeof(SwampCreature))
                         {
                             SwampCreature creature = (SwampCreature)enemyArr[i];
-                            //creature.ReturnMove(creature.getMovement());   // Return move checks if movement is valid with Vision array , Creature.getMovement is fetching the movement set my ReturnMove. This is different to hero because enemies Random Movement rather than an input
-                            LandArray[creature.getX(), creature.getY()] = new EmptyTile(creature.getX(), creature.getY());//sets the current location to Empty before new location is set
-                            enemyDirection = creature.ReturnMove(creature.getMovement()); // Checks if movement is valid against Vision array
-                            creature.Move(enemyDirection, creature); //Moves the X and Y location
-                            if (LandArray[creature.getX(), creature.getY()].getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+                            if (creature.ReturnMove(creature.getMovement()) != Character.Movement.noMovement)
                             {
+                                int oldX = creature.getX();
+                                int oldY = creature.getY();
+                                LandArray[oldX, oldY] = new EmptyTile(oldX, oldY); 
+                                creature.Move(creature.getMovement(), creature);
+                                
+                                enemyArr[i] = creature;
+                                LandArray[creature.getX(), creature.getY()] = creature;
+                                if (LandArray[creature.getX(), creature.getY()].getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+                                {
 
-                                creature.PickUp(map.GetItemAtPosition(creature.getX(), creature.getY())); // Adds item to player after given movement based on its location
-                            }
-                            if (LandArray[creature.getX(), creature.getY()].getTileType() == Tile.TileType.Weapon) // Checks current Tile where the player is currently moved onto 
-                            {
+                                    creature.PickUp(map.GetItemAtPosition(creature.getX(), creature.getY())); // Adds item to player after given movement based on its location
+                                }
+                                if (LandArray[creature.getX(), creature.getY()].getTileType() == Tile.TileType.Weapon) // Checks current Tile where the player is currently moved onto 
+                                {
 
-                               creature.PickUp(map.GetItemAtPosition(creature.getX(), creature.getY())); // Adds item to player after given movement based on its location
+                                    creature.PickUp(map.GetItemAtPosition(creature.getX(), creature.getY())); // Adds item to player after given movement based on its location
+                                }
                             }
                         }
                         if (enemyArr[i].GetType() == typeof(Leader))
                         {
+                            
                             Leader leader = (Leader)enemyArr[i];
-                            //creature.ReturnMove(creature.getMovement());   // Return move checks if movement is valid with Vision array , Creature.getMovement is fetching the movement set my ReturnMove. This is different to hero because enemies Random Movement rather than an input
-                            LandArray[leader.getX(), leader.getY()] = new EmptyTile(leader.getX(), leader.getY());//sets the current location to Empty before new location is set
-                            enemyDirection = leader.ReturnMove(leader.getMovement()); // Checks if movement is valid against Vision array
-                            leader.Move(enemyDirection, leader); //Moves the X and Y location
-                            if (LandArray[leader.getX(), leader.getY()].getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+                            if (leader.ReturnMove(leader.getMovement()) != Character.Movement.noMovement)
                             {
+                                //creature.ReturnMove(creature.getMovement());   // Return move checks if movement is valid with Vision array , Creature.getMovement is fetching the movement set my ReturnMove. This is different to hero because enemies Random Movement rather than an input
+                                int oldX = leader.getX();
+                                int oldY = leader.getY();
+                                LandArray[oldX, oldY] = new EmptyTile(oldX, oldY);
+                                leader.Move(leader.getMovement(), leader);
 
-                                leader.PickUp(map.GetItemAtPosition(leader.getX(), leader.getY())); // Adds item to player after given movement based on its location
-                            }
-                            if (LandArray[leader.getX(), leader.getY()].getTileType() == Tile.TileType.Weapon) // Checks current Tile where the player is currently moved onto 
-                            {
+                                enemyArr[i] = leader;
+                                LandArray[leader.getX(), leader.getY()] = leader;
+                                if (LandArray[leader.getX(), leader.getY()].getTileType() == Tile.TileType.Gold) // Checks current Tile where the player is currently moved onto 
+                                {
 
-                                leader.PickUp(map.GetItemAtPosition(leader.getX(), leader.getY())); // Adds item to player after given movement based on its location
+                                    leader.PickUp(map.GetItemAtPosition(leader.getX(), leader.getY())); // Adds item to player after given movement based on its location
+                                }
+                                if (LandArray[leader.getX(), leader.getY()].getTileType() == Tile.TileType.Weapon) // Checks current Tile where the player is currently moved onto 
+                                {
+
+                                    leader.PickUp(map.GetItemAtPosition(leader.getX(), leader.getY())); // Adds item to player after given movement based on its location
+                                }
                             }
                             
                         }
                         }
+                        
                         map.setLand(LandArray);//updates the Map
                         map.UpdateVision();//updates the enemies vision
                         
