@@ -17,7 +17,8 @@ namespace GADE6112_POE_part_1
             this.x = x;
             this.y = y;
             weapon = new MeleeWeapon(MeleeWeapon.Types.LongSword);
-            
+            goldPurse = 2; // For Testing (Question3.4)
+
         }
         public void setLeaderTarget(Hero target)
         {

@@ -493,7 +493,9 @@ namespace GADE6112_POE_part_1
                         richTextBox1.Text = richTextBox1.Text + enemyArr[i].ToString();
                         if (enemyArr[i].isDead())
                         {
+                            landArray[enemyArr[i].getX(), enemyArr[i].getY()] = new EmptyTile(enemyArr[i].getX(), enemyArr[i].getY());
                             enemyArr[i] = null;
+                            
                             UpdateMap();
                         }
                         /* if (enemyArr[i].ToString() == comboBox1.SelectedText.ToString()) // Attempt to attack selected Location

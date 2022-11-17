@@ -17,6 +17,7 @@ namespace GADE6112_POE_part_1
 
             //enemySym = getSymbols(1);
             weapon = new MeleeWeapon(MeleeWeapon.Types.Dagger);
+            goldPurse = 1; // For Testing (Question3.4)
           
 
         }

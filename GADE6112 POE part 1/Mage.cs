@@ -16,8 +16,9 @@ namespace GADE6112_POE_part_1
         */
         public Mage(int x, int y) : base( x,y,5,5,5,Tile.TileType.Enemy)
         {
-            
+
             //mageSym = getSymbols(4);
+            goldPurse = 3; // For Testing (Question3.4)
 
         }
 
