@@ -240,21 +240,31 @@ namespace GADE6112_POE_part_1
         {
             for (int i = 0; i < map.getEnemies().Length; i++)
             {
-                Enemy enemy = enemyArr[i];
-                if (enemy.GetType() == typeof(SwampCreature))
+                if (enemyArr[i] != null)
                 {
-                    if (enemy.CheckRange(heroGame))
+                    Enemy enemy = enemyArr[i];
+                    if (enemy.GetType() == typeof(SwampCreature))
                     {
-                        enemy.Attack(heroGame);
+                        if (enemy.CheckRange(heroGame))
+                        {
+                            enemy.Attack(heroGame);
 
+                        }
                     }
-                }
-                else if (enemy.GetType() == typeof(Mage))
-                {
-                    if (enemy.CheckRange(heroGame))
+                    if (enemy.GetType() == typeof(Mage))
                     {
-                        enemy.Attack(heroGame);
+                        if (enemy.CheckRange(heroGame))
+                        {
+                            enemy.Attack(heroGame);
 
+                        }
+                    }
+                    if (enemy.GetType() == typeof(Leader))
+                    {
+                        if(enemy.CheckRange(heroGame))
+                        {
+                            enemy.Attack(heroGame);
+                        }
                     }
                 }
             }
