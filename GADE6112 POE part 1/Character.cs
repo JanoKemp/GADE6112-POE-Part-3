@@ -99,40 +99,44 @@ namespace GADE6112_POE_part_1
         private int DistanceTo(Character target)//Wants the number of tiles in between hero and target
         {
             int targetX, targetY, distanceX , distanceY; // Local variables created for assigning Target X and Y values to be checked against distance
-            targetX = target.x;
-            targetY = target.y;
-            distanceX = 0;
-            distanceY = 0;
-            /*for (int i = 0; i < currentVision.Length; i++)
+            if (target != null)
             {
-                if (targetX == currentVision[i].getX() && targetY == currentVision[i].getY())
+                targetX = target.x;
+                targetY = target.y;
+                distanceX = 0;
+                distanceY = 0;
+                /*for (int i = 0; i < currentVision.Length; i++)
                 {
-                    return distance = 1;
+                    if (targetX == currentVision[i].getX() && targetY == currentVision[i].getY())
+                    {
+                        return distance = 1;
+                    }
+                    else return distance = 0;
                 }
-                else return distance = 0;
+                return distance;
+                */
+                if (targetX > this.x) // Ensures distance cannot be negative
+                {
+                    distanceX = targetX - this.x; // Adds X and Y of each object and then subtracts from the bigger X and Y. Gives a distance to be used , later for checking
+
+                }
+                if (this.x > targetX)
+                {
+                    distanceX = this.x - targetX;
+
+                }
+                if (targetY > this.y)
+                {
+                    distanceY = targetY - this.y;
+
+                }
+                if (this.y > targetY)
+                {
+                    distanceY = this.y - targetY;
+                }
+                return distanceX + distanceY;
             }
-            return distance;
-            */
-            if (targetX > this.x) // Ensures distance cannot be negative
-            {
-                distanceX = targetX - this.x; // Adds X and Y of each object and then subtracts from the bigger X and Y. Gives a distance to be used , later for checking
-              
-            }
-            if (this.x > targetX)
-            {
-                distanceX = this.x - targetX;
-                
-            }
-            if(targetY > this.y)
-            {
-                distanceY = targetY - this.y;
-              
-            }
-            if (this.y > targetY)
-            {
-                distanceY = this.y - targetY;
-            }
-            return distanceX + distanceY;
+            else return 0;
             
 
             //Calculate distance to a certain grid

@@ -305,26 +305,27 @@ namespace GADE6112_POE_part_1
                             {
                                 // if (landArray[x, y].getX() == enemyArr[i].getX() && landArray[x, y].getY() == enemyArr[i].getY())
 
-
-                                if (enemyArr[i].GetType() == typeof(SwampCreature)) // if enemyArr[at location] returns type SwampCreature then it runs the following code
+                                if (enemyArr[i] != null)
                                 {
-                                    textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "SC";// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
-                                                                                                  // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
-                                                                                                  //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                    if (enemyArr[i].GetType() == typeof(SwampCreature)) // if enemyArr[at location] returns type SwampCreature then it runs the following code
+                                    {
+                                        textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "SC";// gets X and Y position of Enemy object in enemyArray and uses them to output their location on the map
+                                                                                                      // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
+                                                                                                      //richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                    }
+                                    if (enemyArr[i].GetType() == typeof(Mage))
+                                    {
+                                        textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "M";
+                                        // richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                        // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
+                                    }
+                                    if (enemyArr[i].GetType() == typeof(Leader))
+                                    {
+                                        textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "L";
+                                        // richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                                        // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
+                                    }
                                 }
-                                if (enemyArr[i].GetType() == typeof(Mage))
-                                {
-                                    textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "M";
-                                    // richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
-                                    // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
-                                }
-                                if (enemyArr[i].GetType() == typeof(Leader))
-                                {
-                                    textBoxes[enemyArr[i].getX(), enemyArr[i].getY()].Text = "L";
-                                    // richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
-                                    // richTextBox1.Text = richTextBox1.Text + "\n " + enemyArr[i].GetType().ToString();
-                                }
-
 
                             }
                         }
@@ -366,19 +367,24 @@ namespace GADE6112_POE_part_1
 
         private void buttonUp_Click(object sender, EventArgs e)
         {
+            gameEngine.getMap().UpdateVision();
             hero.setMovement(Character.Movement.up);
             gameEngine.MovePlayer(Character.Movement.up); // Calls Move player method which changes the X and Y accordingly 
             gameEngine.getMap().UpdateVision(); // Updates vision based on new movement
             heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
             gameEngine.MoveEnemies(); // Calling it in hero PlayerMove in GameEngine
+            gameEngine.getMap().UpdateVision();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items
             for (int i = 0; i < enemyArr.Length; i++) //loops through enemyArr
             {
-                if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                if (enemyArr[i] != null)
                 {
-                    comboBox1.Items.Add(enemyArr[i].ToString()); // Adds Enemies within range to ComboBox
+                    if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                    {
+                        comboBox1.Items.Add(enemyArr[i].ToString());
+                    }
                 }
             }
             /*for (int x = 0; x < landArray.GetLength(0); x++)
@@ -394,20 +400,24 @@ namespace GADE6112_POE_part_1
 
         private void buttonLeft_Click(object sender, EventArgs e)
         {
-            
+            gameEngine.getMap().UpdateVision();
             hero.setMovement(Character.Movement.left);
             gameEngine.MovePlayer(Character.Movement.left);
             gameEngine.getMap().UpdateVision();
             heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
             gameEngine.MoveEnemies(); // Calling it in hero PlayerMove in GameEngine
+            gameEngine.getMap().UpdateVision();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items
             for (int i = 0; i < enemyArr.Length; i++)
             {
-                if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                if (enemyArr[i] != null)
                 {
-                    comboBox1.Items.Add(enemyArr[i].ToString());
+                    if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                    {
+                        comboBox1.Items.Add(enemyArr[i].ToString());
+                    }
                 }
             }
             ShopMethod();
@@ -415,19 +425,24 @@ namespace GADE6112_POE_part_1
 
         private void buttonRight_Click(object sender, EventArgs e)
         {
+            gameEngine.getMap().UpdateVision();
             hero.setMovement(Character.Movement.right);
             gameEngine.MovePlayer(Character.Movement.right);
             gameEngine.getMap().UpdateVision();
             heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
             gameEngine.MoveEnemies(); // Calling it in hero PlayerMove in GameEngine
+            gameEngine.getMap().UpdateVision();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items
             for (int i = 0; i < enemyArr.Length; i++)
             {
-                if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                if (enemyArr[i] != null)
                 {
-                    comboBox1.Items.Add(enemyArr[i].ToString());
+                    if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                    {
+                        comboBox1.Items.Add(enemyArr[i].ToString());
+                    }
                 }
             }
             ShopMethod();
@@ -435,19 +450,24 @@ namespace GADE6112_POE_part_1
 
         private void buttonDown_Click(object sender, EventArgs e)
         {
+            gameEngine.getMap().UpdateVision();
             hero.setMovement(Character.Movement.down);
             gameEngine.MovePlayer(Character.Movement.down);
             gameEngine.getMap().UpdateVision();
             heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
             gameEngine.MoveEnemies(); // Calling it in hero PlayerMove in GameEngine
+            gameEngine.getMap().UpdateVision();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items
             for (int i = 0; i < enemyArr.Length; i++)
             {
-                if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                if (enemyArr[i] != null)
                 {
-                    comboBox1.Items.Add(enemyArr[i].ToString());
+                    if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                    {
+                        comboBox1.Items.Add(enemyArr[i].ToString());
+                    }
                 }
             }
             ShopMethod();
@@ -464,27 +484,38 @@ namespace GADE6112_POE_part_1
         {
             for (int i = 0; i < enemyArr.Length; i++)
             {
-                if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
+                if (enemyArr[i] != null)
                 {
-
-                    hero.Attack(enemyArr[i]); // Creature hp - hero damage. Then sets new Creature hp
-                    richTextBox1.Text = richTextBox1.Text + enemyArr[i].ToString();
-                    enemyArr[i].isDead();
-                    hero.isDead();
-                   /* if (enemyArr[i].ToString() == comboBox1.SelectedText.ToString()) // Attempt to attack selected Location
+                    if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
                     {
-                        hero.Attack(enemyArr[i]);
+
+                        hero.Attack(enemyArr[i]); // Creature hp - hero damage. Then sets new Creature hp
+                        richTextBox1.Text = richTextBox1.Text + enemyArr[i].ToString();
+                        if (enemyArr[i].isDead())
+                        {
+                            enemyArr[i] = null;
+                            UpdateMap();
+                        }
+                        /* if (enemyArr[i].ToString() == comboBox1.SelectedText.ToString()) // Attempt to attack selected Location
+                         {
+                             hero.Attack(enemyArr[i]);
+                         }
+                        */
                     }
-                   */
+                    if (enemyArr[i] != null && enemyArr[i].CheckRange(hero) == true)
+                    {
+                        enemyArr[i].Attack(hero);
+                        if(hero.isDead())
+                        {
+                            var deathPopup = new Form();
+                            deathPopup.ShowDialog();
+                        }
+                    }
                 }
-                if (enemyArr[i].CheckRange(hero) == true)
-                {
-                    enemyArr[i].Attack(hero);
-                    hero.isDead();
-                }    
             }
             for (int i = 0; i < enemyArr.Length; i++)
             {
+                if(enemyArr[i] != null)
                 richTextBox1.Text = hero.ToString() + " \n " + enemyArr[i].ToString();
             }
             UpdateMap();
