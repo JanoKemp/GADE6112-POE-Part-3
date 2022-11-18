@@ -66,22 +66,22 @@ namespace GADE6112_POE_part_1
             {
                 if (weapon.getWeaponType() == MeleeWeapon.Types.Dagger.ToString())
                 {
-                    heroMessage = "Player stats:\n Hp: " + hp + "/" + maxHp + "\nCurrent Weapon:" + weapon.getWeaponType().ToString() + "\nWeapon Range:" + weapon.getWeaponRange() + "\n Weapon Damage: " + weapon.getWeaponDamage() + "\nGold: " + goldPurse + "\n X : Y \n[" + x + " : " + y + "]";
+                    heroMessage = "Player stats:\n Hp: " + hp + "/" + maxHp + "\nCurrent Weapon:" + weapon.getWeaponType().ToString() + "\nWeapon Range:" + weapon.getWeaponRange() + "\nWeapon Damage: " + weapon.getWeaponDamage() + "\nGold: " + goldPurse + "\n X : Y \n[" + x + " : " + y + "]";
                     return heroMessage;
                 }
                 if (weapon.getWeaponType() == MeleeWeapon.Types.LongSword.ToString())
                 {
-                    heroMessage = "Player stats:\n Hp: " + hp + "/" + maxHp + "\nCurrent Weapon:" + weapon.getWeaponType().ToString() + "\nWeapon Range:" + weapon.getWeaponRange() + "\n Weapon Damage: " + weapon.getWeaponDamage() + "\nGold: " + goldPurse + "\n X : Y \n[" + x + " : " + y + "]";
+                    heroMessage = "Player stats:\n Hp: " + hp + "/" + maxHp + "\nCurrent Weapon:" + weapon.getWeaponType().ToString() + "\nWeapon Range:" + weapon.getWeaponRange() + "\nWeapon Damage: " + weapon.getWeaponDamage() + "\nGold: " + goldPurse + "\n X : Y \n[" + x + " : " + y + "]";
                     return heroMessage;
                 }
                 if (weapon.getWeaponType() == RangedWeapon.Types.Rifle.ToString())
                 {
-                    heroMessage = "Player stats:\n Hp: " + hp + "/" + maxHp + "\nCurrent Weapon:" + weapon.getWeaponType().ToString() + "\nWeapon Range:" + weapon.getWeaponRange() + "\n Weapon Damage: " + weapon.getWeaponDamage() + "\nGold: " + goldPurse + "\n X : Y \n[" + x + " : " + y + "]";
+                    heroMessage = "Player stats:\n Hp: " + hp + "/" + maxHp + "\nCurrent Weapon:" + weapon.getWeaponType().ToString() + "\nWeapon Range:" + weapon.getWeaponRange() + "\nWeapon Damage: " + weapon.getWeaponDamage() + "\nGold: " + goldPurse + "\n X : Y \n[" + x + " : " + y + "]";
                     return heroMessage;
                 }
                 if (weapon.getWeaponType() == RangedWeapon.Types.LongBow.ToString())
                 {
-                    heroMessage = "Player stats:\n Hp: " + hp + "/" + maxHp + "\nCurrent Weapon:" + weapon.getWeaponType().ToString() + "\nWeapon Range:" + weapon.getWeaponRange() + "\n Weapon Damage: " + weapon.getWeaponDamage() + "\nGold: " + goldPurse + "\n X : Y \n[" + x + " : " + y + "]";
+                    heroMessage = "Player stats:\n Hp: " + hp + "/" + maxHp + "\nCurrent Weapon:" + weapon.getWeaponType().ToString() + "\nWeapon Range:" + weapon.getWeaponRange() + "\nWeapon Damage: " + weapon.getWeaponDamage() + "\nGold: " + goldPurse + "\n X : Y \n[" + x + " : " + y + "]";
                     return heroMessage;
                 }
                 else return heroMessage;

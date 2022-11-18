@@ -720,9 +720,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(602, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(442, 15);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(183, 204);
+            this.richTextBox1.Size = new System.Drawing.Size(183, 275);
             this.richTextBox1.TabIndex = 123;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -762,7 +762,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(451, 56);
+            this.comboBox1.Location = new System.Drawing.Point(631, 112);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(128, 23);
             this.comboBox1.TabIndex = 127;
@@ -842,9 +842,9 @@
             this.heroGoldLabel1.AutoSize = true;
             this.heroGoldLabel1.Location = new System.Drawing.Point(807, 48);
             this.heroGoldLabel1.Name = "heroGoldLabel1";
-            this.heroGoldLabel1.Size = new System.Drawing.Size(58, 15);
+            this.heroGoldLabel1.Size = new System.Drawing.Size(73, 15);
             this.heroGoldLabel1.TabIndex = 135;
-            this.heroGoldLabel1.Text = "HeroGold";
+            this.heroGoldLabel1.Text = "Hero Gold: 0";
             this.heroGoldLabel1.Click += new System.EventHandler(this.heroGoldLabel1_Click);
             // 
             // mainForm

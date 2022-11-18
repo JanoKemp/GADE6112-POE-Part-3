@@ -230,9 +230,13 @@ namespace GADE6112_POE_part_1
 
                 //textBoxes[enemyArr[x].getX(), enemyArr[x].getY()].Text = creature.getEnemySym().ToString();
             }
+            richTextBox1.Text = hero.ToString();
             for(int i = 0; i < mapLand.getEnemies().Length; i++)
             {
-                richTextBox1.Text = richTextBox1.Text + "\n" + enemyArr[i].ToString();
+                if (enemyArr[i] != null)
+                {
+                    richTextBox1.Text = richTextBox1.Text + "\n\n" + enemyArr[i].ToString();
+                }
             }
         }
         public void HeroCreation()
@@ -376,6 +380,13 @@ namespace GADE6112_POE_part_1
             gameEngine.getMap().UpdateVision();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
+            for (int i = 0; i < mapLand.getEnemies().Length; i++)
+            {
+                if (enemyArr[i] != null)
+                {
+                    richTextBox1.Text = richTextBox1.Text + "\n\n" + enemyArr[i].ToString();
+                }
+            }
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items
             for (int i = 0; i < enemyArr.Length; i++) //loops through enemyArr
             {
@@ -409,6 +420,13 @@ namespace GADE6112_POE_part_1
             gameEngine.getMap().UpdateVision();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
+            for (int i = 0; i < mapLand.getEnemies().Length; i++)
+            {
+                if (enemyArr[i] != null)
+                {
+                    richTextBox1.Text = richTextBox1.Text + "\n\n" + enemyArr[i].ToString();
+                }
+            }
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items
             for (int i = 0; i < enemyArr.Length; i++)
             {
@@ -434,6 +452,13 @@ namespace GADE6112_POE_part_1
             gameEngine.getMap().UpdateVision();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
+            for (int i = 0; i < mapLand.getEnemies().Length; i++)
+            {
+                if (enemyArr[i] != null)
+                {
+                    richTextBox1.Text = richTextBox1.Text + "\n\n" + enemyArr[i].ToString();
+                }
+            }
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items
             for (int i = 0; i < enemyArr.Length; i++)
             {
@@ -459,6 +484,13 @@ namespace GADE6112_POE_part_1
             gameEngine.getMap().UpdateVision();
             UpdateMap();
             richTextBox1.Text = hero.ToString();
+            for (int i = 0; i < mapLand.getEnemies().Length; i++)
+            {
+                if (enemyArr[i] != null)
+                {
+                    richTextBox1.Text = richTextBox1.Text + "\n\n" + enemyArr[i].ToString();
+                }
+            }
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items
             for (int i = 0; i < enemyArr.Length; i++)
             {
@@ -490,13 +522,13 @@ namespace GADE6112_POE_part_1
                     {
 
                         hero.Attack(enemyArr[i]); // Creature hp - hero damage. Then sets new Creature hp
-                        richTextBox1.Text = richTextBox1.Text + enemyArr[i].ToString();
+                       // richTextBox1.Text = richTextBox1.Text + enemyArr[i].ToString();
                         if (enemyArr[i].isDead())
                         {
                             landArray[enemyArr[i].getX(), enemyArr[i].getY()] = new EmptyTile(enemyArr[i].getX(), enemyArr[i].getY());
                             enemyArr[i] = null;
-                            
                             UpdateMap();
+                            DeathMessage();
                         }
                         /* if (enemyArr[i].ToString() == comboBox1.SelectedText.ToString()) // Attempt to attack selected Location
                          {
@@ -509,8 +541,7 @@ namespace GADE6112_POE_part_1
                         enemyArr[i].Attack(hero);
                         if(hero.isDead())
                         {
-                            var deathPopup = new Form();
-                            deathPopup.ShowDialog();
+                            DeathMessage();
                         }
                     }
                 }
@@ -525,6 +556,43 @@ namespace GADE6112_POE_part_1
             //gameEngine.EnemyAttack(mage.CheckRange(hero), hero, mage);
 
 
+        }
+        public void DeathMessage()
+        {
+            int numCount = 0;
+            if (hero.isDead())
+            {
+                string message = "Hero has died! You lose";
+                string title = "GAME OVER";
+                DialogResult dialogResult = MessageBox.Show(message, title, MessageBoxButtons.OK);
+                if (dialogResult == DialogResult.OK)
+                {
+                    Application.Restart();
+                }
+            }
+            int enemyNullCount = 0;
+            for(int i = 0; i < enemyArr.Length; i++)
+            {
+                if (enemyArr[i] != null)
+                {
+                    enemyNullCount++;
+                    numCount = i;
+                }
+                
+            }
+            if(enemyNullCount < 1)
+            {
+                string message = "Your ending stats were:\n"+ hero.ToString();
+                string title = "GAME OVER | YOU WON";
+                DialogResult dialogResult = MessageBox.Show(message, title, MessageBoxButtons.OK);
+                if (dialogResult == DialogResult.OK)
+                {
+                    Application.Restart();
+                }
+            }
+            
+
+            
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
