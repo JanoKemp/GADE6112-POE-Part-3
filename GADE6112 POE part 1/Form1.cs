@@ -277,7 +277,7 @@ namespace GADE6112_POE_part_1
             }
         }
 
-        public void UpdateMap()
+        public void UpdateMap() // Loops through map and updates their locations actively written in the text boxes
         {
             for (int x = 0; x < mapLand.getLand().GetLength(0); x++)
             {
@@ -343,7 +343,7 @@ namespace GADE6112_POE_part_1
         {
             if (shop.CanBuy(0)) // if the hero can afford item 1 then enable the button
             {
-                shopB1.Enabled = true;
+                shopB1.Enabled = true;// Makes the button pressable
             }
             else shopB1.Enabled = false; // else grey it out until the player can afford the item
             if (shop.CanBuy(1))
@@ -356,7 +356,7 @@ namespace GADE6112_POE_part_1
                 shopB3.Enabled = true;
             }
             else shopB3.Enabled = false;
-            itemLabel1.Text = shop.DisplayWeapon(0);
+            itemLabel1.Text = shop.DisplayWeapon(0); // Displays Weapons stored in Weapons array in shop
             itemLabel2.Text = shop.DisplayWeapon(1);
             itemLabel3.Text = shop.DisplayWeapon(2);
             shopB1.Text = "Buy";
@@ -373,20 +373,20 @@ namespace GADE6112_POE_part_1
 
         private void buttonUp_Click(object sender, EventArgs e)
         {
-            gameEngine.getMap().UpdateVision();
-            hero.setMovement(Character.Movement.up);
+            gameEngine.getMap().UpdateVision();//Updates vision for all characters to insure no issues
+            hero.setMovement(Character.Movement.up);// Sets the movement corresponding to button pressed
             gameEngine.MovePlayer(Character.Movement.up); // Calls Move player method which changes the X and Y accordingly 
             gameEngine.getMap().UpdateVision(); // Updates vision based on new movement
-            heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString();
+            heroGoldLabel1.Text = "Hero Gold: " + hero.getGoldPurse().ToString(); // Updates heros gold label in shop
             gameEngine.MoveEnemies(); // Calling it in hero PlayerMove in GameEngine
-            gameEngine.getMap().UpdateVision();
-            UpdateMap();
-            richTextBox1.Text = hero.ToString();
+            gameEngine.getMap().UpdateVision(); // Updates vision again
+            UpdateMap(); // Updates the map after all movement
+            richTextBox1.Text = hero.ToString(); // outputs hero stats
             for (int i = 0; i < mapLand.getEnemies().Length; i++)
             {
                 if (enemyArr[i] != null)
                 {
-                    richTextBox1.Text = richTextBox1.Text + "\n\n" + enemyArr[i].ToString();
+                    richTextBox1.Text = richTextBox1.Text + "\n\n" + enemyArr[i].ToString(); // Adds all enemy stats to output after hero
                 }
             }
             comboBox1.Items.Clear();//Resets combo Box to not cont add same items
@@ -396,7 +396,7 @@ namespace GADE6112_POE_part_1
                 {
                     if (hero.CheckRange(enemyArr[i]) == true) // Checks if creature is within range
                     {
-                        comboBox1.Items.Add(enemyArr[i].ToString());
+                        comboBox1.Items.Add(enemyArr[i].ToString()); // Adds item to combo Box if within range
                     }
                 }
             }
@@ -408,7 +408,7 @@ namespace GADE6112_POE_part_1
                 }
             }
             */
-            ShopMethod();
+            ShopMethod(); // Updates the shop with gold and weapons , also updates labels
         }
 
         private void buttonLeft_Click(object sender, EventArgs e)
@@ -527,10 +527,11 @@ namespace GADE6112_POE_part_1
                        // richTextBox1.Text = richTextBox1.Text + enemyArr[i].ToString();
                         if (enemyArr[i].isDead())
                         {
-                            landArray[enemyArr[i].getX(), enemyArr[i].getY()] = new EmptyTile(enemyArr[i].getX(), enemyArr[i].getY());
-                            enemyArr[i] = null;
-                            UpdateMap();
-                            DeathMessage();
+                            landArray[enemyArr[i].getX(), enemyArr[i].getY()] = new EmptyTile(enemyArr[i].getX(), enemyArr[i].getY()); // enemy gone from map
+                            enemyArr[i].setDamage(0); // Fixes a bug where enemy can still do damage even when set null
+                            enemyArr[i] = null; // Kills the enemy
+                            UpdateMap(); // Updates map after death
+                            DeathMessage(); // Checks number of enemies left and ends game if there are none
                         }
                         /* if (enemyArr[i].ToString() == comboBox1.SelectedText.ToString()) // Attempt to attack selected Location
                          {
@@ -543,14 +544,16 @@ namespace GADE6112_POE_part_1
                         enemyArr[i].Attack(hero);
                         if(hero.isDead())
                         {
-                            DeathMessage();
+                            DeathMessage(); //Checks if hero is dead , if so it ends the game
                         }
                     }
                 }
             }
+            
             for (int i = 0; i < enemyArr.Length; i++)
             {
                 if(enemyArr[i] != null)
+
                 richTextBox1.Text = hero.ToString() + " \n " + enemyArr[i].ToString();
             }
             UpdateMap();
@@ -562,18 +565,18 @@ namespace GADE6112_POE_part_1
         public void DeathMessage()
         {
             int numCount = 0;
-            if (hero.isDead())
+            if (hero.isDead()) // checks if the hero is dead once calld
             {
                 string message = "Hero has died! You lose";
                 string title = "GAME OVER";
-                DialogResult dialogResult = MessageBox.Show(message, title, MessageBoxButtons.OK);
+                DialogResult dialogResult = MessageBox.Show(message, title, MessageBoxButtons.OK); // Outputs strings in order of message then caption and then button
                 if (dialogResult == DialogResult.OK)
                 {
-                    Application.Restart();
+                    Application.Restart(); // Restarts the application
                 }
             }
             int enemyNullCount = 0;
-            for(int i = 0; i < enemyArr.Length; i++)
+            for(int i = 0; i < enemyArr.Length; i++) // Checks which enemies are still alive
             {
                 if (enemyArr[i] != null)
                 {
@@ -582,7 +585,7 @@ namespace GADE6112_POE_part_1
                 }
                 
             }
-            if(enemyNullCount < 1)
+            if(enemyNullCount < 1) // if all enemies are dead then output the following
             {
                 string message = "Your ending stats were:\n"+ hero.ToString();
                 string title = "GAME OVER | YOU WON";
@@ -608,7 +611,7 @@ namespace GADE6112_POE_part_1
             {
                 for(int c = 0; c < textBoxes.GetLength(1); c++)
                 {
-                    textBoxes[i, c].Text = String.Empty;
+                    textBoxes[i, c].Text = String.Empty; // Resets the map to be overwritten by new map
                 }
             }
             gameEngine.Load();//calls Load method from GameEngine class

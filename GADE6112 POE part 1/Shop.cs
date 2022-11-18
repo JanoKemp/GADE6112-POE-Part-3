@@ -21,16 +21,16 @@ namespace GADE6112_POE_part_1
             weapons = new Weapon[3];
             for (int i = 0; i < weapons.Length; i++)
             {
-                weapons[i] = RandomWeapon();
+                weapons[i] = RandomWeapon(); // Adds 3 random weapons to the store
             }
         }
-        private Weapon RandomWeapon()
+        private Weapon RandomWeapon() // RandomlyGenerates a weapon to be stored in the shop after purchase
         {
             int randWeapon = randomNum.Next(0, 4);
             if (randWeapon == 0)
             {
 
-                Weapon dagger = new MeleeWeapon(MeleeWeapon.Types.Dagger); //   IS FOR TESTING WILL BE ISSUES WITH ALL WEAPONS HAVING SAME ARRAY LOCATION
+                Weapon dagger = new MeleeWeapon(MeleeWeapon.Types.Dagger); //Doesnt make use of optional params as these are equiped
                 return dagger;
             }
             if (randWeapon == 1)
@@ -50,7 +50,7 @@ namespace GADE6112_POE_part_1
             }
             else return null;
         }
-        public bool CanBuy(int num) //"num" is the item in the store they are selecting
+        public bool CanBuy(int num) //"num" is the item in the store they are selecting ( Checks if the item is affordable)
         {
             int customerGold = customer.getGoldPurse();
             
@@ -89,7 +89,7 @@ namespace GADE6112_POE_part_1
             else return false;
         }
         public Weapon [] getWeapons() { return weapons; }
-        public void Buy(int num)
+        public void Buy(int num) // Uses can buy and purchases the item and equips it whilst removing gold.
         {
             int customerPurse = customer.getGoldPurse();
             if(CanBuy(num) == true) // Checks if they can buy that item - CanBuy returns true if they can

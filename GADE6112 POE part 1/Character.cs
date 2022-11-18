@@ -151,13 +151,13 @@ namespace GADE6112_POE_part_1
             }
             if(target.isDead())
             {
-                Loot(target);
+                Loot(target); // if the target is dead they take their gear(if possible)
                 
             }
             
 
         }
-        public void Loot(Character target)
+        public void Loot(Character target) //Equips their weapon(if they have no weapon) and gold uppon kill
         {
             goldPurse = goldPurse + target.getGoldPurse();
             if (weapon == null && target.getWeapon() != null && GetType() != typeof(Mage)) //Mages may not pick up weapons

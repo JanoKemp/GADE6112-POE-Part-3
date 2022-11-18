@@ -16,7 +16,7 @@ namespace GADE6112_POE_part_1
         {
             this.x = x;
             this.y = y;
-            weapon = new MeleeWeapon(MeleeWeapon.Types.LongSword);
+            weapon = new MeleeWeapon(MeleeWeapon.Types.LongSword);// Said to spawn with this weapon
             goldPurse = 2; // For Testing (Question3.4)
 
         }
@@ -37,7 +37,7 @@ namespace GADE6112_POE_part_1
             
             int moveDirection; // Local variable used for assigning random direction
             moveDirection = leaderMove.Next(5); // randomly generates a number which is then correlated with a direction.
-            if (leaderX < targetX && currentVision[1].GetType() == typeof(EmptyTile) || leaderX < targetX && currentVision[1].getTileType() == Tile.TileType.Gold)
+            if (leaderX < targetX && currentVision[1].GetType() == typeof(EmptyTile) || leaderX < targetX && currentVision[1].getTileType() == Tile.TileType.Gold) // This follows the hero until it cant then it changes to the ELSE which generates a random location exactly the same as swampcreature
             {
                 setMovement(Movement.down);
                 return Movement.down;

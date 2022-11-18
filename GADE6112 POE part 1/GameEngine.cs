@@ -156,7 +156,7 @@ namespace GADE6112_POE_part_1
             //This updates the move is the movement is valid via button presses
             return movement;
         }
-        public void MoveEnemies()
+        public void MoveEnemies() // Checks if the enemy is not dead. IF is alive then get X and Y and move to the new location RANDOMLY generated. Set their previous X and Y to an empty tile as they are no longer there. PickUp any items in their path and equip them
         {
             Character.Movement enemyDirection;
             Enemy[] enemyArr = map.getEnemies();
@@ -174,7 +174,7 @@ namespace GADE6112_POE_part_1
                         if (enemyArr[i].GetType() == typeof(SwampCreature))
                         {
                             SwampCreature creature = (SwampCreature)enemyArr[i];
-                            if (creature.ReturnMove(creature.getMovement()) != Character.Movement.noMovement)
+                            if (creature.ReturnMove(creature.getMovement()) != Character.Movement.noMovement) 
                             {
                                 int oldX = creature.getX();
                                 int oldY = creature.getY();
@@ -238,7 +238,7 @@ namespace GADE6112_POE_part_1
 
         public void EnemyAttack()
         {
-            for (int i = 0; i < map.getEnemies().Length; i++)
+            for (int i = 0; i < map.getEnemies().Length; i++) //Loops through enemies and checks their type ----> then Checks range and if that succeeds then attacks the hero
             {
                 if (enemyArr[i] != null)
                 {
