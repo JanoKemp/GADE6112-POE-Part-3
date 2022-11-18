@@ -36,6 +36,7 @@ namespace GADE6112_POE_part_1
             HeroCreation();
             ItemCreation();
             ShopMethod();
+            gameEngine.getMap().UpdateVision(); // Updates vision array for all as the game starts
 
 
 
@@ -256,6 +257,7 @@ namespace GADE6112_POE_part_1
 
                 }
             }
+            gameEngine.getMap().UpdateVision();
         }
         public void ItemCreation()
         {
@@ -602,6 +604,13 @@ namespace GADE6112_POE_part_1
 
         private void LoadBtn_Click(object sender, EventArgs e)
         {
+            for (int i = 0; i < textBoxes.GetLength(0); i++)
+            {
+                for(int c = 0; c < textBoxes.GetLength(1); c++)
+                {
+                    textBoxes[i, c].Text = String.Empty;
+                }
+            }
             gameEngine.Load();//calls Load method from GameEngine class
             MapAssignment(); // Calls MapAssigment class - to assign text Boxes to Land array in map
             MapGeneration();
@@ -619,16 +628,41 @@ namespace GADE6112_POE_part_1
         private void shopB1_Click(object sender, EventArgs e)
         {
              shop.Buy(0); // Buys the item at the first array location
+            richTextBox1.Text = hero.ToString();
+            for (int i = 0; i < mapLand.getEnemies().Length; i++)
+            {
+                if (enemyArr[i] != null)
+                {
+                    richTextBox1.Text = richTextBox1.Text + "\n\n" + enemyArr[i].ToString();
+                }
+            }
+
         }
 
         private void shopB2_Click(object sender, EventArgs e)
         {
             shop.Buy(1); // Buys the item at the second array location
+            richTextBox1.Text = hero.ToString();
+            for (int i = 0; i < mapLand.getEnemies().Length; i++)
+            {
+                if (enemyArr[i] != null)
+                {
+                    richTextBox1.Text = richTextBox1.Text + "\n\n" + enemyArr[i].ToString();
+                }
+            }
         }
 
         private void shopB3_Click(object sender, EventArgs e)
         {
             shop.Buy(2); // Buys the item at the third array location
+            richTextBox1.Text = hero.ToString();
+            for (int i = 0; i < mapLand.getEnemies().Length; i++)
+            {
+                if (enemyArr[i] != null)
+                {
+                    richTextBox1.Text = richTextBox1.Text + "\n\n" + enemyArr[i].ToString();
+                }
+            }
         }
 
         private void costLabel1_Click(object sender, EventArgs e)
